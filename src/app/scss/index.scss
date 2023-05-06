@@ -1,0 +1,126 @@
+@use 'colors';
+
+body {
+  //position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 800px;
+  background-image: url('../assets/images/cpu_desk_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  box-shadow: 0px 0px 6px 2px inset colors.$color_white;
+
+  header {
+    position: relative;  
+    .swoosh {
+      position: absolute;
+      width: 100%;
+      top: 0; left: 0;
+    }
+  }
+  main {
+    flex: 1;    
+    position: relative;
+    min-height: 50vw;
+    padding: 0;
+    perspective: 10000px;
+    transform-style: flat;
+    font-size: 70%;
+
+    .screen {
+      position: absolute;
+      width: 25vw;
+      padding-top: 6vw;
+      //background-color: rgba(255,0,0,0.5);
+      transform: translate3d(24vw, 6.75vw, 0vw) rotateX(6deg) rotateY(24deg) rotateZ(-3.5deg) skewX(4deg);
+      overflow: hidden;
+      .logo {
+        position: absolute;
+        top: -1.5vw;
+        left: 8vw;
+        width: 6vw;
+
+      }
+      ul {
+        li {
+          position: relative;
+          line-height: 1.25;
+          padding-bottom: 0.75vw;
+          margin-left: 2vw;
+          &::before {
+            content: ""; /* Set the content to an empty string */
+            position: absolute;
+            display: inline-block; /* Set the display to inline-block */
+            width: 1.2vw; /* Set the width of the bullet */
+            height: 1.2vw; /* Set the height of the bullet */
+            top: 0.3vw;
+            left: -1.6vw;
+            background-image: url('../assets/images/Bullet.svg'); /* Set the background image to your SVG */
+            background-size: contain; /* Set the background size to contain the image */
+            margin-right: 10px; /* Add some spacing between the bullet and the text */
+          }
+        }
+      }
+    }
+    
+    .intro {  
+      position: absolute;
+      right: 5vw;
+      top: 16vw;
+      max-width: 40vw;
+      text-align: center;
+      background-image: radial-gradient(colors.$color_white_rgb 35%, transparent 65%);
+      text-shadow: 1px 1px 2px colors.$color_gray;
+
+      white-space: nowrap;
+
+      > * {
+        position: relative;        
+      }
+
+      .swoosh {
+        position: absolute;
+        top: 2.75vw;
+        right: 3.95vw;
+      }
+
+      h2 {
+        font-size: 100%;
+      }
+    }
+
+    .logo {
+      width: 10vw;
+    }
+
+    .divider1 {
+      z-index: 1;
+      position: absolute;
+      top: 54.75vw;
+      img {
+        height: 3vw;
+      }
+    }
+  }
+
+  footer {
+    position: relative;
+    background-color: colors.$color_gray_lt;
+    min-height: 6vw;
+    //overflow-y: hidden;
+    img {
+      position: absolute;
+      display: block;
+      top: -2.8vw;
+      right: 0;
+      transform: scale(300%) translateX(-33.3%);
+    }
+    .divider {
+      width: 100%;
+      height: 8vw;
+      background: transparent url('../assets/images/Divider_Gray.svg') no-repeat scroll 96% center;
+      background-size: 200%;
+      transform: translateY(-50%);
+    }
+  }
+}

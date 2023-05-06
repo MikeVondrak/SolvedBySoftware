@@ -1,0 +1,24 @@
+{
+  "name": "SolvedBySoftware",
+  "version": "1.0.0",
+  "description": "Software development company",
+  "main": "index.js",
+  "author": "Mike Vondrak",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^2.29.1",
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.7.0",
+    "gulp-open": "^3.0.1",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "sass": "^1.62.1",
+    "scss": "^0.2.4"
+  },
+  "scripts": {
+    "sass-dev": "sass --watch --update --style=expanded src/app/scss/:src/css",
+    "sass-prod": "sass --no-source-map --style=compressed src/app/scss/:dist/css"
+  }
+}

@@ -4,6 +4,7 @@ const concat = require("gulp-concat");
 const cleanCSS = require("gulp-clean-css");
 const ts = require("gulp-typescript");
 const order = require('gulp-order');
+const uglify = require('gulp-uglify');
 const sass = require("gulp-sass")(require("sass"));
 const tsProject = ts.createProject("tsconfig.json");
 
@@ -21,7 +22,9 @@ gulp.task("typescript", function () {
   return tsProject
     .src()
     .pipe(tsProject())
-    .js.pipe(gulp.dest("./dist/js"))
+    .js.pipe(concat('bundle.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest("./dist/js"))
 });
 
 gulp.task("html", function () {
@@ -47,7 +50,7 @@ gulp.task("serve", function () {
   });
 
   gulp.watch("./src/app/scss/*.scss").on("change", gulp.series("bundleCss", "refresh"));
-  gulp.watch("./src/app/ts/*.ts").on("change", gulp.series("typescript"));
+  gulp.watch("./src/app/ts/*.ts").on("change", gulp.series("typescript", "refresh"));
   gulp.watch("./index.html").on("change", gulp.series("html", "refresh"));
 });
 

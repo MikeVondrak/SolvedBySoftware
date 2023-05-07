@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 3840 453" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1,0,0,1,-20,0)">
-        <g transform="matrix(0.999929,0,0,0.981386,19.4558,7.80963)">
-            <g id="Swoosh_Header" transform="matrix(1.28699,1.53341e-16,1.50498e-16,-1.3113,-4037.07,1401.55)">
-                <g transform="matrix(0.777065,9.08561e-17,9.1073e-17,-0.777065,3139.57,1078.37)">
-                    <path d="M3836.23,4.484L-3.968,4.778L-3.968,457.128C29.342,438.233 60.449,414.061 88.17,384.771C112.976,358.561 133.343,330.044 149.531,299.47C162.977,274.365 173.501,248.134 181.12,221.269L3836.23,4.484Z" style="fill:rgb(244,126,63);"/>
-                </g>
-                <g transform="matrix(0.777065,9.06393e-17,9.1073e-17,-0.777065,3136.82,1064.46)">
-                    <path d="M3840.19,-13.424L-0.43,-13.424L-0,299.853C5.322,295.057 10.545,290.091 15.663,284.958C41.143,259.401 62.244,231.424 79.221,201.281C93.313,176.538 104.515,150.594 112.83,123.941L3840.19,-13.424Z" style="fill:rgb(71,72,72);"/>
+<svg width="100%" height="100%" viewBox="0 0 3840 424" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-19,0)">
+        <g transform="matrix(0.999929,0,0,0.918425,19.4558,7.3086)">
+            <rect id="Header" x="-0.456" y="-7.958" width="3840.27" height="461.592" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect id="Header1" serif:id="Header" x="-0.456" y="-7.958" width="3840.27" height="461.592"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g id="Swoosh_Header" transform="matrix(1.28699,1.63854e-16,1.50498e-16,-1.4012,-4037.07,1498.17)">
+                    <g transform="matrix(0.777065,9.08561e-17,9.1073e-17,-0.777065,3139.42,1100.78)">
+                        <path d="M3836.23,33.314L-3.968,33.314L-3.968,457.128C29.342,438.233 60.449,414.061 88.17,384.771C112.976,358.561 133.343,330.044 149.531,299.47C162.977,274.365 173.501,248.134 181.12,221.269L3836.23,33.314Z" style="fill:rgb(244,126,63);"/>
+                    </g>
+                    <g transform="matrix(0.777065,9.06393e-17,9.1073e-17,-0.777065,3137.85,1092.3)">
+                        <path d="M3838.24,22.406L-1.958,22.406L-1.958,298.663C3.363,293.866 10.545,290.091 15.663,284.958C41.143,259.401 62.244,231.424 79.221,201.281C93.313,176.538 104.515,150.594 112.83,123.941L3838.24,22.406Z" style="fill:rgb(71,72,72);"/>
+                    </g>
                 </g>
             </g>
         </g>

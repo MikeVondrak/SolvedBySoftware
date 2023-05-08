@@ -90,8 +90,29 @@ body {
     }
 
     .carousel-nav {
-      padding: 10vw;
-      color: red;
+      button {
+        width: 100%;
+        background-color: transparent;
+        border: none;
+
+        &:active {
+          outline: 2px dashed colors.$color_primary;
+        }
+      }
+
+      &.main-nav {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1vw;
+        width: 80%;
+        margin: 2vw auto 0;
+        img {
+          max-width: 6vw;
+          max-height: 5vw;
+        }
+      }
     }
 
     .logo {

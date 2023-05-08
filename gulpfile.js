@@ -37,12 +37,17 @@ gulp.task("typescript", function () {
 });
 
 gulp.task("html", function () {
+  console.log('HTML');
+
   // Iterate through HTML files and get template ID from element
   const templateFiles = fs
     .readdirSync(htmlFilesPath)
     .map((f) => htmlFilesPath + f);
   let templateContents = new Map();
   templateFiles.forEach((file) => {
+    
+    console.log('LOADING HTML', templateFiles.length);
+    
     const fileTemplate = fs.readFileSync(file);
     if (fileTemplate) {
       const domTemplate = new JSDOM(fileTemplate);
@@ -51,7 +56,6 @@ gulp.task("html", function () {
       if (!!template) {
         const attr = template.attributes.getNamedItem("data-template-id");
         const templateId = attr.value;
-        console.log("------", templateId);
         templateContents.set(templateId, template.innerHTML);
       }
     }
@@ -60,23 +64,20 @@ gulp.task("html", function () {
   // Return modified index.html file contents
   return gulp.src("./index.html").pipe(
     map(function (file, callback) {
-      console.log("!!!!!!!");
       const contents = file?.contents?.toString();
       const name = file.basename;
       const domIndex = new JSDOM(contents);
       const docIndex = domIndex?.window?.document;
+
+      console.log('REFRESHING INDEX', templateContents.size);
 
       // iterate through templates and insert into index.html
       templateContents.forEach((val, key) => {
         const selector = `[data-content-id="${key}"]`;
         const placeholderList = docIndex.querySelectorAll(`${selector}`);
         const placeholders = Array.from(placeholderList);
-        console.log(
-          `++++++++++, s=${selector}, k=${key}, v=${val}, p=${placeholders}`
-        );
         // if there's a placeholder with a data-content-id that matches an html file's data-template-id
         if (placeholders.length > 0) {
-          console.log("APPENDING", val);
           // assume we matched exactly 1 element
           placeholders[0].append(JSDOM.fragment(val));
         }
@@ -84,10 +85,8 @@ gulp.task("html", function () {
 
       const newContents = Buffer.from(docIndex.documentElement.outerHTML);
       file.contents = newContents;
-      //console.log('!!!!!!!!', newContents.toString());
       callback(null, file);
-      //return file;
-    })).pipe(gulp.dest("dist"));
+    })).pipe(gulp.dest("dist")).pipe(connect.reload());
 });
 
 gulp.task("copyAssets", function () {
@@ -95,8 +94,9 @@ gulp.task("copyAssets", function () {
   return gulp.src("src/assets/**/*").pipe(gulp.dest("dist/assets"));
 });
 
-gulp.task("refresh", function () {
-  return gulp.src("./index.html").pipe(connect.reload());
+gulp.task("reloadIndex", function () {
+  console.log('RELOAD');
+  return connect.reload(); // TODO - this doesn't work
 });
 
 gulp.task("serve", function () {
@@ -106,13 +106,21 @@ gulp.task("serve", function () {
     port: 3000,
   });
 
-  gulp
-    .watch("./src/app/scss/*.scss")
-    .on("change", gulp.series("bundleCss", "refresh"));
-  gulp
-    .watch("./src/app/ts/*.ts")
-    .on("change", gulp.series("typescript", "refresh"));
-  gulp.watch("./index.html").on("change", gulp.series("html", "refresh"));
+  // gulp
+  //   .watch("./src/app/scss/*.scss")
+  //   .on("change", gulp.series("bundleCss", "refresh"));
+  // gulp
+  //   .watch("./src/app/ts/*.ts")
+  //   .on("change", gulp.series("typescript", "refresh"));
+  // gulp.watch("./index.html").on("change", gulp.series("html", "refresh"));
+  // gulp.watch("./src/app/html/*.html").on("change", gulp.series("html", "refresh"));
+
+
+  gulp.watch("./src/app/scss/*.scss").on("change", gulp.series("bundleCss", "reloadIndex"));
+  gulp.watch("./src/app/ts/*.ts").on("change", gulp.series("typescript", "reloadIndex"));
+  gulp.watch("./index.html").on("change", gulp.series("html", "reloadIndex"));
+  gulp.watch("./src/app/html/*.html").on("change", gulp.series("html", "reloadIndex"));
+
 });
 
 gulp.task(

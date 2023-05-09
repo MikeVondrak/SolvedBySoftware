@@ -23,16 +23,16 @@ body {
     position: relative;
     min-height: 50vw;
     padding: 0;
-    perspective: 5000px;
+    perspective: 100vw; //5000px;
     transform-style: flat;
     font-size: 55%;
 
     .screen {
       position: absolute;
-      width: 39.85vw;
+      width: 36.95vw;
       height: 21.25vw;
-      //background-color: rgba(255,0,0,0.5);
-      transform: translate3d(16.75vw, 8.8vw, 0vw) rotateX(11deg) rotateY(27deg) rotateZ(-5deg) skewX(2.75deg) skewY(-2deg) scaleY(1.2);
+      background-color: rgba(255,0,0,0.5);
+      transform: translate3d(18.25vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3deg) skewX(6.25deg) skewY(-2deg) scaleY(1.2);
       overflow: hidden;
       
       > * {

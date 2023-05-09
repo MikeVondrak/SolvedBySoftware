@@ -1,0 +1,85 @@
+@use './colors';
+
+$col1: transparent; //#82242B;
+$col2: transparent; //#24822B;
+$col3: transparent; //#242B82;
+
+
+#ContentPane_Services.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > * {    
+    flex: 0 0 33%;
+    height: 100%;
+    padding: 1vw;
+    //background-image: url('../assets/images/stock_bg1.jpg'), linear-gradient(transparent 0%, transparent 20%, $col1 70%);
+    background-repeat: no-repeat, no-repeat;
+    background-size: contain, 100%;
+    text-align: center;
+
+    &.separator {
+      padding: 0;
+      width: 1vw;
+      height: 98%;
+      margin-bottom: 2%;
+      //border: 1px dotted magenta;
+      position: absolute;
+
+      //background-image: url('../assets/images/Accent_Swoosh.svg');
+      // width: 2vw;
+      // height: 10vw;
+      
+      &.up {
+        left: 32%;
+        img {
+          height: 100%;
+        }
+      }
+      &.down {
+        left: 65%;
+        img {
+          height: 100%;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    h3 {
+      padding: 0.5vw 0 2vw 0;
+      
+      color: colors.$color_white;
+      text-shadow: 2px 2px 6px #000;
+
+      background-image: radial-gradient(rgba(0,0,0,0.9), transparent 70%);
+    }
+    p {
+      font-size: 80%;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25vw;
+      margin: 0.5vw 0 1vw 0;
+      font-size: 80%;
+
+      li {
+        font-weight: bold;
+      }
+    }
+
+    &.category1 {
+      background-image: url('../assets/images/stock_bg1.jpg'), linear-gradient($col1 0%, $col1 20%, transparent 70%);
+    }
+
+    &.category2 {
+      //background: linear-gradient(transparent 0%, #248232 70%);
+      background-image: url('../assets/images/stock_bg2.jpg'), linear-gradient($col2 0%, $col2 20%, transparent 70%);
+    }
+    &.category3 {
+      //background: linear-gradient(transparent 0%, #2E294E 70%);
+      background-image: url('../assets/images/stock_bg3.jpg'), linear-gradient($col3 0%, $col3 20%, transparent 70%);
+    }
+  }
+}

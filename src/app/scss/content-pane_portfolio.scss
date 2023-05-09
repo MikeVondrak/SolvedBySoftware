@@ -1,0 +1,16 @@
+#ContentPane_Portfolio.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // .logo {
+  //   position: absolute;;
+  //   top: 0.5vw;
+  //   right: 0.5vw;
+  //   width: 5vw;
+  // }
+
+  > * {
+    flex: 1;
+  }
+}

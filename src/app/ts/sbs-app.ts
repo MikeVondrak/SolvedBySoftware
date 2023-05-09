@@ -28,25 +28,32 @@ function updateNav() {
 }
 
 function updateScreen() {
-
-  
   const contentPanes = document.querySelectorAll<HTMLDivElement>('#Screen [data-content-id]');
-  console.log('UPDATE SCREEN!!!', contentPanes.length);
+  console.log('UPDATE SCREEN!!!', currentPageId,  contentPanes.length);
   
   contentPanes.forEach(pane => {
-    pane.style.opacity = '0';
-    pane.style.display = 'none';
-
     const id = pane.getAttribute('data-content-id');
-    console.log(`ID: ${id}, ${currentPageId}`);
+    //if (parseInt(pane.style.opacity) > 0) {
+    if (id !== currentPageId) {
+      pane.style.opacity = '0';
+      setTimeout(() => {
+        // set timeout so display none doesn't interrupt animation
+        pane.style.display = 'none';
+      }, 150);
+    }
+
     if (id === currentPageId) {
+      console.log(`ID: ${id}, ${currentPageId}`);
       pane.style.display = 'block';
-      pane.style.opacity = '1';
+      setTimeout(() => {
+        // set timeout so opacity change doesn't happen the same cycle as display block (interrupts animation)
+        pane.style.opacity = '1';
+      }, 1);
     }
   });
 
   console.log('Update NAV ', currentPageId);
   const screenEl = document.getElementById('Screen');
-
-
 }
+
+updateScreen();

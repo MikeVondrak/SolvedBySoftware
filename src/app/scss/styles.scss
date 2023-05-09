@@ -2,10 +2,13 @@
 /* Define the font family */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(20px, 2vw, 100px);
-  box-sizing: border-box;
+  font-size: clamp(20px, 2vw, 100px);  
   margin: 0;
   padding: 0;
   color: colors.$color_text;

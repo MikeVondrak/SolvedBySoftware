@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(1,0,0,1,-861,-755)">
+<svg width="100%" height="100%" viewBox="0 0 79 124" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-7,-1051)">
+        <g id="Sevices_Alt">
+        </g>
         <g id="Portfolio-C" serif:id="Portfolio C">
         </g>
         <g id="Portfolio-A" serif:id="Portfolio A">
@@ -16,31 +18,7 @@
         </g>
         <g id="Info-Circle" serif:id="Info Circle">
         </g>
-        <g id="Info_Stylized" transform="matrix(1,0,0,1,-0.127258,-0.606857)">
-            <rect x="861.127" y="755.607" width="139.974" height="139.974" style="fill:none;"/>
-            <clipPath id="_clip1">
-                <rect x="861.127" y="755.607" width="139.974" height="139.974"/>
-            </clipPath>
-            <g clip-path="url(#_clip1)">
-                <g id="Info-Circle1" serif:id="Info Circle" transform="matrix(1,0,0,1,1899.41,376.982)">
-                    <g transform="matrix(1,0,0,1,-43.75,0)">
-                        <circle cx="-924.543" cy="448.612" r="69.987" style="fill:rgb(71,72,72);"/>
-                    </g>
-                    <g transform="matrix(1.39649,0,0,1,399.377,0.360675)">
-                        <g transform="matrix(0.78,0,0,1,-217.994,0)">
-                            <g transform="matrix(109.04,0,0,109.04,-990.884,486.959)">
-                                <path d="M0.167,-0.554C0.145,-0.554 0.126,-0.562 0.111,-0.577C0.096,-0.592 0.088,-0.611 0.088,-0.633C0.088,-0.655 0.096,-0.674 0.111,-0.69C0.126,-0.705 0.145,-0.713 0.167,-0.713C0.189,-0.713 0.208,-0.705 0.224,-0.69C0.239,-0.674 0.247,-0.655 0.247,-0.633C0.247,-0.611 0.239,-0.592 0.224,-0.577C0.208,-0.562 0.189,-0.554 0.167,-0.554ZM0.099,0.006C0.067,0.006 0.041,-0.004 0.021,-0.024C0.002,-0.044 -0.008,-0.074 -0.008,-0.114C-0.008,-0.131 -0.005,-0.152 0,-0.179L0.068,-0.5L0.212,-0.5L0.14,-0.16C0.137,-0.15 0.136,-0.139 0.136,-0.128C0.136,-0.115 0.139,-0.105 0.146,-0.1C0.152,-0.094 0.162,-0.091 0.177,-0.091C0.189,-0.091 0.2,-0.093 0.209,-0.097C0.206,-0.064 0.195,-0.038 0.173,-0.021C0.153,-0.003 0.128,0.006 0.099,0.006Z" style="fill:rgb(244,126,63);fill-rule:nonzero;"/>
-                            </g>
-                            <g transform="matrix(109.04,0,0,109.04,-990.884,486.959)">
-                            </g>
-                            <g transform="matrix(109.04,0,0,109.04,-968.095,486.959)">
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-        <g id="Resume-Skewed" serif:id="Resume Skewed" transform="matrix(0.665768,0.151951,-0.151951,0.665768,2002.16,134.172)">
+        <g id="Resume-Skewed" serif:id="Resume Skewed" transform="matrix(0.665768,0.151951,-0.151951,0.665768,2098.16,134.172)">
             <g id="Resume" transform="matrix(1,0,0,1,91.1932,58.1317)">
                 <g id="Resume-Skewed1" serif:id="Resume Skewed">
                     <g id="Resume1" serif:id="Resume">
@@ -69,6 +47,33 @@
                                 <path d="M-906.948,628.379C-886.076,630.223 -865.204,632.073 -844.333,633.927" style="fill:none;stroke:rgb(244,126,63);stroke-width:9.18px;"/>
                             </g>
                         </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+        <g id="Email3" transform="matrix(1,0,0,1,-0.824746,-0.564141)">
+            <rect x="7.825" y="1051.56" width="78.614" height="123.121" style="fill:none;"/>
+            <clipPath id="_clip1">
+                <rect x="7.825" y="1051.56" width="78.614" height="123.121"/>
+            </clipPath>
+            <g clip-path="url(#_clip1)">
+                <g id="e-mail1" serif:id="e mail" transform="matrix(9.11427e-17,-1.48847,1.18498,7.25589e-17,-1601.17,2632.96)">
+                    <g transform="matrix(0.997474,0,0,1.11324,473.55,291.124)">
+                        <path d="M548.858,995.37L553.807,991.586L588.021,1018.41L509.696,1018.41L543.807,991.667L548.858,995.37Z" style="fill:rgb(244,126,63);"/>
+                    </g>
+                    <g transform="matrix(-1.48317e-16,-0.809305,0.942539,0.0326466,-296.56,2095.7)">
+                        <path d="M924.49,1390.15L963.553,1353.68L885.426,1353.68L924.49,1390.15Z" style="fill:rgb(244,126,63);"/>
+                    </g>
+                    <g transform="matrix(1.48317e-16,-0.809305,-0.942539,0.0326466,2337.94,2095.7)">
+                        <path d="M924.49,1390.15L963.553,1353.68L885.426,1353.68L924.49,1390.15Z" style="fill:rgb(244,126,63);"/>
+                    </g>
+                    <g transform="matrix(0.871122,0,4.29496e-32,0.878644,-92.1662,638.153)">
+                        <path d="M1277.62,861.381L1232.78,819.864L1322.47,819.864L1277.62,861.381Z" style="fill:rgb(244,126,63);"/>
+                    </g>
+                    <g transform="matrix(0.786432,0,0,0.793223,7.80595,674.157)">
+                        <g transform="matrix(38.4181,0,0,38.4181,1298.87,891.178)">
+                        </g>
+                        <text x="1277.5px" y="891.178px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:38.418px;fill:rgb(244,126,63);">e</text>
                     </g>
                 </g>
             </g>

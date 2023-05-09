@@ -5,6 +5,7 @@
 html, body {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(20px, 2vw, 100px);
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   color: colors.$color_text;
@@ -26,4 +27,9 @@ h4 { font-size: $hbase * 1.2; }
 h5 { font-size: $hbase; }
 
 footer {
+}
+
+a {
+  color: colors.$color_primary;
+  text-decoration: none;
 }

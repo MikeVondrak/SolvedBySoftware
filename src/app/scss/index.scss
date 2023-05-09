@@ -23,42 +23,30 @@ body {
     position: relative;
     min-height: 50vw;
     padding: 0;
-    perspective: 600px;
+    perspective: 5000px;
     transform-style: flat;
     font-size: 55%;
 
     .screen {
       position: absolute;
-      width: 24vw;
-      padding-top: 6vw;
+      width: 39.85vw;
+      height: 21.25vw;
       //background-color: rgba(255,0,0,0.5);
-      transform: translate3d(24vw, 8vw, 0vw) rotateX(6deg) rotateY(6deg) rotateZ(-4deg) skewX(6deg) scaleY(1.2);
+      transform: translate3d(16.75vw, 8.8vw, 0vw) rotateX(11deg) rotateY(27deg) rotateZ(-5deg) skewX(2.75deg) skewY(-2deg) scaleY(1.2);
       overflow: hidden;
-      .logo {
+      
+      > * {
         position: absolute;
-        top: -1.5vw;
-        left: 8vw;
-        width: 6vw;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        transition: opacity 0.5s ease-in-out;
 
-      }
-      ul {
-        li {
-          position: relative;
-          line-height: 1.25;
-          padding-bottom: 0.75vw;
-          margin-left: 2vw;
-          &::before {
-            content: ""; /* Set the content to an empty string */
-            position: absolute;
-            display: inline-block; /* Set the display to inline-block */
-            width: 1.2vw; /* Set the width of the bullet */
-            height: 1.2vw; /* Set the height of the bullet */
-            top: 0.15vw;
-            left: -1.6vw;
-            background-image: url('../assets/images/Bullet.svg'); /* Set the background image to your SVG */
-            background-size: contain; /* Set the background size to contain the image */
-            margin-right: 10px; /* Add some spacing between the bullet and the text */
-          }
+        
+        .page-container {
+          height: 100%;
+          padding: 0vw;
         }
       }
     }
@@ -91,12 +79,20 @@ body {
 
     .carousel-nav {
       button {
-        width: 100%;
+        width: 5vw;
+        margin: 0;
+        padding: 0;
         background-color: transparent;
         border: none;
 
+        transition: opacity 0.3s ease-in-out;
+
         &:active {
           outline: 2px dashed colors.$color_primary;
+        }
+
+        &:disabled {
+          opacity: 0.4;
         }
       }
 
@@ -105,12 +101,15 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 1vw;
-        width: 80%;
+        gap: 1.5vw;
+        width: 90%;
         margin: 2vw auto 0;
         img {
           max-width: 6vw;
           max-height: 5vw;
+        }
+        .info-icon img {
+          max-width: 4vw;
         }
       }
     }

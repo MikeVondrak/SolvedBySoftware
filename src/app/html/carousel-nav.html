@@ -1,14 +1,17 @@
 <template data-template-id="CarouselNavMain">
-  <button onclick="loadPage('Services')">
+  <button data-click="Home" onclick="loadPage('Home')">
+    <img src="assets/images/Home.svg" />
+  </button>
+  <button data-click="Services" onclick="loadPage('Services')">
     <img src="assets/images/Services.svg" />
   </button>
-  <button onclick="loadPage('Contact')">
+  <button data-click="Contact" onclick="loadPage('Contact')">
     <img src="assets/images/Contact.svg" />
   </button>
-  <button onclick="loadPage('Portfolio')">
+  <button data-click="Portfolio" onclick="loadPage('Portfolio')">
     <img src="assets/images/Portfolio.svg" />
   </button>
-  <button onclick="loadPage('AboutUs')">
+  <button data-click="AboutUs" onclick="loadPage('AboutUs')" class="info-icon">
     <img src="assets/images/Info.svg" />
   </button>
 </template>

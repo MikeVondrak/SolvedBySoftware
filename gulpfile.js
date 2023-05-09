@@ -24,7 +24,8 @@ gulp.task("bundleCss", function () {
     .pipe(sass().on("error", sass.logError))
     .pipe(concat("bundle.css"))
     .pipe(cleanCSS())
-    .pipe(gulp.dest("./dist/css"));
+    .pipe(gulp.dest("./dist/css"))
+    .pipe(connect.reload());
 });
 
 gulp.task("typescript", function () {
@@ -33,7 +34,8 @@ gulp.task("typescript", function () {
     .pipe(tsProject())
     .js.pipe(concat("bundle.js"))
     .pipe(uglify())
-    .pipe(gulp.dest("./dist/js"));
+    .pipe(gulp.dest("./dist/js"))
+    .pipe(connect.reload());
 });
 
 gulp.task("html", function () {
@@ -116,10 +118,10 @@ gulp.task("serve", function () {
   // gulp.watch("./src/app/html/*.html").on("change", gulp.series("html", "refresh"));
 
 
-  gulp.watch("./src/app/scss/*.scss").on("change", gulp.series("bundleCss", "reloadIndex"));
-  gulp.watch("./src/app/ts/*.ts").on("change", gulp.series("typescript", "reloadIndex"));
-  gulp.watch("./index.html").on("change", gulp.series("html", "reloadIndex"));
-  gulp.watch("./src/app/html/*.html").on("change", gulp.series("html", "reloadIndex"));
+  gulp.watch("./src/app/scss/*.scss").on("change", gulp.series("bundleCss"));
+  gulp.watch("./src/app/ts/*.ts").on("change", gulp.series("typescript"));
+  gulp.watch("./index.html").on("change", gulp.series("html"));
+  gulp.watch("./src/app/html/*.html").on("change", gulp.series("html"));
 
 });
 

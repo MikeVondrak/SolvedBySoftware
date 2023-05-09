@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-431,-894)">
+        <g transform="matrix(1,0,0,1,-0.593501,0)">
+            <rect id="Email" x="431.594" y="894" width="139.386" height="139.386" style="fill:none;"/>
+            <g id="Email1" serif:id="Email">
+                <path d="M570.979,928.846L570.979,998.539C570.979,1017.77 555.365,1033.39 536.133,1033.39L466.44,1033.39C447.208,1033.39 431.594,1017.77 431.594,998.539L431.594,928.846C431.594,909.614 447.208,894 466.44,894L536.133,894C555.365,894 570.979,909.614 570.979,928.846ZM501.652,971.922L496.09,967.41L458.532,999.995L544.771,999.995L507.101,967.313L501.652,971.922ZM508.986,964.999L546.939,998.294L546.939,929.097L508.986,964.999ZM501.407,967.313L544.526,927.391L458.287,927.391L501.407,967.313ZM493.587,964.999L455.634,929.097L455.634,998.294L493.587,964.999Z" style="fill:rgb(71,72,72);"/>
+            </g>
+        </g>
+    </g>
+</svg>

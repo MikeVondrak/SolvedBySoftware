@@ -32,13 +32,13 @@ $col3: transparent; //#242B82;
       // height: 10vw;
       
       &.up {
-        left: 32%;
+        left: 31.5%;
         img {
           height: 100%;
         }
       }
       &.down {
-        left: 65%;
+        left: 64.5%;
         img {
           height: 100%;
           transform: rotate(180deg);
@@ -61,7 +61,7 @@ $col3: transparent; //#242B82;
       display: flex;
       flex-direction: column;
       gap: 0.25vw;
-      margin: 0.5vw 0 1vw 0;
+      margin: 0.75vw 0 1vw 0;
       font-size: 80%;
 
       li {

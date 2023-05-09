@@ -1,14 +1,18 @@
 #ContentPane_AboutUs.page-container {
+  padding: 1vw;
 
   .section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    p {
+      padding: 1vw;
+    }
+    img {
+      width: 16vw;
+    }
   }
 
-  img {
-    width: 16vw;
-    margin: 0 1vw 0.5vw 0;    
-  }
 
 }

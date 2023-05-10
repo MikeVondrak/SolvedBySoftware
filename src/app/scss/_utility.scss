@@ -1,0 +1,16 @@
+$breakpoints: (
+  "min": 320,
+  "xs": 400,
+  "sm": 600,
+  "md": 840,
+  "lg": 1024,
+  "xl": 1280,
+  "ws": 1440,
+  "hd": 1920,
+);
+
+@mixin media-breakpoint-gte($bp) {
+  @media (min-width: #{map-get($breakpoints, $bp) + px}) {
+    @content;
+  }
+}

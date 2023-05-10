@@ -1,7 +1,7 @@
 @use 'colors';
+@use 'utility';
 
 body {
-  //position: relative;
   display: flex;
   flex-direction: column;
   min-height: 800px;
@@ -31,8 +31,19 @@ body {
       position: absolute;
       width: 36.95vw;
       height: 21.25vw;
+      
       //background-color: rgba(255,0,0,0.5);
-      transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3deg) skewX(4deg) skewY(-3deg) scaleY(1.22);
+
+      transform: translate3d(18vw, 8.5vw, 0vw) rotateX(11deg) rotateY(15deg) rotateZ(-3deg) skewX(6deg) skewY(-4.5deg) scaleY(1.22);
+      @include utility.media-breakpoint-gte(sm) {
+        
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        transform: translate3d(18vw, 8.5vw, 0vw) rotateX(11deg) rotateY(15deg) rotateZ(-3deg) skewX(6deg) skewY(-4deg) scaleY(1.23);
+      }
+      @include utility.media-breakpoint-gte(xl) {
+        transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3deg) skewX(4deg) skewY(-3deg) scaleY(1.22);
+      }
       overflow: hidden;
       
       > * {
@@ -41,8 +52,8 @@ body {
         left: 0;
         bottom: 0;
         right: 0;
+        opacity: 0;
         transition: opacity 0.5s ease-in-out;
-
         
         .page-container {
           height: 100%;
@@ -74,43 +85,6 @@ body {
 
       h2 {
         font-size: 160%;
-      }
-    }
-
-    .carousel-nav {
-      button {
-        width: 5vw;
-        margin: 0;
-        padding: 0;
-        background-color: transparent;
-        border: none;
-
-        transition: opacity 0.3s ease-in-out;
-
-        &:active {
-          outline: 2px dashed colors.$color_primary;
-        }
-
-        &:disabled {
-          opacity: 0.4;
-        }
-      }
-
-      &.main-nav {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1.5vw;
-        width: 90%;
-        margin: 2vw auto 0;
-        img {
-          max-width: 6vw;
-          max-height: 5vw;
-        }
-        .info-icon img {
-          max-width: 4vw;
-        }
       }
     }
 

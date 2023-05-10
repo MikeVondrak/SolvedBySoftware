@@ -1,17 +1,26 @@
 <template data-template-id="CarouselNavMain">
-  <button data-click="Home" onclick="loadPage('Home')">
-    <img src="assets/images/Home.svg" />
-  </button>
-  <button data-click="Services" onclick="loadPage('Services')">
-    <img src="assets/images/Services.svg" />
-  </button>
-  <button data-click="Contact" onclick="loadPage('Contact')">
-    <img src="assets/images/Contact.svg" />
-  </button>
-  <button data-click="Portfolio" onclick="loadPage('Portfolio')">
-    <img src="assets/images/Portfolio.svg" />
-  </button>
-  <button data-click="AboutUs" onclick="loadPage('AboutUs')" class="info-icon">
-    <img src="assets/images/Info.svg" />
-  </button>
+  <div class="nav-container">
+    <div class="carousel-nav main-nav">
+      <button data-click="Home" onclick="loadPage('Home')">
+        <img src="assets/images/Home.svg" />
+      </button>
+      <button data-click="Services" onclick="loadPage('Services')">
+        <img src="assets/images/Services.svg" />
+      </button>
+      <button data-click="Contact" onclick="loadPage('Contact')">
+        <img src="assets/images/Contact.svg" />
+      </button>
+      <button data-click="Portfolio" onclick="loadPage('Portfolio')">
+        <img src="assets/images/Portfolio.svg" />
+      </button>
+      <button
+        data-click="AboutUs"
+        onclick="loadPage('AboutUs')"
+        class="info-icon"
+      >
+        <img src="assets/images/Info.svg" />
+      </button>
+    </div>
+    <img class="marker" id="MainNavMarker" src="assets/images/Marker.svg" />
+  </div>
 </template>

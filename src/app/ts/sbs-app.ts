@@ -13,6 +13,7 @@ function loadPage(pageId: string) {
   console.log('LOAD PAGE ', currentPageId);
   updateNav();
   updateScreen();
+  setMarkerPosition(currentPageId);
 }
 
 function updateNav() {

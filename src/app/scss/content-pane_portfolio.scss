@@ -1,16 +1,68 @@
 #ContentPane_Portfolio.page-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  // .logo {
-  //   position: absolute;;
-  //   top: 0.5vw;
-  //   right: 0.5vw;
-  //   width: 5vw;
-  // }
-
-  > * {
-    flex: 1;
+  //position: relative;
+  //background: rgba(255,0,0,0.2);
+  .folder-bg {
+    position: relative;
+    width: 98%;
+    bottom: 1vw;
+    left: 0.5vw;
+  }
+  ul {
+    //background: rgba(0,255,0,0.2);
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    li {
+      position: absolute;
+      
+      &.stellar {
+        top: 17vw;
+        left: 6vw;
+        img {
+          height: 2.75vw;
+        }
+      }
+      &.payscout {
+        top: 9vw;
+        left: 19vw;
+        img {
+          height: 3.5vw;
+        }
+      }
+      &.western-timber-frame {
+        top: 9vw;
+        left: 5vw;
+        img {
+          height: 5.5vw;
+        }
+      }
+      &.delegate {
+        top: 2vw;
+        left: 23vw;
+        img {
+          height: 4vw;
+        }
+      }
+      &.whip-around {
+        top: 1.5vw;
+        left: 2vw;        
+        img {
+          height: 2.75vw;
+        }
+      }
+      &.centric {
+        top: 5.5vw;
+        left: 2vw;
+        img {
+          height: 2vw;
+        }
+      }
+      &.elan {
+        top: 14vw;
+        right: 3vw;
+        img {
+          height: 2vw;
+        }
+      }  
+    }
   }
 }

@@ -43,7 +43,7 @@
   }
   .marker {
     --markerStart: 2.75vw;
-    --markerInc: 5.9vw;
+    --markerInc: 5.92vw;
     --markerPos_Home: var(--markerStart);
     --markerPos_Services: calc(var(--markerStart) + calc(var(--markerInc) * 1));
     --markerPos_Contact: calc(var(--markerStart) + calc(var(--markerInc) * 2));

@@ -1,20 +1,33 @@
 @use "colors";
 @use "utility";
 
+@mixin bg-radial-grad() {
+  background-image: radial-gradient(
+    colors.$color_white_rgb 35%,
+    transparent 70%
+  );
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("../assets/images/cpu_desk_bg.jpg");
+  
+  box-shadow: 0px 0px 6px 2px inset colors.$color_white;
+  background-image: url("../assets/images/cpu_desk_bg.jpg"), linear-gradient(90deg, colors.$color_white_alt2 30%, colors.$color_white_alt 60%);
+  background-size: 165%;
   background-repeat: no-repeat;
-
-  background-size: 150%;
-  background-position: 7% 0%;
+  background-position: 14% 19.5vw, top left;
+  
+  @include utility.media-breakpoint-gte(sm) {
+    background-image: url("../assets/images/cpu_desk_bg.jpg"), linear-gradient(52deg, colors.$color_white_alt2 30%, colors.$color_white_alt 60%);
+    background-size: 150%;
+    background-position: 7% 16.5vw, top left;
+  }  
   @include utility.media-breakpoint-gte(lg) {
     background-size: 100%;
     background-position: center top;
   }
-  box-shadow: 0px 0px 6px 2px inset colors.$color_white;
 
   header {
     position: relative;
@@ -28,9 +41,9 @@ body {
   main {
     flex: 1;
     position: relative;
-    min-height: 50vw;
+    min-height: 800px;
     padding: 0;
-    perspective: 100vw; //5000px;
+    perspective: 100vw;
     transform-style: flat;
     font-size: 55%;
 
@@ -41,9 +54,11 @@ body {
 
       //background-color: rgba(255,0,0,0.5);
 
-      transform: translate3d(18vw, 8.5vw, 0vw) rotateX(11deg) rotateY(15deg)
+      transform: translate3d(18vw, 38.5vw, 0vw) rotateX(11deg) rotateY(15deg)
         rotateZ(-3deg) skewX(6deg) skewY(-4.5deg) scaleY(1.22);
       @include utility.media-breakpoint-gte(sm) {
+        // transform: translate3d(18vw, 8.5vw, 0vw) rotateX(11deg) rotateY(15deg)
+        // rotateZ(-3deg) skewX(6deg) skewY(-4.5deg) scaleY(1.22);
       }
 
       // Begin large-format layout at 1024px
@@ -55,15 +70,18 @@ body {
       // 1280
       @include utility.media-breakpoint-gte(xl) {
         //transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3.75deg) skewX(5deg) skewY(-3.5deg) scaleY(1.24);
-        transform: translate3d(18.25vw,8.5vw,0) rotateX(11deg) rotateY(17deg) rotateZ(-5.25deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
+        transform: translate3d(18.25vw, 8.5vw, 0) rotateX(11deg) rotateY(17deg)
+          rotateZ(-5.25deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
       }
       // 1440
       @include utility.media-breakpoint-gte(ws) {
-        transform: translate3d(18.25vw, 8.5vw, 0) rotateX(11deg) rotateY(17deg) rotateZ(-4deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
+        transform: translate3d(18.25vw, 8.5vw, 0) rotateX(11deg) rotateY(17deg)
+          rotateZ(-4deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
       }
       // 1920
       @include utility.media-breakpoint-gte(hd) {
-        transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3.5deg) skewX(4deg) skewY(-3deg) scaleY(1.22);
+        transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg)
+          rotateY(17deg) rotateZ(-3.5deg) skewX(4deg) skewY(-3deg) scaleY(1.22);
       }
       overflow: hidden;
 
@@ -85,50 +103,71 @@ body {
 
     .intro {
       position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       right: 50vw;
-      top: 40vw;
+      top: 7vw;
       max-width: 80vw;
-      padding: 10vw 20vw;
-      background-image: radial-gradient(
-        colors.$color_white_rgb 35%,
-        transparent 70%
-      );
+      font-size: 2.75vw;
       transform: translateX(50%);
+      text-align: center;
+      $shadowOffset: clamp(1px, 0.1vw, 2px);
+      text-shadow: 0.1vw 0.1vw 0.2vw colors.$color_gray;
+      @include utility.media-breakpoint-gte(sm) {
+        font-size: 2.25vw;
+      }
       @include utility.media-breakpoint-gte(lg) {
-        //position: absolute;
+        text-shadow: $shadowOffset $shadowOffset clamp(2px, 0.2vw, 4px) colors.$color_gray;
+      }
+      white-space: nowrap;
+      @include bg-radial-grad();
+      @include utility.media-breakpoint-gte(lg) {
         right: 5vw;
         top: 16vw;
         max-width: 40vw;
         padding: 0;
-        background-image: radial-gradient(
-          colors.$color_white_rgb 35%,
-          transparent 65%
-        );
+        font-size: 104%;
+        @include bg-radial-grad();
         transform: translateX(0%);
-      }
-      text-align: center;
-      text-shadow: 1px 1px 2px colors.$color_gray;
+      }      
 
-      white-space: nowrap;
-
-      > * {
-        position: relative;
-      }
-
-      .swoosh {
-        position: absolute;
-        width: 70%;
-        top: 6.25vw;
-        right: 9vw;
+      .title {
+        margin-bottom: 3vw;
         @include utility.media-breakpoint-gte(lg) {
-          width: 92%;
-          top: 2.35vw;
-          right: 3.25vw;
+          margin-bottom: 2vw;
+        }
+        > * {
+          position: relative;
+          @include bg-radial-grad();
+        }
+        .swoosh {
+          position: absolute;
+          width: 90%;
+          top: 5.5vw;
+          right: 8.5vw;
+          @include utility.media-breakpoint-gte(sm) {
+            width: 90%;
+            top: 4.5vw;
+            right: 7.5vw;
+          }
+          @include utility.media-breakpoint-gte(lg) {
+            width: 92%;
+            top: 2.35vw;
+            right: 3.25vw;
+          }
+        }
+        h2 {
+          font-size: 160%;
         }
       }
 
-      h2 {
-        font-size: 160%;
+      .main-nav {
+        display: none;
+        @include utility.media-breakpoint-gte(lg) {
+          display: flex;
+        }
       }
     }
 

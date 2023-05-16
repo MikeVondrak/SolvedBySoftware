@@ -1,35 +1,50 @@
 @use "./colors";
+@use "./utility";
 
 .nav-container {
-  position: relative;
-
+  position: relative;  
   .carousel-nav {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     &.main-nav {
       gap: 1.5vw;
       width: 90%;
-      margin: 2vw auto 0;
+      margin: 0 auto 0;
       img {
-        max-width: 6vw;
-        max-height: 5vw;
+        max-width: 8vw;
+        max-height: 7vw;
+
+        @include utility.media-breakpoint-gte(lg) {
+          max-width: 6vw;
+          max-height: 5vw;
+        }
       }
       .info-icon img {
-        max-width: 4vw;
-      }
+        max-width: 7vw;
+        @include utility.media-breakpoint-gte(lg) {
+          max-width: 4vw;
+        }
+      }      
     }
 
     button {
       display: block;
-      width: 5vw;
+      width: 10vw;
+      background-image: radial-gradient(
+        rgba(255, 255, 235, 0.5) 25%,
+        transparent 75%
+      );
+
+      @include utility.media-breakpoint-gte(lg) {
+        width: 4vw;
+      }
       margin: 0;
       padding: 0;
       background-color: transparent;
       border: none;
-
       transition: opacity 0.3s ease-in-out;
 
       &:active {
@@ -42,20 +57,33 @@
     }
   }
   .marker {
-    --markerStart: 2.75vw;
-    --markerInc: 5.92vw;
+    --markerStart: 5.3vw;
+    --markerInc: 10.38vw;
     --markerPos_Home: var(--markerStart);
     --markerPos_Services: calc(var(--markerStart) + calc(var(--markerInc) * 1));
     --markerPos_Contact: calc(var(--markerStart) + calc(var(--markerInc) * 2));
     --markerPos_Portfolio: calc(var(--markerStart) + calc(var(--markerInc) * 3));
     --markerPos_AboutUs: calc(var(--markerStart) + calc(var(--markerInc) * 4));
 
+    --markerStartLg: 2vw;
+    --markerIncLg: 5vw;
+    --markerPosLg_Home: var(--markerStartLg);
+    --markerPosLg_Services: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 1));
+    --markerPosLg_Contact: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 2));
+    --markerPosLg_Portfolio: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 3));
+    --markerPosLg_AboutUs: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 4));
+
     transition: left 0.3s ease-in-out;
 
     position: absolute;
-    top: -0.5vw;
+    top: -1.5vw;
     left: var(--markerPos_Home);
-    width: 2vw;
+    width: 4vw;
+    @include utility.media-breakpoint-gte(lg) {
+      top: -0.5vw;
+      width: 2vw;
+    }
+    
     animation: hover-up-down 1s ease-in-out infinite alternate;
 
     @keyframes hover-up-down {

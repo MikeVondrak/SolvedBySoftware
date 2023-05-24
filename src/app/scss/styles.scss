@@ -1,42 +1,88 @@
 @use "colors";
+@use "utility";
 /* Define the font family */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
 
-$fontBase: 2.1vw;
-$hbase: 2.5vw;
+$hMargin: 1vw;
+$hMarginInc: 0.5vw;
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
-  font-family: 'Montserrat', sans-serif;
-  font-size: $fontBase;
+html,
+body {
+  min-height: 100%; // "sticky footer"
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 5vw;
+  @include utility.media-breakpoint-gte(xs) {
+    font-size: 4vw;
+  }
+  @include utility.media-breakpoint-gte(sm) {
+    font-size: 3.25vw;
+  }
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 2.5vw;
+  }
+  @include utility.media-breakpoint-gte(lg) {
+    font-size: 2vw;
+  }
+  @include utility.media-breakpoint-gte(ws) {
+    font-size: 1.5vw;
+  }
+  @include utility.media-breakpoint-gte(hd) {
+    font-size: 1.2vw;
+  }
   color: colors.$color_text;
-  background-color: colors.$color_background;  
-  min-height: 100%;
+  background-color: colors.$color_background;
 }
 body {
-  min-height: 100vh;
+  line-height: 1.25;
 }
-h1, h2, h3, h4, h5 {
-  margin-bottom: 2vw;
-  font-family: 'Raleway', sans-serif;
-  font-weight: bold;  
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
-h1 { font-size: $hbase * 2.5; }
-h2 { font-size: $hbase * 2.0; }
-h3 { font-size: $hbase * 1.5; }
-h4 { font-size: $hbase * 1.2; }
-h5 { font-size: $hbase; }
-p { font-size: $fontBase; }
+h1 {
+  margin: ($hMargin + ($hMarginInc * 8)) 0 ($hMargin + ($hMarginInc * 6));
+  font-size: 2.25em;
+}
+h2 {
+  margin: ($hMargin + ($hMarginInc * 7)) 0 ($hMargin + ($hMarginInc * 5));
+  font-size: 2em;
+}
+h3 {
+  margin: ($hMargin + ($hMarginInc * 6)) 0 ($hMargin + ($hMarginInc * 4));
+  font-size: 1.75em;
+}
+h4 {
+  margin: ($hMargin + ($hMarginInc * 5)) 0 ($hMargin + ($hMarginInc * 3));
+  font-size: 1.5em;
+}
+h5 {
+  margin: ($hMargin + ($hMarginInc * 4)) 0 ($hMargin + ($hMarginInc * 2));
+  font-size: 1.25em;
+}
+p {
+  margin: ($hMargin + ($hMarginInc * 3)) 0 ($hMargin + ($hMarginInc * 1));
+  font-size: 1em;
+}
+li, a, button {
+  font-size: 1em;
+}
 
-
-header {}
-main {}
-footer {}
+header {
+}
+main {
+}
+footer {
+}
 
 a {
   color: colors.$color_primary;

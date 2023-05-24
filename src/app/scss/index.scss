@@ -14,20 +14,30 @@ body {
   min-height: 100vh;
 
   box-shadow: 0px 0px 6px 2px inset colors.$color_white;
-  background-image: url("../assets/images/cpu_desk_bg.jpg"),
+  background-image: url("../assets/images/cpu_desk_bg_sm.jpg"),
     linear-gradient(
-      60deg,
+      70deg,
       colors.$color_white_alt2 30%,
       colors.$color_white_alt 60%
     );
-  background-size: 165%;
+  background-size: 205%;
   background-repeat: no-repeat;
-  background-position: 14% 19.5vw, top left;
+  background-position: 22% 19.5vw, top left;
 
+  @include utility.media-breakpoint-gte(xs) {
+    // background-image: url("../assets/images/cpu_desk_bg_sm.jpg"),
+    //   linear-gradient(
+    //     70deg,
+    //     colors.$color_white_alt2 30%,
+    //     colors.$color_white_alt 60%
+    //   );
+    background-size: 150%;
+    background-position: 7% 16.5vw, top left;
+  }
   @include utility.media-breakpoint-gte(sm) {
     background-image: url("../assets/images/cpu_desk_bg.jpg"),
       linear-gradient(
-        52deg,
+        70deg,
         colors.$color_white_alt2 30%,
         colors.$color_white_alt 60%
       );
@@ -56,26 +66,47 @@ body {
     perspective: 200vw;
     perspective-origin: top center;
     transform-style: flat;
-    font-size: 55%;
 
     .main-spacer {
-      height: 100vw;
+      height: 133.7vw;
+      @include utility.media-breakpoint-gte(xs) {
+        height: 100vw;
+      }
+      @include utility.media-breakpoint-gte(sm) {
+        height: 100vw;
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        height: 55.25vw;
+      }
     }
 
     .screen {
       /* CONFIG */
-      $w: 66.75vw;
-      $h: 40.5vw;
-      $tX: 18.75vw;
-      $tY: 31.1vw;
+      $w: 80.75vw;
+      $h: 50.25vw;
+      $tX: 12.5vw;
+      $tY: 33.5vw;
       $tZ: 0;
       $rX: 7deg;
-      $rY: 25deg;
-      $rZ: 2deg;
+      $rY: 22deg;
+      $rZ: 2.5deg;
       $sX: 9.5deg;
       $sY: 0deg;
       $scX: 1;
       $scY: 1;
+
+      $w_xs: 61.45vw;
+      $h_xs: 36.5vw;
+      $tX_xs: 21.4vw;
+      $tY_xs: 27.4vw;
+      $tZ_xs: 0;
+      $rX_xs: 7deg;
+      $rY_xs: 27deg;
+      $rZ_xs: 2deg;
+      $sX_xs: 9.5deg;
+      $sY_xs: 0deg;
+      $scX_xs: 1;
+      $scY_xs: 1;
 
       $w_sm: 62.10vw;
       $h_sm: 36.5vw;
@@ -101,16 +132,22 @@ body {
       $sX_lg: 3.5deg;
       $sY_lg: -4.75deg;
 
-
       background-color: rgba(255, 0, 0, 0.5);
       
       position: absolute;
       
       width: $w;
       height: $h;
+      font-size: 0.5em;
+
       transform: translate3d($tX, $tY, $tZ) rotateX($rX) rotateY($rY)
         rotateZ($rZ) skewX($sX) skewY($sY) scaleX($scX) scaleY($scY);
-      // Background resizes and repositions at 600px    
+      @include utility.media-breakpoint-gte(xs) {
+        width: $w_xs;
+        height: $h_xs;
+        transform: translate3d($tX_xs, $tY_xs, $tZ_xs) rotateX($rX_xs) rotateY($rY_xs)
+          rotateZ($rZ_xs) skewX($sX_xs) skewY($sY_xs);
+      }
       @include utility.media-breakpoint-gte(sm) {
         width: $w_sm;
         height: $h_sm;
@@ -169,13 +206,17 @@ body {
       right: 50vw;
       top: 7vw;
       max-width: 80vw;
-      font-size: 2.75vw;
+      font-size: 0.6em;
       transform: translateX(50%);
       text-align: center;
       $shadowOffset: clamp(1px, 0.1vw, 2px);
       text-shadow: 0.1vw 0.1vw 0.2vw colors.$color_gray;
+      @include utility.media-breakpoint-gte(xs) {
+        top: 6vw;
+      }
       @include utility.media-breakpoint-gte(sm) {
         font-size: 2.25vw;
+        top: 6vw;
       }
       @include utility.media-breakpoint-gte(lg) {
         text-shadow: $shadowOffset $shadowOffset clamp(2px, 0.2vw, 4px)
@@ -204,13 +245,18 @@ body {
         }
         .swoosh {
           position: absolute;
-          width: 90%;
-          top: 5.5vw;
-          right: 8.5vw;
+          width: 86%;
+          top: 6.35vw;
+          right: 8.2vw;
+          @include utility.media-breakpoint-gte(xs) {
+            width: 88%;
+            top: 5.1vw;
+            right: 6.5vw;
+          }
           @include utility.media-breakpoint-gte(sm) {
             width: 90%;
-            top: 4.5vw;
-            right: 7.5vw;
+            top: 4.9vw;
+            right: 6.1vw;
           }
           @include utility.media-breakpoint-gte(lg) {
             width: 92%;
@@ -218,8 +264,11 @@ body {
             right: 3.25vw;
           }
         }
+        h1, h2 {
+          margin: 0vw;
+        }
         h2 {
-          font-size: 160%;
+          font-size: 1.5em;
         }
       }
 
@@ -236,10 +285,10 @@ body {
     }
 
     .divider1 {
-      z-index: 1;
       position: relative;
+      display: flex;
+      justify-content: center;
       top: -0.5vw;
-      // top: 54.75vw;
       img {
         height: 3vw;
       }

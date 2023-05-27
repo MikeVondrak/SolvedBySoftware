@@ -73,7 +73,7 @@
     --markerPosLg_Portfolio: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 3));
     --markerPosLg_AboutUs: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 4));
 
-    transition: left 0.3s ease-in-out;
+    transition: left 0.3s cubic-bezier(1, -0.25, 0.25, 1.26);
 
     position: absolute;
     top: -1.5vw;

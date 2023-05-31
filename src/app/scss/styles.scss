@@ -16,24 +16,24 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Montserrat", sans-serif;
-  font-size: 5vw;
+  font-size: 4vw;
   @include utility.media-breakpoint-gte(xs) {
-    font-size: 4vw;
+    font-size: 3vw;
   }
   @include utility.media-breakpoint-gte(sm) {
-    font-size: 3.25vw;
+    font-size: 2.25vw;
   }
   @include utility.media-breakpoint-gte(md) {
-    font-size: 2.5vw;
+    font-size: 1.75vw;
   }
   @include utility.media-breakpoint-gte(lg) {
-    font-size: 2vw;
-  }
-  @include utility.media-breakpoint-gte(ws) {
     font-size: 1.5vw;
   }
+  @include utility.media-breakpoint-gte(ws) {
+    font-size: 1.4vw;
+  }
   @include utility.media-breakpoint-gte(hd) {
-    font-size: 1.2vw;
+    font-size: 1.3vw;
   }
   color: colors.$color_text;
   background-color: colors.$color_background;

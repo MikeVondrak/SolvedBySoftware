@@ -1,78 +1,198 @@
-@use './utility';
+@use "./utility";
+
+/* NOTE: webkit browser styling by default
+ * - overrides for FireFox below
+ * - this was a huge PITA, don't do it again
+ */
+$w: 81.75vw;
+$h: 51.25vw;
+$tX: 13.5vw;
+$tY: 33.5vw;
+$tZ: 0;
+$rX: 7deg;
+$rY: 22deg;
+$rZ: 2.5deg;
+$sX: 9.5deg;
+$sY: 0deg;
+$scX: 1;
+$scY: 1;
+
+// 400px
+$w_xs: 59.4vw;
+$h_xs: 35.25vw;
+$tX_xs: 20.5vw;
+$tY_xs: 27.0vw;
+$tZ_xs: 0;
+$rX_xs: 7deg;
+$rY_xs: 27deg;
+$rZ_xs: 1.5deg;
+$sX_xs: 9.5deg;
+$sY_xs: 0deg;
+$scX_xs: 1;
+$scY_xs: 1;
+
+// 600px
+$w_sm: 60.65vw;
+$h_sm: 35.8vw;
+$tX_sm: 20.75vw;
+$tY_sm: 27vw;
+$tZ_sm: 0;
+$rX_sm: 7deg;
+$rY_sm: 28deg;
+$rZ_sm: 1.8deg;
+$sX_sm: 9.25deg;
+$sY_sm: 0deg;
+$scX_sm: 1;
+$scY_sm: 1;
+
+// 840px
+$w_md: 60.9vw;
+$h_md: 36.0vw;
+$tX_md: 20.75vw;
+$tY_md: 27vw;
+$tZ_md: 0;
+$rX_md: 7deg;
+$rY_md: 28deg;
+$rZ_md: 1.8deg;
+$sX_md: 9.25deg;
+$sY_md: 0deg;
+$scX_md: 1;
+$scY_md: 1;
+
+// 1024px - begin desktop layout
+$w_lg: 45.8vw;
+$h_lg: 24.5vw;
+$tX_lg: 13.9vw;
+$tY_lg: 6.8vw;
+$tZ_lg: 0;
+$rX_lg: 7deg;
+$rY_lg: 42deg;
+$rZ_lg: -1.65deg;
+$sX_lg: 6.85deg;
+$sY_lg: 0deg;
+
+// 1280px
+$w_xl: 45.8vw;
+$h_xl: 24.5vw;
+$tX_xl: 13.9vw;
+$tY_xl: 6.8vw;
+$tZ_xl: 0;
+$rX_xl: 7deg;
+$rY_xl: 42deg;
+$rZ_xl: -1.65deg;
+$sX_xl: 6.85deg;
+$sY_xl: 0deg;
+
+// 1440px
+$w_ws: 45.9vw;
+$h_ws: 24.5vw;
+$tX_ws: 13.9vw;
+$tY_ws: 6.9vw;
+$tZ_ws: 0;
+$rX_ws: 7deg;
+$rY_ws: 42deg;
+$rZ_ws: -1.65deg;
+$sX_ws: 6.85deg;
+$sY_ws: 0deg;
+
+// 1920px
+$w_hd: 46vw;
+$h_hd: 24.6vw;
+$tX_hd: 14vw;
+$tY_hd: 6.9vw;
+$tZ_hd: 0;
+$rX_hd: 7deg;
+$rY_hd: 42deg;
+$rZ_hd: -1.65deg;
+$sX_hd: 6.85deg;
+$sY_hd: 0deg;
+
+
+// -------- FireFox Overrides --------
+$w_xs_ff: 61.45vw;
+$h_xs_ff: 36.5vw;
+$tX_xs_ff: 21.4vw;
+$tY_xs_ff: 27.4vw;
+$tZ_xs_ff: 0;
+$rX_xs_ff: 7deg;
+$rY_xs_ff: 27deg;
+$rZ_xs_ff: 2deg;
+$sX_xs_ff: 9.5deg;
+$sY_xs_ff: 0deg;
+$scX_xs_ff: 1;
+$scY_xs_ff: 1;
+
+$w_sm_ff: 62.1vw;
+$h_sm_ff: 36.5vw;
+$tX_sm_ff: 21.15vw;
+$tY_sm_ff: 27.2vw;
+$tZ_sm_ff: 0;
+$rX_sm_ff: 7deg;
+$rY_sm_ff: 28deg;
+$rZ_sm_ff: 1.8deg;
+$sX_sm_ff: 9.25deg;
+$sY_sm_ff: 0deg;
+$scX_sm_ff: 1;
+$scY_sm_ff: 1;
+
+$w_md_ff: 62.1vw;
+$h_md_ff: 36.5vw;
+$tX_md_ff: 21.15vw;
+$tY_md_ff: 27.2vw;
+$tZ_md_ff: 0;
+$rX_md_ff: 7deg;
+$rY_md_ff: 28deg;
+$rZ_md_ff: 1.8deg;
+$sX_md_ff: 9.25deg;
+$sY_md_ff: 0deg;
+$scX_md_ff: 1;
+$scY_md_ff: 1;
+
+// begin desktop layout
+$w_lg_ff: 46.25vw;
+$h_lg_ff: 24.7vw;
+$tX_lg_ff: 14.1vw;
+$tY_lg_ff: 7vw;
+$tZ_lg_ff: 0;
+$rX_lg_ff: 7deg;
+$rY_lg_ff: 42deg;
+$rZ_lg_ff: -1.65deg;
+$sX_lg_ff: 6.85deg;
+$sY_lg_ff: 0deg;
+
+$w_xl_ff: 46.25vw;
+$h_xl_ff: 24.7vw;
+$tX_xl_ff: 14.1vw;
+$tY_xl_ff: 7vw;
+$tZ_xl_ff: 0;
+$rX_xl_ff: 7deg;
+$rY_xl_ff: 42deg;
+$rZ_xl_ff: -1.65deg;
+$sX_xl_ff: 6.85deg;
+$sY_xl_ff: 0deg;
+
+$w_ws_ff: 46.25vw;
+$h_ws_ff: 24.8vw;
+$tX_ws_ff: 14.1vw;
+$tY_ws_ff: 6.9vw;
+$tZ_ws_ff: 0;
+$rX_ws_ff: 7deg;
+$rY_ws_ff: 42deg;
+$rZ_ws_ff: -1.65deg;
+$sX_ws_ff: 6.85deg;
+$sY_ws_ff: 0deg;
 
 #Screen {
-  /* CONFIG */
-  $w: 80.75vw;
-  $h: 50.25vw;
-  $tX: 12.5vw;
-  $tY: 33.5vw;
-  $tZ: 0;
-  $rX: 7deg;
-  $rY: 22deg;
-  $rZ: 2.5deg;
-  $sX: 9.5deg;
-  $sY: 0deg;
-  $scX: 1;
-  $scY: 1;
-
-  $w_xs: 61.45vw;
-  $h_xs: 36.5vw;
-  $tX_xs: 21.4vw;
-  $tY_xs: 27.4vw;
-  $tZ_xs: 0;
-  $rX_xs: 7deg;
-  $rY_xs: 27deg;
-  $rZ_xs: 2deg;
-  $sX_xs: 9.5deg;
-  $sY_xs: 0deg;
-  $scX_xs: 1;
-  $scY_xs: 1;
-
-  $w_sm: 62.1vw;
-  $h_sm: 36.5vw;
-  $tX_sm: 21.15vw;
-  $tY_sm: 27.2vw;
-  $tZ_sm: 0;
-  $rX_sm: 7deg;
-  $rY_sm: 28deg;
-  $rZ_sm: 1.8deg;
-  $sX_sm: 9.25deg;
-  $sY_sm: 0deg;
-  $scX_sm: 1;
-  $scY_sm: 1;
-
-  $w_lg: 46.1vw;
-  $h_lg: 24.7vw;
-  $tX_lg: 13.9vw;
-  $tY_lg: 6.8vw;
-  $tZ_lg: 0;
-  $rX_lg: 7deg;
-  $rY_lg: 42deg;
-  $rZ_lg: -1.65deg;
-  $sX_lg: 6.85deg;
-  $sY_lg: 0deg;
-
-  $w_ws: 46.1vw;
-  $h_ws: 24.7vw;
-  $tX_ws: 13.9vw;
-  $tY_ws: 6.8vw;
-  $tZ_ws: 0;
-  $rX_ws: 7deg;
-  $rY_ws: 42deg;
-  $rZ_ws: -1.65deg;
-  $sX_ws: 6.85deg;
-  $sY_ws: 0deg;
-
   background-color: rgba(255, 0, 0, 0.5);
 
   position: absolute;
+  font-size: 0.5em;
 
   width: $w;
   height: $h;
-  font-size: 0.5em;
-
   transform: translate3d($tX, $tY, $tZ) rotateX($rX) rotateY($rY) rotateZ($rZ)
     skewX($sX) skewY($sY) scaleX($scX) scaleY($scY);
+
   @include utility.media-breakpoint-gte(xs) {
     width: $w_xs;
     height: $h_xs;
@@ -85,31 +205,86 @@
     transform: translate3d($tX_sm, $tY_sm, $tZ_sm) rotateX($rX_sm)
       rotateY($rY_sm) rotateZ($rZ_sm) skewX($sX_sm) skewY($sY_sm);
   }
+  @include utility.media-breakpoint-gte(md) {
+    width: $w_md;
+    height: $h_md;
+    transform: translate3d($tX_md, $tY_md, $tZ_md) rotateX($rX_md)
+      rotateY($rY_md) rotateZ($rZ_md) skewX($sX_md) skewY($sY_md);
+  }
   // Begin large-format layout at 1024px
   @include utility.media-breakpoint-gte(lg) {
     width: $w_lg;
     height: $h_lg;
-    // transform: translate3d(18.25vw, 8.5vw, 0) rotateX(5deg) rotateY(17deg)
-    //   rotateZ(-3.5deg) skewX(4deg) skewY(-4.5deg) scaleY(1.25);
     transform: translate3d($tX_lg, $tY_lg, $tZ_lg) rotateX($rX_lg)
       rotateY($rY_lg) rotateZ($rZ_lg) skewX($sX_lg) skewY($sY_lg);
   }
   // 1280
-  // @include utility.media-breakpoint-gte(xl) {
-  //   //transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg) rotateY(17deg) rotateZ(-3.75deg) skewX(5deg) skewY(-3.5deg) scaleY(1.24);
-  //   transform: translate3d(18.25vw, 8.5vw, 0) rotateX(11deg) rotateY(17deg)
-  //     rotateZ(-5.25deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
-  // }
-  // // 1440
-  // @include utility.media-breakpoint-gte(ws) {
-  //   transform: translate3d(18.25vw, 8.5vw, 0) rotateX(11deg) rotateY(17deg)
-  //     rotateZ(-4deg) skewX(4deg) skewY(-3.5deg) scaleY(1.25);
-  // }
+  @include utility.media-breakpoint-gte(xl) {    
+    width: $w_xl;
+    height: $h_xl;
+    transform: translate3d($tX_xl, $tY_xl, $tZ_xl) rotateX($rX_xl)
+      rotateY($rY_xl) rotateZ($rZ_xl) skewX($sX_xl) skewY($sY_xl);
+  }
+  // 1440
+  @include utility.media-breakpoint-gte(ws) {
+    width: $w_ws;
+    height: $h_ws;
+    transform: translate3d($tX_ws, $tY_ws, $tZ_ws) rotateX($rX_ws)
+      rotateY($rY_ws) rotateZ($rZ_ws) skewX($sX_ws) skewY($sY_ws);    
+  }
   // // 1920
-  // @include utility.media-breakpoint-gte(hd) {
-  //   transform: translate3d(18.35vw, 8.5vw, 0vw) rotateX(11deg)
-  //     rotateY(17deg) rotateZ(-3.5deg) skewX(4deg) skewY(-3deg) scaleY(1.22);
-  // }
+  @include utility.media-breakpoint-gte(hd) {
+    width: $w_hd;
+    height: $h_hd;
+    transform: translate3d($tX_hd, $tY_hd, $tZ_hd) rotateX($rX_hd)
+      rotateY($rY_hd) rotateZ($rZ_hd) skewX($sX_hd) skewY($sY_hd);
+  }
+
+  // Firefox Overrides
+  @-moz-document url-prefix() {
+
+
+    @include utility.media-breakpoint-gte(xs) {
+      width: $w_xs_ff;
+      height: $h_xs_ff;
+      transform: translate3d($tX_xs_ff, $tY_xs_ff, $tZ_xs_ff) rotateX($rX_xs_ff)
+        rotateY($rY_xs_ff) rotateZ($rZ_xs_ff) skewX($sX_xs_ff) skewY($sY_xs_ff);
+    }
+    @include utility.media-breakpoint-gte(sm) {
+      width: $w_sm_ff;
+      height: $h_sm_ff;
+      transform: translate3d($tX_sm_ff, $tY_sm_ff, $tZ_sm_ff) rotateX($rX_sm_ff)
+        rotateY($rY_sm_ff) rotateZ($rZ_sm_ff) skewX($sX_sm_ff) skewY($sY_sm_ff);
+    }
+    @include utility.media-breakpoint-gte(md) {
+      width: $w_md_ff;
+      height: $h_md_ff;
+      transform: translate3d($tX_md_ff, $tY_md_ff, $tZ_md_ff) rotateX($rX_md_ff)
+        rotateY($rY_md_ff) rotateZ($rZ_md_ff) skewX($sX_md_ff) skewY($sY_md_ff);
+    }
+    @include utility.media-breakpoint-gte(lg) {
+      width: $w_lg_ff;
+      height: $h_lg_ff;
+      transform: translate3d($tX_lg_ff, $tY_lg_ff, $tZ_lg_ff) rotateX($rX_lg_ff)
+        rotateY($rY_lg_ff) rotateZ($rZ_lg_ff) skewX($sX_lg_ff) skewY($sY_lg_ff);
+    }
+    @include utility.media-breakpoint-gte(xl) {
+      width: $w_xl_ff;
+      height: $h_xl_ff;
+      transform: translate3d($tX_xl_ff, $tY_xl_ff, $tZ_xl_ff) rotateX($rX_xl_ff)
+        rotateY($rY_xl_ff) rotateZ($rZ_xl_ff) skewX($sX_xl_ff) skewY($sY_xl_ff);
+    }
+    @include utility.media-breakpoint-gte(ws) {
+      width: $w_ws_ff;
+      height: $h_ws_ff;
+      transform: translate3d($tX_ws_ff, $tY_ws_ff, $tZ_ws_ff) rotateX($rX_ws_ff)
+        rotateY($rY_ws_ff) rotateZ($rZ_ws_ff) skewX($sX_ws_ff) skewY($sY_ws_ff);
+    }
+  }
+
+
+
+
   overflow: hidden;
 
   > * {

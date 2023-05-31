@@ -68,15 +68,27 @@ body {
     transform-style: flat;
 
     .main-spacer {
-      height: 133.7vw;
+      height: 133.6vw;
       @include utility.media-breakpoint-gte(xs) {
-        height: 100vw;
+        height: 96.75vw;
       }
       @include utility.media-breakpoint-gte(sm) {
-        height: 100vw;
+        height: 97.75vw;
       }
       @include utility.media-breakpoint-gte(lg) {
         height: 55.25vw;
+      }
+      @-moz-document url-prefix() {
+        height: 133.3vw;
+        @include utility.media-breakpoint-gte(xs) {
+          height: 99.4vw;
+        }
+        @include utility.media-breakpoint-gte(sm) {
+          height: 99.4vw;
+        }
+        @include utility.media-breakpoint-gte(lg) {
+          height: 54.75vw;
+        }
       }
     }
 
@@ -89,11 +101,11 @@ body {
       right: 50vw;
       top: 7vw;
       max-width: 80vw;
-      font-size: 0.6em;
+      font-size: 0.9em;
       transform: translateX(50%);
       text-align: center;
       $shadowOffset: clamp(1px, 0.1vw, 2px);
-      text-shadow: 0.1vw 0.1vw 0.2vw colors.$color_gray;
+      text-shadow: $shadowOffset $shadowOffset 0.5vw colors.$color_gray;
       @include utility.media-breakpoint-gte(xs) {
         top: 6vw;
       }
@@ -102,14 +114,14 @@ body {
         top: 6vw;
       }
       @include utility.media-breakpoint-gte(lg) {
-        text-shadow: $shadowOffset $shadowOffset clamp(2px, 0.2vw, 4px)
+        text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px)
           colors.$color_gray;
       }
       white-space: nowrap;
       @include bg-radial-grad();
       @include utility.media-breakpoint-gte(lg) {
         right: 5vw;
-        top: 16vw;
+        top: 12vw;
         max-width: 40vw;
         padding: 0;
         font-size: 104%;
@@ -152,6 +164,7 @@ body {
         }
         h2 {
           font-size: 1.5em;
+          font-weight: bold;
         }
       }
 
@@ -171,7 +184,6 @@ body {
       position: relative;
       display: flex;
       justify-content: center;
-      top: -0.5vw;
       img {
         height: 3vw;
       }

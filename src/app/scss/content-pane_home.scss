@@ -1,3 +1,6 @@
+@use './utility';
+@use './colors';
+
 #ContentPane_Home.page-container {
   display: flex;
   justify-content: center;
@@ -7,22 +10,44 @@
     position: absolute;
     bottom: -1px;
     left: 2vw;
-    width: 12vw;
+    width: 24vw;
     img {
       display: block;
       width: 100%;
+    }
+    @include utility.media-breakpoint-gte(xs) {
+      width: 18vw;
+    }
+    @include utility.media-breakpoint-gte(lg) {
+      width: 12vw;
     }
   }
 
   .logo {
     position: absolute;;
-    top: 0.5vw;
-    right: 0.5vw;
-    width: 5vw;
+    top: 1vw;
+    left: 1vw;
+    width: 10vw;
+    @include utility.media-breakpoint-gte(xs){
+      width: 7vw;
+    }
+    @include utility.media-breakpoint-gte(lg){
+      top: 0.5vw;
+      left: 0.5vw; //unset;
+      // right: 0.5vw;
+      width: 5vw;
+    }    
   }
   ul {
-    margin: 0 9vw 0 20vw;
+    margin: 0 4vw 0 32vw;
     font-size: 1.45em;
+    @include utility.media-breakpoint-gte(xs) {
+      margin: 0 2vw 0 26vw;
+    }
+    @include utility.media-breakpoint-gte(lg) {
+      margin: 0 2vw 0 18vw;
+      font-size: 1.2em;
+    }    
     li {
       position: relative;
       line-height: 1.25;
@@ -35,10 +60,14 @@
         content: ""; /* Set the content to an empty string */
         position: absolute;
         display: inline-block; /* Set the display to inline-block */
-        width: 1.2vw; /* Set the width of the bullet */
-        height: 1.2vw; /* Set the height of the bullet */
-        top: 0.15vw;
-        left: -1.85vw;
+        width: clamp(8px, 2vw, 100px); /* Set the width of the bullet */
+        height: clamp(8px, 2vw, 100px); /* Set the height of the bullet */
+        top: 0.25vw;
+        left: -3vw;
+        @include utility.media-breakpoint-gte(lg) {
+          top: 0.15vw;
+          left: -1.85vw;
+        }
         background-image: url('../assets/images/Bullet.svg'); /* Set the background image to your SVG */
         background-size: contain; /* Set the background size to contain the image */
         margin-right: 0; /* Add some spacing between the bullet and the text */

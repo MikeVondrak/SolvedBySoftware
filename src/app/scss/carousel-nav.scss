@@ -10,36 +10,42 @@
     justify-content: center;
     align-items: center;
     &.main-nav {
-      gap: 1.5vw;
-      width: 90%;
+      gap: 5vw;
       margin: 0 auto 0;
-      img {
-        max-width: 8vw;
-        max-height: 7vw;
-
-        @include utility.media-breakpoint-gte(lg) {
-          max-width: 6vw;
-          max-height: 5vw;
-        }
+      @include utility.media-breakpoint-gte(xs) {
+        gap: 3.5vw;
       }
-      .info-icon img {
-        max-width: 7vw;
-        @include utility.media-breakpoint-gte(lg) {
-          max-width: 4vw;
-        }
-      }      
+      @include utility.media-breakpoint-gte(md) {
+        gap: 3vw;
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        gap: 1.25vw;
+      }
     }
 
-    button {
-      display: block;
-      width: 10vw;
-      background-image: radial-gradient(
-        rgba(255, 255, 235, 0.5) 25%,
-        transparent 75%
-      );
-
+    button {      
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      
+      width: 12vw;
+      @include utility.media-breakpoint-gte(xs) {
+        width: 12vw;
+      }
+      @include utility.media-breakpoint-gte(sm) {
+        width: 10vw;
+      }
+      @include utility.media-breakpoint-gte(md) {
+        width: 8vw;
+      }
       @include utility.media-breakpoint-gte(lg) {
-        width: 4vw;
+        width: 4.5vw;
+      }
+      // @include utility.media-breakpoint-gte(xl) {
+      //   width: 4vw;
+      // }
+      @include utility.media-breakpoint-gte(ws) {
+        width: 3.75vw;
       }
       margin: 0;
       padding: 0;
@@ -56,37 +62,101 @@
       }
     }
   }
-  .marker {
-    --markerStart: 5.3vw;
-    --markerInc: 10.38vw;
+  .marker-container {
+    --markerStart: 3vw;
+    --markerInc: 17.0vw;
     --markerPos_Home: var(--markerStart);
     --markerPos_Services: calc(var(--markerStart) + calc(var(--markerInc) * 1));
     --markerPos_Contact: calc(var(--markerStart) + calc(var(--markerInc) * 2));
     --markerPos_Portfolio: calc(var(--markerStart) + calc(var(--markerInc) * 3));
     --markerPos_AboutUs: calc(var(--markerStart) + calc(var(--markerInc) * 4));
 
-    --markerStartLg: 2vw;
-    --markerIncLg: 5vw;
+    --markerStartXs: 2.8vw;
+    --markerIncXs: 15.5vw;
+    --markerPosXs_Home: var(--markerStartXs);
+    --markerPosXs_Services: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 1));
+    --markerPosXs_Contact: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 2));
+    --markerPosXs_Portfolio: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 3));
+    --markerPosXs_AboutUs: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 4));
+
+    --markerStartSm: 2.4vw;
+    --markerIncSm: 13.55vw;
+    --markerPosSm_Home: var(--markerStartSm);
+    --markerPosSm_Services: calc(var(--markerStartSm) + calc(var(--markerIncSm) * 1));
+    --markerPosSm_Contact: calc(var(--markerStartSm) + calc(var(--markerIncSm) * 2));
+    --markerPosSm_Portfolio: calc(var(--markerStartSm) + calc(var(--markerIncSm) * 3));
+    --markerPosSm_AboutUs: calc(var(--markerStartSm) + calc(var(--markerIncSm) * 4));
+
+    --markerStartMd: 1.90vw;
+    --markerIncMd: 11vw;
+    --markerPosMd_Home: var(--markerStartMd);
+    --markerPosMd_Services: calc(var(--markerStartMd) + calc(var(--markerIncMd) * 1));
+    --markerPosMd_Contact: calc(var(--markerStartMd) + calc(var(--markerIncMd) * 2));
+    --markerPosMd_Portfolio: calc(var(--markerStartMd) + calc(var(--markerIncMd) * 3));
+    --markerPosMd_AboutUs: calc(var(--markerStartMd) + calc(var(--markerIncMd) * 4));
+
+    --markerStartLg: 1vw;
+    --markerIncLg: 5.76vw;
     --markerPosLg_Home: var(--markerStartLg);
     --markerPosLg_Services: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 1));
     --markerPosLg_Contact: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 2));
     --markerPosLg_Portfolio: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 3));
     --markerPosLg_AboutUs: calc(var(--markerStartLg) + calc(var(--markerIncLg) * 4));
+    // NOTE: no change for XL
+    --markerStartXl: 1vw;
+    --markerIncXl: 5.76vw;
+    --markerPosXl_Home: var(--markerStartXl);
+    --markerPosXl_Services: calc(var(--markerStartXl) + calc(var(--markerIncXl) * 1));
+    --markerPosXl_Contact: calc(var(--markerStartXl) + calc(var(--markerIncXl) * 2));
+    --markerPosXl_Portfolio: calc(var(--markerStartXl) + calc(var(--markerIncXl) * 3));
+    --markerPosXl_AboutUs: calc(var(--markerStartXl) + calc(var(--markerIncXl) * 4));
+
+    --markerStartWs: 0.9vw;
+    --markerIncWs: 5vw;
+    --markerPosWs_Home: var(--markerStartWs);
+    --markerPosWs_Services: calc(var(--markerStartWs) + calc(var(--markerIncWs) * 1));
+    --markerPosWs_Contact: calc(var(--markerStartWs) + calc(var(--markerIncWs) * 2));
+    --markerPosWs_Portfolio: calc(var(--markerStartWs) + calc(var(--markerIncWs) * 3));
+    --markerPosWs_AboutUs: calc(var(--markerStartWs) + calc(var(--markerIncWs) * 4));
+
+    --markerStartHd: 0.9vw;
+    --markerIncHd: 5vw;
+    --markerPosHd_Home: var(--markerStartHd);
+    --markerPosHd_Services: calc(var(--markerStartHd) + calc(var(--markerIncHd) * 1));
+    --markerPosHd_Contact: calc(var(--markerStartHd) + calc(var(--markerIncHd) * 2));
+    --markerPosHd_Portfolio: calc(var(--markerStartHd) + calc(var(--markerIncHd) * 3));
+    --markerPosHd_AboutUs: calc(var(--markerStartHd) + calc(var(--markerIncHd) * 4));
+
 
     transition: 
-      left 0.5s cubic-bezier(1, -0.25, 0.25, 1.25), 
-      transform 0.5s cubic-bezier(1, -0.25, 0.25, 1.25),;
+      //left 0.5s cubic-bezier(1, -0.25, 0.25, 1.25), 
+      transform 0.5s cubic-bezier(1, -0.25, 0.25, 1.25);
 
     position: absolute;
     top: -1.5vw;
-    left: var(--markerPos_Home);
-    width: 4vw;
+    //left: var(--markerPos_Home);
+    transform: translateX(var(--markerPos_Home));
+    width: 6vw;
+    @include utility.media-breakpoint-gte(sm) {
+      top: -0.9vw;
+      width: 5vw;   
+    }
+    @include utility.media-breakpoint-gte(md) {
+      top: -1.1vw;
+      width: 4.25vw;
+    }
     @include utility.media-breakpoint-gte(lg) {
+      top: -0.5vw;
+      width: 2.5vw;
+    }
+    @include utility.media-breakpoint-gte(ws) {
       top: -0.5vw;
       width: 2vw;
     }
     
-    animation: hover-up-down 1s ease-in-out infinite alternate;
+    .marker {
+      animation: hover-up-down 1s ease-in-out infinite alternate;
+    }
 
     @keyframes hover-up-down {
       $bounceAmount: 5%;

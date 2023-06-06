@@ -21,19 +21,19 @@ body {
     font-size: 3vw;
   }
   @include utility.media-breakpoint-gte(sm) {
-    font-size: 2.25vw;
+    font-size: 2.75vw;
   }
   @include utility.media-breakpoint-gte(md) {
-    font-size: 1.75vw;
+    font-size: 2.5vw;
   }
   @include utility.media-breakpoint-gte(lg) {
-    font-size: 1.5vw;
+    font-size: 2.25vw;
   }
   @include utility.media-breakpoint-gte(ws) {
-    font-size: 1.4vw;
+    font-size: 2.0vw;
   }
   @include utility.media-breakpoint-gte(hd) {
-    font-size: 1.3vw;
+    font-size: 1.75vw;
   }
   color: colors.$color_text;
   background-color: colors.$color_background;

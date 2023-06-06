@@ -1,12 +1,13 @@
 @use "./utility";
+@use "./colors";
 
 /* NOTE: webkit browser styling by default
  * - overrides for FireFox below
  * - this was a huge PITA, don't do it again
  */
-$w: 81.75vw;
-$h: 51.25vw;
-$tX: 13.5vw;
+$w: 79.75vw;
+$h: 50vw;
+$tX: 12.65vw;
 $tY: 33.5vw;
 $tZ: 0;
 $rX: 7deg;
@@ -18,10 +19,10 @@ $scX: 1;
 $scY: 1;
 
 // 400px
-$w_xs: 59.4vw;
-$h_xs: 35.25vw;
-$tX_xs: 20.5vw;
-$tY_xs: 27.0vw;
+$w_xs: 60.9vw;
+$h_xs: 36.5vw;
+$tX_xs: 21.25vw;
+$tY_xs: 27vw;
 $tZ_xs: 0;
 $rX_xs: 7deg;
 $rY_xs: 27deg;
@@ -32,9 +33,9 @@ $scX_xs: 1;
 $scY_xs: 1;
 
 // 600px
-$w_sm: 60.65vw;
-$h_sm: 35.8vw;
-$tX_sm: 20.75vw;
+$w_sm: 61.5vw;
+$h_sm: 36.7vw;
+$tX_sm: 21.1vw;
 $tY_sm: 27vw;
 $tZ_sm: 0;
 $rX_sm: 7deg;
@@ -46,8 +47,8 @@ $scX_sm: 1;
 $scY_sm: 1;
 
 // 840px
-$w_md: 60.9vw;
-$h_md: 36.0vw;
+$w_md: 60.3vw;
+$h_md: 36vw;
 $tX_md: 20.75vw;
 $tY_md: 27vw;
 $tZ_md: 0;
@@ -60,7 +61,7 @@ $scX_md: 1;
 $scY_md: 1;
 
 // 1024px - begin desktop layout
-$w_lg: 45.8vw;
+$w_lg: 45.3vw;
 $h_lg: 24.5vw;
 $tX_lg: 13.9vw;
 $tY_lg: 6.8vw;
@@ -72,7 +73,7 @@ $sX_lg: 6.85deg;
 $sY_lg: 0deg;
 
 // 1280px
-$w_xl: 45.8vw;
+$w_xl: 45.5vw;
 $h_xl: 24.5vw;
 $tX_xl: 13.9vw;
 $tY_xl: 6.8vw;
@@ -84,7 +85,7 @@ $sX_xl: 6.85deg;
 $sY_xl: 0deg;
 
 // 1440px
-$w_ws: 45.9vw;
+$w_ws: 45.6vw;
 $h_ws: 24.5vw;
 $tX_ws: 13.9vw;
 $tY_ws: 6.9vw;
@@ -96,7 +97,7 @@ $sX_ws: 6.85deg;
 $sY_ws: 0deg;
 
 // 1920px
-$w_hd: 46vw;
+$w_hd: 45.7vw;
 $h_hd: 24.6vw;
 $tX_hd: 14vw;
 $tY_hd: 6.9vw;
@@ -107,9 +108,8 @@ $rZ_hd: -1.65deg;
 $sX_hd: 6.85deg;
 $sY_hd: 0deg;
 
-
-// -------- FireFox Overrides --------
-$w_xs_ff: 61.45vw;
+// --- FireFox Overrides ---
+$w_xs_ff: 60.9vw;
 $h_xs_ff: 36.5vw;
 $tX_xs_ff: 21.4vw;
 $tY_xs_ff: 27.4vw;
@@ -122,7 +122,7 @@ $sY_xs_ff: 0deg;
 $scX_xs_ff: 1;
 $scY_xs_ff: 1;
 
-$w_sm_ff: 62.1vw;
+$w_sm_ff: 61.3vw;
 $h_sm_ff: 36.5vw;
 $tX_sm_ff: 21.15vw;
 $tY_sm_ff: 27.2vw;
@@ -135,7 +135,7 @@ $sY_sm_ff: 0deg;
 $scX_sm_ff: 1;
 $scY_sm_ff: 1;
 
-$w_md_ff: 62.1vw;
+$w_md_ff: 61.4vw;
 $h_md_ff: 36.5vw;
 $tX_md_ff: 21.15vw;
 $tY_md_ff: 27.2vw;
@@ -181,13 +181,19 @@ $rY_ws_ff: 42deg;
 $rZ_ws_ff: -1.65deg;
 $sX_ws_ff: 6.85deg;
 $sY_ws_ff: 0deg;
+// --- end FF overrides ---
 
 #Screen {
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: colors.$color-white-alt; //rgba(255, 0, 0, 0.5);
+  background-image: url("../../assets/images/ScreenBg.svg");
+  background-size: 110% 110%;
+  background-repeat: no-repeat;
+  background-position: center;
 
   position: absolute;
   font-size: 0.5em;
 
+  /* Default values are for Chrome version 29 and above, Edge > 81 */
   width: $w;
   height: $h;
   transform: translate3d($tX, $tY, $tZ) rotateX($rX) rotateY($rY) rotateZ($rZ)
@@ -219,7 +225,7 @@ $sY_ws_ff: 0deg;
       rotateY($rY_lg) rotateZ($rZ_lg) skewX($sX_lg) skewY($sY_lg);
   }
   // 1280
-  @include utility.media-breakpoint-gte(xl) {    
+  @include utility.media-breakpoint-gte(xl) {
     width: $w_xl;
     height: $h_xl;
     transform: translate3d($tX_xl, $tY_xl, $tZ_xl) rotateX($rX_xl)
@@ -230,7 +236,7 @@ $sY_ws_ff: 0deg;
     width: $w_ws;
     height: $h_ws;
     transform: translate3d($tX_ws, $tY_ws, $tZ_ws) rotateX($rX_ws)
-      rotateY($rY_ws) rotateZ($rZ_ws) skewX($sX_ws) skewY($sY_ws);    
+      rotateY($rY_ws) rotateZ($rZ_ws) skewX($sX_ws) skewY($sY_ws);
   }
   // // 1920
   @include utility.media-breakpoint-gte(hd) {
@@ -242,8 +248,6 @@ $sY_ws_ff: 0deg;
 
   // Firefox Overrides
   @-moz-document url-prefix() {
-
-
     @include utility.media-breakpoint-gte(xs) {
       width: $w_xs_ff;
       height: $h_xs_ff;
@@ -281,9 +285,6 @@ $sY_ws_ff: 0deg;
         rotateY($rY_ws_ff) rotateZ($rZ_ws_ff) skewX($sX_ws_ff) skewY($sY_ws_ff);
     }
   }
-
-
-
 
   overflow: hidden;
 

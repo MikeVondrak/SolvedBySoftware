@@ -2,8 +2,12 @@
 @use "utility";
 
 @mixin bg-radial-grad() {
+  // background-image: radial-gradient(
+  //   colors.$color_white_alt 35%,
+  //   transparent 70%
+  // );
   background-image: radial-gradient(
-    colors.$color_white_rgb 35%,
+    rgba(255,255,255,0.75) 35%,
     transparent 70%
   );
 }
@@ -14,7 +18,7 @@ body {
   min-height: 100vh;
 
   box-shadow: 0px 0px 6px 2px inset colors.$color_white;
-  background-image: url("../assets/images/cpu_desk_bg_sm.jpg"),
+  background-image: url("../assets/images/cpu_desk_bg_blk_sm.jpg"),
     linear-gradient(
       70deg,
       colors.$color_white_alt2 30%,
@@ -35,7 +39,7 @@ body {
     background-position: 7% 16.5vw, top left;
   }
   @include utility.media-breakpoint-gte(sm) {
-    background-image: url("../assets/images/cpu_desk_bg.jpg"),
+    background-image: url("../assets/images/cpu_desk_bg_blk_md.jpg"),
       linear-gradient(
         70deg,
         colors.$color_white_alt2 30%,
@@ -68,12 +72,12 @@ body {
     transform-style: flat;
 
     .main-spacer {
-      height: 133.6vw;
+      height: 133.3vw;
       @include utility.media-breakpoint-gte(xs) {
-        height: 96.75vw;
+        height: 99.25vw;
       }
       @include utility.media-breakpoint-gte(sm) {
-        height: 97.75vw;
+        height: 99.25vw;
       }
       @include utility.media-breakpoint-gte(lg) {
         height: 55.25vw;
@@ -92,6 +96,13 @@ body {
       }
     }
 
+    .main-nav {      
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .intro {
       position: absolute;
       display: flex;
@@ -106,47 +117,58 @@ body {
       text-align: center;
       $shadowOffset: clamp(1px, 0.1vw, 2px);
       text-shadow: $shadowOffset $shadowOffset 0.5vw colors.$color_gray;
+      white-space: nowrap;
+      //background-color: aqua;
+      @include bg-radial-grad();
+      
       @include utility.media-breakpoint-gte(xs) {
         top: 6vw;
       }
       @include utility.media-breakpoint-gte(sm) {
-        font-size: 2.25vw;
+        //font-size: 2.25vw;
         top: 6vw;
       }
       @include utility.media-breakpoint-gte(lg) {
-        text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px)
-          colors.$color_gray;
-      }
-      white-space: nowrap;
-      @include bg-radial-grad();
-      @include utility.media-breakpoint-gte(lg) {
-        right: 5vw;
-        top: 12vw;
-        max-width: 40vw;
+        text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px) colors.$color_gray;
+        right: 1vw;
+        top: 10vw;
+        width: 42vw;
         padding: 0;
-        font-size: 104%;
+        //font-size: 104%;
         @include bg-radial-grad();
         transform: translateX(0%);
+      }
+      @include utility.media-breakpoint-gte(ws) {
+        
+      }
+      @include utility.media-breakpoint-gte(ws) {
+        right: 2vw;
       }
 
       .title {
         margin-bottom: 3vw;
         @include utility.media-breakpoint-gte(lg) {
+          font-size: 0.75em;
           margin-bottom: 2vw;
         }
+        // @include utility.media-breakpoint-gte(xl) {
+        //   font-size: 0.75em;
+        //   margin-bottom: 1.5vw;
+        // }
         > * {
           position: relative;
           @include bg-radial-grad();
         }
         .swoosh {
+          // NOTE: set these values using Chrome debugger with responsive sizing on (minorly affects position for vw)
           position: absolute;
           width: 86%;
-          top: 6.35vw;
-          right: 8.2vw;
+          top: 7.9vw;
+          right: 6.2vw;
           @include utility.media-breakpoint-gte(xs) {
             width: 88%;
-            top: 5.1vw;
-            right: 6.5vw;
+            top: 5.9vw;
+            right: 7.1vw;
           }
           @include utility.media-breakpoint-gte(sm) {
             width: 90%;
@@ -168,7 +190,7 @@ body {
         }
       }
 
-      .main-nav {
+      #NavDesktop {
         display: none;
         @include utility.media-breakpoint-gte(lg) {
           display: flex;
@@ -180,6 +202,25 @@ body {
       width: 10vw;
     }
 
+    #NavMobile {
+      position: absolute;      
+      display: flex;
+
+      top: 104vw;
+      left: 50%;
+      transform: translateX(-50%);
+      @include bg-radial-grad();
+      padding: 6vw 30vw;
+      //background-color: colors.$color-white-alt;
+      @include utility.media-breakpoint-gte(xs) {
+        top: 77vw;
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        display: none;
+      }
+    }
+
+
     .divider1 {
       position: relative;
       display: flex;
@@ -187,6 +228,10 @@ body {
       img {
         height: 3vw;
       }
+    }
+
+    .demo-content {
+      margin: 0 1rem;
     }
   }
 

@@ -105,8 +105,12 @@ gulp.task("html", function () {
           const placeholders = Array.from(placeholderList);
           // if there's a placeholder with a data-content-id that matches an html file's data-template-id
           if (placeholders.length > 0) {
-            // assume we matched exactly 1 element
-            placeholders[0].append(JSDOM.fragment(val));
+            placeholders.forEach(ph => {
+              ph.append(JSDOM.fragment(val));
+
+              // assume we matched exactly 1 element
+              //placeholders[0].append(JSDOM.fragment(val));
+            })            
           }
         });
 

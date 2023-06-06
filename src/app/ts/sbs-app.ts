@@ -3,13 +3,15 @@ import { updateNav, setMarkerPosition } from './main-nav';
 var currentPageId: string = '';
 var debounce: boolean = false;
 
+/**
+ * Update the virtual screen that displays content based on Main Nav selection
+ */
 export function updateScreen() {
   const contentPanes = document.querySelectorAll<HTMLDivElement>('#Screen [data-content-id]');
   console.log('Update Screen:', currentPageId,  contentPanes.length);
   
   contentPanes.forEach(pane => {
     const id = pane.getAttribute('data-content-id');
-    //if (parseInt(pane.style.opacity) > 0) {
     if (id !== currentPageId) {
       pane.style.opacity = '0';
       setTimeout(() => {
@@ -29,6 +31,9 @@ export function updateScreen() {
   });
 }
 
+/**
+ * 
+ */
 function addMainNavHandlers() {
   const mainNavButtons = document.querySelectorAll('button[data-main-nav]');
   mainNavButtons.forEach((buttonNode: Element) => {
@@ -56,9 +61,9 @@ export const loadPage = (pageId: string) => {
  * Main App
  */
 (() => {
+  console.log('-------- SBS APP INIT ---------');
   currentPageId = '';
   debounce = false;
-  console.log('-------- SBS APP INIT ---------');
   document.addEventListener("DOMContentLoaded", ($event) => {
     addMainNavHandlers();
     loadPage('Home');
@@ -67,9 +72,9 @@ export const loadPage = (pageId: string) => {
     if (debounce) {
       return;
     }
-
     loadPage(currentPageId);
     debounce = true;
+    // Load the page one final time after a short timeout to make sure we're in the correct UI state
     setTimeout(() => {
       debounce = false;
       loadPage(currentPageId);

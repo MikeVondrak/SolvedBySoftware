@@ -139,6 +139,8 @@ gulp.task("serve", function () {
   connect.server({
     root: "./dist",
     livereload: true,
+    // NOTE - specific IP to allow testing over LAN
+    host: "192.168.1.100",
     port: 3000,
   });
   gulp.watch("./src/app/scss/*.scss").on("change", gulp.series("bundleCss"));

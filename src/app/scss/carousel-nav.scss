@@ -27,6 +27,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      @include utility.bg-radial-grad();
       
       width: 12vw;
       @include utility.media-breakpoint-gte(xs) {

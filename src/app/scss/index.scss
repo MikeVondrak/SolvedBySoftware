@@ -1,23 +1,7 @@
 @use "colors";
 @use "utility";
 
-@mixin bg-radial-grad() {
-  // background-image: radial-gradient(
-  //   colors.$color_white_alt 35%,
-  //   transparent 70%
-  // );
-  background-image: radial-gradient(
-    rgba(255,255,255,0.75) 35%,
-    transparent 70%
-  );
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  box-shadow: 0px 0px 6px 2px inset colors.$color_white;
+@mixin computer-desk-bg {
   background-image: url("../assets/images/cpu_desk_bg_blk_sm.jpg"),
     linear-gradient(
       70deg,
@@ -29,12 +13,6 @@ body {
   background-position: 22% 19.5vw, top left;
 
   @include utility.media-breakpoint-gte(xs) {
-    // background-image: url("../assets/images/cpu_desk_bg_sm.jpg"),
-    //   linear-gradient(
-    //     70deg,
-    //     colors.$color_white_alt2 30%,
-    //     colors.$color_white_alt 60%
-    //   );
     background-size: 150%;
     background-position: 7% 16.5vw, top left;
   }
@@ -52,177 +30,182 @@ body {
     background-size: 100%;
     background-position: center top;
   }
+}
 
-  header {
-    position: relative;
-    .swoosh {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      left: 0;
-    }
-  }
-  main {
-    flex: 1;
-    position: relative;
-    min-height: 800px;
-    padding: 0;
-    perspective: 200vw;
-    perspective-origin: top center;
-    transform-style: flat;
+body {
+  // box-shadow: 0px 0px 6px 2px inset colors.$color_white;
 
-    .main-spacer {
-      height: 133.3vw;
-      @include utility.media-breakpoint-gte(xs) {
-        height: 99.25vw;
-      }
-      @include utility.media-breakpoint-gte(sm) {
-        height: 99.25vw;
-      }
-      @include utility.media-breakpoint-gte(lg) {
-        height: 55.25vw;
-      }
-      @-moz-document url-prefix() {
-        height: 133.3vw;
-        @include utility.media-breakpoint-gte(xs) {
-          height: 99.4vw;
-        }
-        @include utility.media-breakpoint-gte(sm) {
-          height: 99.4vw;
-        }
-        @include utility.media-breakpoint-gte(lg) {
-          height: 54.75vw;
-        }
-      }
-    }
+  .site-container {
+    // flexbox sticky footer
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
-    .main-nav {      
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .intro {
-      position: absolute;
+    header {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      right: 50vw;
-      top: 7vw;
-      max-width: 80vw;
-      font-size: 0.9em;
-      transform: translateX(50%);
-      text-align: center;
-      $shadowOffset: 0.15vw; //clamp(1px, 0.1vw, 1px);
-      text-shadow: $shadowOffset $shadowOffset 0.5vw rgba(0,0,0,0.5);
-      white-space: nowrap;
-      //background-color: aqua;
-      @include bg-radial-grad();
-      
-      @include utility.media-breakpoint-gte(xs) {
-        top: 6vw;
+
+      @include computer-desk-bg();
+
+      border: 2px solid red;
+
+      @media (orientation: portrait) {
+        height: 90vh;
       }
-      @include utility.media-breakpoint-gte(sm) {
-        //font-size: 2.25vw;
-        top: 6vw;
+      @media (orientation: landscape) {
+        height: calc(100vw * 0.55);
       }
       @include utility.media-breakpoint-gte(lg) {
-        //text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px) colors.$color_gray;
-        text-shadow: 0.1vw 0.1vw 0.25vw rgba(0,0,0,0.5);
-        right: 1vw;
-        top: 10vw;
-        width: 42vw;
-        padding: 0;
-        //font-size: 104%;
-        @include bg-radial-grad();
-        transform: translateX(0%);
-      }
-      @include utility.media-breakpoint-gte(ws) {
-        
-      }
-      @include utility.media-breakpoint-gte(ws) {
-        right: 2vw;
+        height: calc(100vw * 0.55);
       }
 
-      .title {
-        margin-bottom: 3vw;
-        @include utility.media-breakpoint-gte(lg) {
-          font-size: 0.75em;
-          margin-bottom: 2vw;
+      .swoosh {
+        z-index: 1; // swoosh above content
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .hero-banner-container {
+        position: relative;
+        perspective: 200vw; // perspective for Screen
+        perspective-origin: top center;
+        transform-style: flat;
+        top: 0;
+        left: 0;
+
+        height: 100%;
+
+        .hero-banner {
+          width: 100%;
         }
-        // @include utility.media-breakpoint-gte(xl) {
-        //   font-size: 0.75em;
-        //   margin-bottom: 1.5vw;
-        // }
-        > * {
-          position: relative;
-          @include bg-radial-grad();
+
+        header {
         }
-        .swoosh {
-          // NOTE: set these values using Chrome debugger with responsive sizing on (minorly affects position for vw)
+
+        .main-nav {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .intro {
           position: absolute;
-          width: 86%;
-          top: 7.9vw;
-          right: 6.2vw;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          right: 50vw;
+          //top: 7vw;
+          max-width: 80vw;
+          font-size: 0.9em;
+          transform: translateX(50%);
+          text-align: center;
+          $shadowOffset: 0.15vw;
+          text-shadow: $shadowOffset $shadowOffset 0.5vw rgba(0, 0, 0, 0.5);
+          white-space: nowrap;
+
+          @include utility.bg-radial-grad();
+
           @include utility.media-breakpoint-gte(xs) {
-            width: 88%;
-            top: 5.9vw;
-            right: 7.1vw;
+            top: 6vw;
           }
           @include utility.media-breakpoint-gte(sm) {
-            width: 90%;
-            top: 4.9vw;
-            right: 6.1vw;
+            //font-size: 2.25vw;
+            top: 6vw;
           }
           @include utility.media-breakpoint-gte(lg) {
-            width: 92%;
-            top: 2.35vw;
-            right: 3.25vw;
+            //text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px) colors.$color_gray;
+            text-shadow: 0.1vw 0.1vw 0.25vw rgba(0, 0, 0, 0.5);
+            right: 1vw;
+            top: 10vw;
+            width: 42vw;
+            padding: 0;
+            //font-size: 104%;
+            @include utility.bg-radial-grad();
+            transform: translateX(0%);
+          }
+          @include utility.media-breakpoint-gte(ws) {
+          }
+          @include utility.media-breakpoint-gte(ws) {
+            right: 2vw;
+          }
+
+          .title {
+            margin-bottom: 3vw;
+            @include utility.media-breakpoint-gte(lg) {
+              font-size: 0.75em;
+              margin-bottom: 2vw;
+            }
+            > * {
+              position: relative;
+              @include utility.bg-radial-grad();
+            }
+            .swoosh {
+              // NOTE: set these values using Chrome debugger with responsive sizing on (minorly affects position for vw)
+              position: absolute;
+              width: 86%;
+              top: 7.9vw;
+              right: 6.2vw;
+              @include utility.media-breakpoint-gte(xs) {
+                width: 88%;
+                top: 5.9vw;
+                right: 7.1vw;
+              }
+              @include utility.media-breakpoint-gte(sm) {
+                width: 90%;
+                top: 4.9vw;
+                right: 6.1vw;
+              }
+              @include utility.media-breakpoint-gte(lg) {
+                width: 92%;
+                top: 2.35vw;
+                right: 3.25vw;
+              }
+            }
+            h1,
+            .tagline {
+              margin: 0vw;
+            }
+            .tagline {
+              font-size: 1.5em;
+              font-weight: bold;
+            }
+          }
+
+          #NavDesktop {
+            display: none;
+            @include utility.media-breakpoint-gte(lg) {
+              display: flex;
+            }
           }
         }
-        h1, h2 {
-          margin: 0vw;
-        }
-        h2 {
-          font-size: 1.5em;
-          font-weight: bold;
-        }
-      }
 
-      #NavDesktop {
-        display: none;
-        @include utility.media-breakpoint-gte(lg) {
+        .logo {
+          width: 10vw;
+        }
+
+        #NavMobile {
+          position: absolute;
           display: flex;
+          top: 104vw;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 6vw 30vw;
+          //background-color: colors.$color-white-alt;
+          @include utility.media-breakpoint-gte(xs) {
+            top: 77vw;
+          }
+          @include utility.media-breakpoint-gte(lg) {
+            display: none;
+          }
         }
       }
     }
 
-    .logo {
-      width: 10vw;
-    }
-
-    #NavMobile {
-      position: absolute;      
-      display: flex;
-
-      top: 104vw;
-      left: 50%;
-      transform: translateX(-50%);
-      @include bg-radial-grad();
-      padding: 6vw 30vw;
-      //background-color: colors.$color-white-alt;
-      @include utility.media-breakpoint-gte(xs) {
-        top: 77vw;
-      }
-      @include utility.media-breakpoint-gte(lg) {
-        display: none;
-      }
-    }
-
-
-    .divider1 {
+    .divider-main {
       position: relative;
       display: flex;
       justify-content: center;
@@ -231,31 +214,38 @@ body {
       }
     }
 
-    .demo-content {
-      margin: 0 1rem;
-    }
-  }
+    main {
+      // flexbox sticky footer
+      flex: 1;
 
-  footer {
-    position: relative;
-    background-color: colors.$color_gray_lt;
-    min-height: 6vw;
-    margin-top: 6vw;
-    //overflow-y: hidden;
-    img {
-      position: absolute;
-      display: block;
-      top: -2.8vw;
-      right: 0;
-      transform: scale(300%) translateX(-33.3%);
+      position: relative;
+
+      .demo-content {
+        margin: 0 1rem;
+      }
     }
-    .divider {
-      width: 100%;
-      height: 8vw;
-      background: transparent url("../assets/images/Divider_Gray.svg") no-repeat
-        scroll 96% center;
-      background-size: 200%;
-      transform: translateY(-50%);
+
+    footer {
+      position: relative;
+      background-color: colors.$color_gray_lt;
+      min-height: 6vw;
+      margin-top: 6vw;
+      //overflow-y: hidden;
+      img {
+        position: absolute;
+        display: block;
+        top: -2.8vw;
+        right: 0;
+        transform: scale(300%) translateX(-33.3%);
+      }
+      .divider {
+        width: 100%;
+        height: 8vw;
+        background: transparent url("../assets/images/Divider_Gray.svg")
+          no-repeat scroll 96% center;
+        background-size: 200%;
+        transform: translateY(-50%);
+      }
     }
-  }
+  } // end site-container
 }

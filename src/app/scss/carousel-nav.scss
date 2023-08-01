@@ -2,7 +2,12 @@
 @use "./utility";
 
 .nav-container {
-  position: relative;  
+  position: relative;
+  padding: 0.35rem 0.8rem;
+  border: 2px solid colors.$color-white-alt;
+  border-radius: 3rem;
+  background-color: colors.$color-white-rgb;
+  box-shadow: 0px 10px 10px -10px colors.$color_gray_dk;
   .carousel-nav {
     position: relative;
     display: flex;
@@ -23,11 +28,13 @@
       }
     }
 
-    button {      
+    button {
+      position: relative;
       display: flex;
       flex-direction: row;
       align-items: center;
-      @include utility.bg-radial-grad();
+      //@include utility.bg-radial-grad();
+
       
       width: 12vw;
       @include utility.media-breakpoint-gte(xs) {
@@ -53,6 +60,18 @@
       background-color: transparent;
       border: none;
       transition: opacity 0.3s ease-in-out;
+
+      // &::before {
+      //   content: '';
+      //   z-index: -1;
+      //   position: absolute;
+      //   $overflow: -1.5vw;
+      //   top: $overflow;
+      //   bottom: $overflow;
+      //   left: $overflow;
+      //   right: $overflow;
+      //   @include utility.bg-radial-grad();
+      // }
 
       &:active {
         outline: 2px dashed colors.$color_primary;

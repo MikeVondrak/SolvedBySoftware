@@ -237,13 +237,20 @@ body {
     }
 
     main {
-      // flexbox sticky footer
-      flex: 1;
-
       position: relative;
+      flex: 1; // flexbox sticky footer
 
-      .demo-content {
+      .content {
         margin: 0 1rem;
+        @include utility.media-breakpoint-gte(sm) {
+          margin: 0 5vw;
+        }
+        @include utility.media-breakpoint-gte(lg) {
+          margin: 0 15vw;
+        }
+        @include utility.media-breakpoint-gte(ws) {
+          margin: 0 25vw;
+        }
       }
     }
 

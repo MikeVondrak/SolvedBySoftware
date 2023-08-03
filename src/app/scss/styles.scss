@@ -21,22 +21,22 @@ body {
   font-family: "Montserrat", sans-serif;
   font-size: 4vw;
   @include utility.media-breakpoint-gte(xs) {
-    font-size: 3vw;
-  }
-  @include utility.media-breakpoint-gte(sm) {
     font-size: 2.75vw;
   }
-  @include utility.media-breakpoint-gte(md) {
-    font-size: 2.5vw;
+  @include utility.media-breakpoint-gte(sm) {
+    font-size: 2.50vw;
   }
-  @include utility.media-breakpoint-gte(lg) {
+  @include utility.media-breakpoint-gte(md) {
     font-size: 2.25vw;
   }
+  @include utility.media-breakpoint-gte(lg) {
+    font-size: 2.00vw;
+  }
   @include utility.media-breakpoint-gte(ws) {
-    font-size: 2.0vw;
+    font-size: 1.75vw;
   }
   @include utility.media-breakpoint-gte(hd) {
-    font-size: 1.75vw;
+    font-size: 1.5vw;
   }
   color: colors.$color_text;
   background-color: colors.$color_background;
@@ -48,7 +48,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+.tagline {
   font-family: "Raleway", sans-serif;
   font-weight: bold;
 }
@@ -60,11 +61,11 @@ h2 {
   margin: ($hMargin + ($hMarginInc * 7)) 0 ($hMargin + ($hMarginInc * 5));
   font-size: 2em;
 }
-h3 {
+h3, .sub-head {
   margin: ($hMargin + ($hMarginInc * 6)) 0 ($hMargin + ($hMarginInc * 4));
   font-size: 1.75em;
 }
-h4 {
+h4, .tagline {
   margin: ($hMargin + ($hMarginInc * 5)) 0 ($hMargin + ($hMarginInc * 3));
   font-size: 1.5em;
 }
@@ -73,11 +74,19 @@ h5 {
   font-size: 1.25em;
 }
 p {
-  margin: ($hMargin + ($hMarginInc * 3)) 0 ($hMargin + ($hMarginInc * 1));
+  margin: ($hMargin + ($hMarginInc * 2.5)) 0 ($hMargin + ($hMarginInc * 1));
   font-size: 1em;
 }
 li, a, button {
   font-size: 1em;
+}
+.tagline {
+  margin-top: 0;
+  font-weight: bold;
+}
+.sub-head {
+  margin-bottom: 1vw;
+  font-size: 1.25em;
 }
 
 header {

@@ -33,7 +33,7 @@
 }
 
 @mixin computer-desk-offset {
-  @media (orientation: portrait) {
+  //@media (orientation: portrait) {
     height: calc(100vw * 1.3);
     @include utility.media-breakpoint-gte(xs) {
       height: calc(100vw * 1);
@@ -41,13 +41,10 @@
     @include utility.media-breakpoint-gte(sm) {
       height: calc(100vw * 0.94);
     }
-    @include utility.media-breakpoint-gte(sm) {
-      height: calc(100vw * 0.94);
-    }
-  }
-  @media (orientation: landscape) {
-    height: calc(100vw * 0.55);
-  }
+  //}
+  // @media (orientation: landscape) {
+  //   height: calc(100vw * 0.55);
+  // }
   @include utility.media-breakpoint-gte(lg) {
     height: calc(100vw * 0.55);
   }
@@ -89,9 +86,6 @@ body {
 
         .hero-banner {
           width: 100%;
-        }
-
-        header {
         }
 
         .main-nav {

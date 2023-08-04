@@ -27,7 +27,7 @@
     z-index: -1;
     position: absolute;
     top: -2vw;
-    left: 36vw;
+    right: 2vw;
     width: 10w;
     opacity: 0.25;
     @include utility.media-breakpoint-gte(xs) {
@@ -35,7 +35,7 @@
     }
     @include utility.media-breakpoint-gte(lg) {
       top: -1.75vw;
-      left: 25vw;
+      //left: 25vw;
       width: 7vw;
     }
     @include utility.media-breakpoint-gte(hd) {
@@ -45,10 +45,14 @@
   .bullets {
     margin: 0 4vw 0 30vw;
     padding: 1vw 1vw 1vw 3.5vw;
-    font-size: 1.45em;
+    font-size: 1.4em;
     background-color: colors.$color_white_translucent;
     @include utility.media-breakpoint-gte(xs) {
-      margin: 0vw 2vw 0 24vw;
+      margin: 0vw 2vw 0 22vw;
+      font-size: 1.05em;
+    }
+    @include utility.media-breakpoint-gte(sm) {
+      font-size: 1.4em;
     }
     @include utility.media-breakpoint-gte(lg) {
       margin: 0vw 2vw 0 16vw;

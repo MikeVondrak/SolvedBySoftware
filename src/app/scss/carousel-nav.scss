@@ -37,7 +37,7 @@
       
       width: 12vw;
       @include utility.media-breakpoint-gte(xs) {
-        width: 11vw;
+        width: 9vw;
       }
       @include utility.media-breakpoint-gte(sm) {
         width: 10vw;

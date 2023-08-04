@@ -145,6 +145,9 @@ body {
             background-position: 45% 55%;
 
             font-size: 1.5em;
+            @include utility.media-breakpoint-gte(md) {
+              font-size: 1.25em;
+            }
             
             @include utility.media-breakpoint-gte(lg) {
               font-size: 0.75em;
@@ -185,6 +188,12 @@ body {
             h1,
             .tagline {
               margin: 0vw;
+            }
+            .tagline {
+              font-size: 1em;
+              @include utility.media-breakpoint-gte(md) {
+                font-size: 1.5em;
+              }
             }
             
           }

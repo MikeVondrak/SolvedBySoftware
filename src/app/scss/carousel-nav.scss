@@ -94,8 +94,8 @@
     --markerPos_Portfolio: calc(var(--markerStart) + calc(var(--markerInc) * 3));
     --markerPos_AboutUs: calc(var(--markerStart) + calc(var(--markerInc) * 4));
 
-    --markerStartXs: 2.44vw;
-    --markerIncXs: 14.5vw;
+    --markerStartXs: 1.35vw;
+    --markerIncXs: 12.5vw;
     --markerPosXs_Home: var(--markerStartXs);
     --markerPosXs_Services: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 1));
     --markerPosXs_Contact: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 2));

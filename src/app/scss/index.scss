@@ -54,10 +54,11 @@ body {
   // box-shadow: 0px 0px 6px 2px inset colors.$color_white;
 
   .site-container {
-    // flexbox sticky footer
-    display: flex;
+    display: flex; // flexbox sticky footer
     flex-direction: column;
     justify-content: flex-start;
+
+    background-color: colors.$color-white;
 
     header {
       display: flex;
@@ -230,19 +231,23 @@ body {
       position: relative;
       display: flex;
       justify-content: center;
+      width: 100%;
       transform: translateY(-50%);
       img {
-        height: 3vw;
       }
     }
 
     main {
+      //z-index: -1;
       position: relative;
+      top: 0;
       flex: 1; // flexbox sticky footer
 
-      background-image: url("../assets/images/ContentBg.svg");
+      background-image: 
+      linear-gradient(84deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 100%),
+      url("/assets/images/ContentBg.svg");
       background-repeat: no-repeat;
-      background-size: cover;   
+      background-size: cover;
 
       .content {
         margin: 0 1rem;
@@ -256,6 +261,27 @@ body {
           margin: 0 25vw;
         }
         section {
+          position: relative;
+          > * {
+            position: relative;
+            z-index: 1;
+          }
+          .accent-image {
+            z-index: 0;
+            position: absolute;
+            width: 20vw;
+            top: 15vw;
+            right: -2vw;
+            opacity: 0.25;
+
+            &.salesforce {
+              top: clamp(12rem, 35vw, 90rem);
+              right: unset;
+              left: -4vw;
+              width: 40vw;
+              opacity: 0.1;
+            }
+          }
           ul.client-list {
             display: flex;
             flex-direction: row;
@@ -314,17 +340,11 @@ body {
 
     footer {
       position: relative;
-      background-color: colors.$color_gray_lt;
-      min-height: 6vw;
+      min-height: clamp(10rem, 10vw, 18rem);
       margin-top: 6vw;
-      //overflow-y: hidden;
-      img {
-        position: absolute;
-        display: block;
-        top: -2.8vw;
-        right: 0;
-        transform: scale(300%) translateX(-33.3%);
-      }
+      background-color: colors.$color_gray_lt;
+      text-align: right;
+
       .divider {
         width: 100%;
         height: 8vw;
@@ -332,6 +352,39 @@ body {
           no-repeat scroll 96% center;
         background-size: 200%;
         transform: translateY(-50%);
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: -4vw;
+        padding: 0 2vw;
+        > div {
+          flex: 0 0 30%;
+          text-align: center;
+
+          &:last-of-type {
+            text-align: right;
+          }
+        }
+        
+        img {
+          width: 20vw;
+        }
+        .fishbone-logo {
+          display: inline-block;
+          $size: 6vw;
+          width: clamp(8rem, $size, 12rem);;
+          height: clamp(7rem, $size, 12rem);;
+          background-image: url("../assets/images/FishboneLogoFull_gray.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          &:hover {
+            background-image: url("../assets/images/FishboneLogoFull.svg");
+          }
+        }
       }
     }
   } // end site-container

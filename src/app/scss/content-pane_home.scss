@@ -1,5 +1,5 @@
-@use './utility';
-@use './colors';
+@use "./utility";
+@use "./colors";
 
 #ContentPane_Home.page-container {
   display: flex;
@@ -30,53 +30,59 @@
     left: 36vw;
     width: 10w;
     opacity: 0.25;
-    @include utility.media-breakpoint-gte(xs){
+    @include utility.media-breakpoint-gte(xs) {
       width: 10vw;
     }
-    @include utility.media-breakpoint-gte(lg){
+    @include utility.media-breakpoint-gte(lg) {
       top: -1.75vw;
       left: 25vw;
       width: 7vw;
     }
-    @include utility.media-breakpoint-gte(hd){
+    @include utility.media-breakpoint-gte(hd) {
       width: 8vw;
     }
   }
-  ul {
+  .bullets {
     margin: 0 4vw 0 32vw;
     padding: 1vw 1vw 1vw 3.5vw;
     font-size: 1.45em;
     background-color: colors.$color_white_translucent;
     @include utility.media-breakpoint-gte(xs) {
-      margin: 1vw 2vw 0 24vw;
+      margin: 0vw 2vw 0 24vw;
     }
     @include utility.media-breakpoint-gte(lg) {
-      margin: 2vw 2vw 0 16vw;
+      margin: 0vw 2vw 0 16vw;
       font-size: 1.2em;
-    }    
-    li {
-      position: relative;
-      line-height: 1.25;
-      padding-bottom: 1.25vw;
-      &:last-of-type {
-        padding-bottom: 0;
-      }
-      //margin-left: 2vw;
-      &::before {
-        content: ""; /* Set the content to an empty string */
-        position: absolute;
-        display: inline-block; /* Set the display to inline-block */
-        width: clamp(8px, 2vw, 100px); /* Set the width of the bullet */
-        height: clamp(8px, 2vw, 100px); /* Set the height of the bullet */
-        top: 0.25vw;
-        left: -3vw;
-        @include utility.media-breakpoint-gte(lg) {
-          top: -0.35vw;
-          left: -2.5vw;
+    }
+    h2 {
+      margin: 0 0 1.5vw;
+      text-align: left;
+    }
+    ul {
+      li {
+        position: relative;
+        line-height: 1.25;
+        padding-bottom: 1.25vw;
+        &:last-of-type {
+          padding-bottom: 0;
         }
-        background-image: url('../assets/images/Bullet.svg'); /* Set the background image to your SVG */
-        background-size: contain; /* Set the background size to contain the image */
-        margin-right: 0; /* Add some spacing between the bullet and the text */
+        //margin-left: 2vw;
+        &::before {
+          content: ""; /* Set the content to an empty string */
+          position: absolute;
+          display: inline-block; /* Set the display to inline-block */
+          width: clamp(8px, 2vw, 100px); /* Set the width of the bullet */
+          height: clamp(8px, 2vw, 100px); /* Set the height of the bullet */
+          top: 0.25vw;
+          left: -3vw;
+          @include utility.media-breakpoint-gte(lg) {
+            top: -0.35vw;
+            left: -2.5vw;
+          }
+          background-image: url("../assets/images/Bullet.svg"); /* Set the background image to your SVG */
+          background-size: contain; /* Set the background size to contain the image */
+          margin-right: 0; /* Add some spacing between the bullet and the text */
+        }
       }
     }
   }

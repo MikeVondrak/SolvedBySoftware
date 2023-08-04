@@ -58,7 +58,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
 
-    background-color: colors.$color-white;
+    background-color: #fff;
 
     header {
       display: flex;
@@ -319,18 +319,25 @@ body {
             flex-direction: row;
             align-items: center;
             justify-content: space-around;
+
+            .phone {
+              p {
+                white-space: nowrap;
+              }
+            }
             a {
               display: flex;
               flex-direction: row;
-              justify-content: flex-start;
+              justify-content: center;
               align-items: center;
+              gap: clamp(0.5rem, 1vw, 1rem);
               flex-wrap: nowrap;
               img {
-                width: 8vw;
-                max-height: 6vw;
-              }
-              p {
-  
+                //width: 8vw;
+                max-height: 11vw;
+                @include utility.media-breakpoint-gte(sm) {
+                  max-height: clamp(0.5rem, 10vw, 4rem);
+                }
               }
             }            
           }
@@ -342,6 +349,7 @@ body {
       position: relative;
       min-height: clamp(10rem, 10vw, 18rem);
       margin-top: 6vw;
+      padding-bottom: clamp(0.5rem, 3vw, 3rem);
       background-color: colors.$color_gray_lt;
       text-align: right;
 
@@ -359,6 +367,7 @@ body {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
         margin-top: -4vw;
         padding: 0 2vw;
         > div {
@@ -371,13 +380,13 @@ body {
         }
         
         img {
-          width: 20vw;
+          width: clamp(10rem, 24vw, 22rem);
         }
         .fishbone-logo {
           display: inline-block;
           $size: 6vw;
-          width: clamp(8rem, $size, 12rem);;
-          height: clamp(7rem, $size, 12rem);;
+          width: clamp(8rem, $size, 12rem);
+          height: clamp(7rem, $size, 12rem);
           background-image: url("../assets/images/FishboneLogoFull_gray.svg");
           background-size: contain;
           background-repeat: no-repeat;

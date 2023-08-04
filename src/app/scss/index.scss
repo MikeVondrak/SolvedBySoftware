@@ -320,7 +320,7 @@ body {
               top: clamp(12rem, 14vw, 16rem);
               right: unset;
               left: 0;
-              width: 100%;
+              width: 80%;
               height: 70vw;
               background: url('../../assets/images/Salesforce_Logo.svg');
               background-position: center;
@@ -366,10 +366,43 @@ body {
 
           .contact {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-around;
+            gap: 4vw;
+            justify-content: center;
+            > div {
+              width: 50%;
+              text-align: left;
+            }
+            @include utility.media-breakpoint-gte(xs) {
+              flex-direction: row;
+              gap: 2vw;
 
+              > div {
+                width: 42vw;
+              }
+            }
+            @include utility.media-breakpoint-gte(sm) {
+              > div {
+                width: 34vw;
+              }
+            }
+            @include utility.media-breakpoint-gte(md) {
+              > div {
+                width: 30vw;
+              }
+            }
+            @include utility.media-breakpoint-gte(lg) {
+              > div {
+                width: 24vw;
+              }
+            }
+            @include utility.media-breakpoint-gte(ws) {
+              > div {
+                width: clamp(10rem, 20vw, 34rem);
+              }
+            }
+            
             .phone {
               p {
                 white-space: nowrap;
@@ -377,17 +410,24 @@ body {
             }
             a {
               display: flex;
-              flex-direction: row;
-              justify-content: center;
+              justify-content: flex-start;
               align-items: center;
               gap: clamp(0.5rem, 1vw, 1rem);
+              
               flex-wrap: nowrap;
+              text-align: left;
               img {
                 //width: 8vw;
-                max-height: 11vw;
+                height: 16vw;
                 @include utility.media-breakpoint-gte(sm) {
-                  max-height: clamp(0.5rem, 10vw, 4rem);
+                  height: clamp(0.5rem, 10vw, 16rem);
                 }
+                @include utility.media-breakpoint-gte(md) {
+                  height: clamp(0.5rem, 6vw, 16rem);
+                }
+              }
+              p {
+                margin: 0;
               }
             }            
           }

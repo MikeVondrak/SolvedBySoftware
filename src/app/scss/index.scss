@@ -240,6 +240,10 @@ body {
       position: relative;
       flex: 1; // flexbox sticky footer
 
+      background-image: url("../assets/images/ContentBg.svg");
+      background-repeat: no-repeat;
+      background-size: cover;   
+
       .content {
         margin: 0 1rem;
         @include utility.media-breakpoint-gte(sm) {
@@ -250,6 +254,60 @@ body {
         }
         @include utility.media-breakpoint-gte(ws) {
           margin: 0 25vw;
+        }
+        section {
+          ul.client-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 2vw 3vw;
+            flex-wrap: wrap;
+            
+            li {
+
+              img {
+                width: 11vw;
+              }
+              &.payscout {
+                img {
+                  width: 13vw;
+                }
+              }
+              &.whip-around {
+                img {
+                  width: 16vw;
+                }
+              }
+              &.centric, &.elan {
+                img {
+                  width: 18vw;
+
+                }
+              }
+            }
+          }
+
+          .contact {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            a {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+              flex-wrap: nowrap;
+              img {
+                width: 8vw;
+                max-height: 6vw;
+              }
+              p {
+  
+              }
+            }            
+          }
         }
       }
     }

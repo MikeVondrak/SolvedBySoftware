@@ -37,7 +37,7 @@
       
       width: 12vw;
       @include utility.media-breakpoint-gte(xs) {
-        width: 12vw;
+        width: 11vw;
       }
       @include utility.media-breakpoint-gte(sm) {
         width: 10vw;
@@ -94,8 +94,8 @@
     --markerPos_Portfolio: calc(var(--markerStart) + calc(var(--markerInc) * 3));
     --markerPos_AboutUs: calc(var(--markerStart) + calc(var(--markerInc) * 4));
 
-    --markerStartXs: 2.8vw;
-    --markerIncXs: 15.5vw;
+    --markerStartXs: 2.44vw;
+    --markerIncXs: 14.5vw;
     --markerPosXs_Home: var(--markerStartXs);
     --markerPosXs_Services: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 1));
     --markerPosXs_Contact: calc(var(--markerStartXs) + calc(var(--markerIncXs) * 2));

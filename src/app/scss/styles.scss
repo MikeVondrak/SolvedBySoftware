@@ -5,7 +5,7 @@
 /* Define the font family */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
 
-$hMargin: 1vw;
+$hMargin: 2vw;
 $hMarginInc: 0.5vw;
 
 * {
@@ -18,60 +18,48 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
-  font-size: 4vw;
-  @include utility.media-breakpoint-gte(xs) {
-    font-size: 2.75vw;
-  }
-  @include utility.media-breakpoint-gte(sm) {
-    font-size: 2.50vw;
-  }
-  @include utility.media-breakpoint-gte(md) {
-    font-size: 2.25vw;
-  }
-  @include utility.media-breakpoint-gte(lg) {
-    font-size: 2.00vw;
-  }
-  @include utility.media-breakpoint-gte(ws) {
-    font-size: 1.75vw;
-  }
-  @include utility.media-breakpoint-gte(hd) {
-    font-size: 1.5vw;
-  }
+  
   color: colors.$color_text;
   background-color: colors.$color_background;
 }
 body {
   line-height: 1.25;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-.tagline {
-  font-family: "Raleway", sans-serif;
-  font-weight: bold;
-}
+
 h1 {
   margin: ($hMargin + ($hMarginInc * 8)) 0 ($hMargin + ($hMarginInc * 6));
-  font-size: 2.25em;
+  font-size: 1.5em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 2.25em;
+  }
 }
 h2 {
   margin: ($hMargin + ($hMarginInc * 7)) 0 ($hMargin + ($hMarginInc * 5));
-  font-size: 2em;
+  font-size: 1.35em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 2em;
+  }
 }
 h3, .sub-head {
   margin: ($hMargin + ($hMarginInc * 6)) 0 ($hMargin + ($hMarginInc * 4));
-  font-size: 1.75em;
+  font-size: 1.25em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.75em;
+  }
 }
 h4, .tagline {
   margin: ($hMargin + ($hMarginInc * 5)) 0 ($hMargin + ($hMarginInc * 3));
-  font-size: 1.5em;
+  font-size: 1.15em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.5em;
+  }
 }
 h5 {
   margin: ($hMargin + ($hMarginInc * 4)) 0 ($hMargin + ($hMarginInc * 2));
-  font-size: 1.25em;
+  font-size: 1em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.25em;
+  }
 }
 p {
   margin: ($hMargin + ($hMarginInc * 2.5)) 0 ($hMargin + ($hMarginInc * 1));
@@ -82,11 +70,11 @@ li, a, button {
 }
 .tagline {
   margin-top: 0;
-  font-weight: bold;
+  //font-weight: bold;
 }
 .sub-head {
   margin-bottom: 1vw;
-  font-size: 1.25em;
+  //font-size: 1.25em;
 }
 
 header {

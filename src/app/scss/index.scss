@@ -1,6 +1,7 @@
 @use "colors";
 @use "utility";
 
+
 @mixin computer-desk-bg {
   background-image: url("../assets/images/cpu_desk_bg_blk_sm.jpg"),
     linear-gradient(
@@ -10,11 +11,11 @@
     );
   background-size: 205%;
   background-repeat: no-repeat;
-  background-position: 22% 19.5vw, top left;
+  background-position: 22% 23.5vw, top left;
 
   @include utility.media-breakpoint-gte(xs) {
-    background-size: 150%;
-    background-position: 7% 16.5vw, top left;
+    background-size: 151%;
+    background-position: 7.5% 22vw, top left;
   }
   @include utility.media-breakpoint-gte(sm) {
     background-image: url("../assets/images/cpu_desk_bg_blk_md.jpg"),
@@ -108,8 +109,6 @@ body {
           font-size: 0.9em;
           transform: translateX(50%);
           text-align: center;
-          $shadowOffset: 0.15vw;
-          text-shadow: $shadowOffset $shadowOffset 0.5vw rgba(0, 0, 0, 0.5);
           white-space: nowrap;
 
           @include utility.bg-radial-grad();
@@ -122,7 +121,7 @@ body {
           }
           @include utility.media-breakpoint-gte(lg) {
             //text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px) colors.$color_gray;
-            text-shadow: 0.1vw 0.1vw 0.25vw rgba(0, 0, 0, 0.5);
+            //text-shadow: 0.1vw 0.1vw 0.25vw rgba(0, 0, 0, 0.5);
             right: 1vw;
             top: 10vw;
             width: 42vw;
@@ -145,7 +144,8 @@ body {
             background-repeat: no-repeat;
             background-position: 45% 55%;
 
-
+            font-size: 1.5em;
+            
             @include utility.media-breakpoint-gte(lg) {
               font-size: 0.75em;
               margin-bottom: 2vw;
@@ -186,10 +186,7 @@ body {
             .tagline {
               margin: 0vw;
             }
-            .tagline {
-              font-size: 1.5em;
-              font-weight: bold;
-            }
+            
           }
 
           #NavDesktop {
@@ -212,7 +209,7 @@ body {
           transform: translateX(-50%);
           
           @include utility.media-breakpoint-gte(xs) {
-            top: 80vw;
+            top: 85vw;
           }
           @include utility.media-breakpoint-gte(sm) {
             top: 79vw;
@@ -233,7 +230,12 @@ body {
       justify-content: center;
       width: 100%;
       transform: translateY(-50%);
+      padding: 0;
       img {
+        width: 100%; // iOS fix
+        display: block;
+        padding: 0;
+        margin: 0;
       }
     }
 
@@ -244,10 +246,11 @@ body {
       flex: 1; // flexbox sticky footer
 
       background-image: 
-      linear-gradient(84deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 100%),
+      linear-gradient(84deg, rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.42) 100%),
       url("/assets/images/ContentBg.svg");
       background-repeat: no-repeat;
       background-size: cover;
+      background-position: 50% 60%;
 
       .content {
         margin: 0 1rem;
@@ -262,9 +265,11 @@ body {
         }
         section {
           position: relative;
+          //overflow: hidden;
           > * {
-            position: relative;
             z-index: 1;
+            position: relative;
+            width: 100%;
           }
           .accent-image {
             z-index: 0;
@@ -274,11 +279,27 @@ body {
             right: -2vw;
             opacity: 0.25;
 
+            &.needle {
+              //width: 100%;
+              height: 80vw;
+              left: 0;
+              right: 0;
+              background: url('../../assets/images/Needle.svg') 200% center no-repeat;
+              @include utility.media-breakpoint-gte(md) {
+
+              }            
+            }
+
             &.salesforce {
               top: clamp(12rem, 35vw, 90rem);
               right: unset;
-              left: -4vw;
-              width: 40vw;
+              left: -24vw;
+              width: 140vw;
+              @include utility.media-breakpoint-gte(sm) {
+                width: 40vw;
+                left: -4vw;
+              }
+                
               opacity: 0.1;
             }
           }
@@ -365,33 +386,48 @@ body {
       .content {
         position: relative;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        margin-top: -4vw;
+        margin-top: -2vw;
         padding: 0 2vw;
+        gap: 6vw;
+        @include utility.media-breakpoint-gte(sm) {
+          flex-direction: row;
+          gap: 2vw;
+        }
         > div {
-          flex: 0 0 30%;
+          flex: 0 0 25%;
           text-align: center;
 
+          &:first-of-type {
+            display: none;
+            @include utility.media-breakpoint-gte(sm) {
+              display: block;
+            }
+          }
           &:last-of-type {
             text-align: right;
           }
         }
         
         img {
-          width: clamp(10rem, 24vw, 22rem);
+          width: clamp(6rem, 40vw, 18rem);
+          
         }
-        .fishbone-logo {
-          display: inline-block;
-          $size: 6vw;
-          width: clamp(8rem, $size, 12rem);
-          height: clamp(7rem, $size, 12rem);
-          background-image: url("../assets/images/FishboneLogoFull_gray.svg");
-          background-size: contain;
-          background-repeat: no-repeat;
-          &:hover {
-            background-image: url("../assets/images/FishboneLogoFull.svg");
+        a {
+          display: block;
+          &.fishbone-logo {
+            display: inline-block;
+            $size: 12vw;
+            width: clamp(5rem, $size, 15rem);
+            height: clamp(5rem, $size, 15rem);
+            background-image: url("../assets/images/FishboneLogoFull_gray.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            &:hover {
+              background-image: url("../assets/images/FishboneLogoFull.svg");
+            }
           }
         }
       }

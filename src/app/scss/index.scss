@@ -337,28 +337,118 @@ body {
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            gap: 2vw 3vw;
+            gap: 6vw 8vw;
+            margin: 7vw 0;
+            @include utility.media-breakpoint-gte(md) {
+              gap: 5vw 3vw;
+              margin: 5vw 0;
+            }
+            @include utility.media-breakpoint-gte(lg) {
+              gap: 3vw 3vw;
+              margin: 3vw 0;
+            }
             flex-wrap: wrap;
-            
-            li {
 
+            li {
               img {
-                width: 11vw;
+                width: 40vw;
               }
               &.payscout {
                 img {
-                  width: 13vw;
+                  width: 50vw;
+                }
+              }
+              &.stellar {
+                img {
+                  width: 50vw;
                 }
               }
               &.whip-around {
                 img {
-                  width: 16vw;
+                  width: 60vw;
                 }
               }
               &.centric, &.elan {
                 img {
-                  width: 18vw;
+                  width: 70vw;
 
+                }
+              }
+              @include utility.media-breakpoint-gte(sm) {
+                img {
+                  width: 28vw;
+                }
+                &.payscout {
+                  img {
+                    width: 32vw;
+                  }
+                }
+                &.stellar {
+                  img {
+                    width: 36vw;
+                  }
+                }
+                &.whip-around {
+                  img {
+                    width: 50vw;
+                  }
+                }
+                &.centric, &.elan {
+                  img {
+                    width: 58vw;
+  
+                  }
+                }
+              }
+              @include utility.media-breakpoint-gte(md) {
+                img {
+                  width: 20vw;
+                }
+                &.payscout {
+                  img {
+                    width: 24vw;
+                  }
+                }
+                &.stellar {
+                  img {
+                    width: 24vw;
+                  }
+                }
+                &.whip-around {
+                  img {
+                    width: 30vw;
+                  }
+                }
+                &.centric, &.elan {
+                  img {
+                    width: 36vw;
+                  }
+                }
+              }
+              @include utility.media-breakpoint-gte(lg) {
+                img {
+                  width: 12vw;
+                }
+                &.payscout {
+                  img {
+                    width: 14vw;
+                  }
+                }
+                &.stellar {
+                  img {
+                    width: 16vw;
+                  }
+                }
+                &.whip-around {
+                  img {
+                    width: 20vw;
+                  }
+                }
+                &.centric, &.elan {
+                  img {
+                    width: 24vw;
+  
+                  }
                 }
               }
             }

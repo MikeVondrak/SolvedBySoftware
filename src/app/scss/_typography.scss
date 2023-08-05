@@ -1,6 +1,9 @@
 @use 'colors';
 @use 'utility';
 
+$hMargin: 2vw;
+$hMarginInc: 0.5vw;
+
 @font-face {
   font-family: 'Raleway';
   src: url('/assets/fonts/Raleway-VariableFont_wght.ttf')  format('truetype');
@@ -40,11 +43,63 @@ h5,
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 
+h1 {
+  margin: ($hMargin + ($hMarginInc * 8)) 0 ($hMargin + ($hMarginInc * 6));
+  font-size: 1.5em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 2.25em;
+  }
+}
+h2 {
+  margin: ($hMargin + ($hMarginInc * 7)) 0 ($hMargin + ($hMarginInc * 5));
+  font-size: 1.35em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 2em;
+  }
+}
+h3, .sub-head {
+  margin: ($hMargin + ($hMarginInc * 6)) 0 ($hMargin + ($hMarginInc * 4));
+  font-size: 1.2em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.6em;
+  }
+}
+h4, .tagline {
+  margin: ($hMargin + ($hMarginInc * 5)) 0 ($hMargin + ($hMarginInc * 3));
+  font-size: 1.1em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.3em;
+  }
+}
+h5 {
+  margin: ($hMargin + ($hMarginInc * 4)) 0 ($hMargin + ($hMarginInc * 2));
+  font-size: 1em;
+  @include utility.media-breakpoint-gte(md) {
+    font-size: 1.1em;
+  }
+}
+p {
+  margin: ($hMargin + ($hMarginInc * 2.5)) 0 ($hMargin + ($hMarginInc * 1));
+  font-size: 1em;
+}
+li, a, button {
+  font-size: 1em;
+}
+.tagline {
+  margin-top: 0;
+  //font-weight: bold;
+}
+.sub-head {
+  margin-bottom: 1vw;
+  //font-size: 1.25em;
+}
+
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   body {
     letter-spacing: -0.5px;
     h1, h2, h3, h4, h5 {
-      letter-spacing: -1px;
+      //letter-spacing: -1px;
       text-shadow: 0px 0px 1px colors.$color_text;
     }
   }
@@ -54,7 +109,7 @@ h5,
   body {
     letter-spacing: -0.5px;
     h1, h2, h3, h4, h5 {
-      letter-spacing: -1.5px;
+      //letter-spacing: -0px;
       text-shadow: 0px 0px 1px colors.$color_text;
     }
   }

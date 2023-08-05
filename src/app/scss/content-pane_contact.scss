@@ -1,4 +1,5 @@
 @use "./colors";
+@use "utility";
 
 #ContentPane_Contact.page-container {
   > div {
@@ -19,7 +20,7 @@
       }
     }
     &.phone {
-      a {        
+      a {
         h1 {
           margin: 0;
           padding: 0 0 2.5vw 0;
@@ -42,6 +43,41 @@
         img {
           width: clamp(2.25rem, 8vw, 10rem);
           margin-left: clamp(1.75rem, 5vw, 10rem);
+        }
+      }
+    }
+  }
+
+  @include utility.media-breakpoint-gte(lg) {
+    > div {
+      a {
+        > div {
+          width: clamp(3.75rem, 11vw, 30rem);
+        }
+      }
+      &.phone {
+        a {
+          h1 {
+            margin: 0;
+            padding: 0 0 2.5vw 0;
+            font-size: clamp(1rem, 4vw, 6rem);
+          }
+          img {
+            width: clamp(2.5rem, 6vw, 8rem);
+            margin-left: clamp(1.75rem, 5vw, 10rem);
+          }
+        }
+      }
+      &.email {
+        a {
+          h1 {
+            font-size: clamp(1rem, 2.5vw, 5rem);
+            padding: 0 0 1vw 0;
+          }
+          img {
+            width: clamp(2.25rem, 6vw, 10rem);
+            margin-left: clamp(1.75rem, 5vw, 10rem);
+          }
         }
       }
     }

@@ -28,6 +28,12 @@
     background-position: 7% 16.5vw, top left;
   }
   @include utility.media-breakpoint-gte(lg) {
+    background-image: url("../assets/images/cpu_desk_bg_blk.jpg"),
+      linear-gradient(
+        49deg,
+        colors.$color_white_alt2 30%,
+        colors.$color_white_alt 60%
+      );
     background-size: 100%;
     background-position: center top;
   }
@@ -248,15 +254,72 @@ body {
       }
     }
 
+    @keyframes hover-up-down {
+      $bounceAmount: 5%;
+      $scaleAmount: 0.05;
+      from {
+        transform: translateY(-$bounceAmount) scale(1 + $scaleAmount);
+      }
+      to {
+        transform: translateY($bounceAmount) scale(1 - $scaleAmount);
+      }
+    }
+    @keyframes hover-up-down-shadow {
+      $bounceAmount: 1%;
+      $scaleAmount: 0.025;
+      from {
+        transform: translateY(-$bounceAmount) scale(1 + $scaleAmount);
+      }
+      to {
+        transform: translateY($bounceAmount) scale(1 - $scaleAmount);
+      }
+    }
+    #ScrollDown.scroll-down-container {
+      --scrollButtonOpacity: 1;
+      z-index: 1;
+      display: none;
+      @include utility.media-breakpoint-gte(lg) {
+        display: block;
+      }
+      position: fixed;
+      width: 6vw;
+      height: 2vw;
+      bottom: 2vw;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      opacity: var(--scrollButtonOpacity);
+      .scroll-down {
+        position: absolute;
+        width: 6vw;
+        height: 2vw;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background-color: colors.$color-orange;
+        animation: hover-up-down 1s 0.1s ease-in-out infinite alternate;
+      }
+      .scroll-down-shadow {
+        position: absolute;
+        display: inline-block;
+        top: 0.5vw;
+        left: 0.3vw;
+        width: 5.4vw;
+        height: 1.6vw;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+        background-color: rgba(0,0,0,0.1);
+        background-image: radial-gradient(circle, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0) 100%);
+        animation: hover-up-down-shadow 1s ease-in-out infinite alternate;
+      }
+    }
+
     main {
       //z-index: -1;
       position: relative;
       top: 0;
       flex: 1; // flexbox sticky footer
-
+      background-color: colors.$color-white;
       background-image: 
-      linear-gradient(84deg, rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.42) 100%),
-      url("/assets/images/ContentBg.svg");
+        linear-gradient(84deg, rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.42) 100%),
+        url("/assets/images/ContentBg.svg");
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 50% 60%;

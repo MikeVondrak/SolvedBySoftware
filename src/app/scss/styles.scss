@@ -6,7 +6,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
 
 
-
 * {
   box-sizing: border-box;
 }
@@ -17,7 +16,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  
+  scroll-behavior: smooth;
   color: colors.$color_text;
   background-color: colors.$color_background;
 }

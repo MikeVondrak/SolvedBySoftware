@@ -1,68 +1,117 @@
+  @use "colors";
+
 #ContentPane_Portfolio.page-container {
-  //position: relative;
-  //background: rgba(255,0,0,0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-size: 102%;
+  background-position: 60% 40%;
+  background-image: 
+    linear-gradient(
+      75deg,
+      colors.$color_black_translucent 0%,
+      transparent 100%
+    ),
+    url("../../assets/images/Portfolio.jpg");
+  // background-image: linear-gradient(
+  //     90deg,
+  //     colors.$color_orange_translucent 0%,
+  //     colors.$color_white_translucent 100%
+  //   ),
+  //   url("../../assets/images/Portfolio_orange.jpg");
   .folder-bg {
     position: relative;
-    width: 98%;
-    bottom: 1vw;
-    left: 0.5vw;
+    //width: 98%;
+    //bottom: 1vw;
+    //left: 0.5vw;
   }
   ul {
     //background: rgba(0,255,0,0.2);
-    position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
+    //position: absolute;
+    //top: 0; left: 0; bottom: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    margin: 2vw;
+
+    &.col-right {
+      align-items: center;
+
+      li::before {
+        // background-image: radial-gradient(
+        //   rgba(255, 255, 255, 0.35) 35%,
+        //   transparent 70%
+        // );
+      };
+    }
+
     li {
-      position: absolute;
-      
+      z-index: 1;
+      position: relative;
+      &::before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        $offset: -2vw;
+        top: calc($offset + 1vw);
+        bottom: calc($offset + 1vw);
+        left: $offset;
+        right: $offset;
+
+        // background-image: radial-gradient(
+        //   rgba(0, 0, 0, 0.75) 55%,
+        //   transparent 70%
+        // );
+        //background-color: colors.$color_black;
+      }
+
       &.stellar {
-        top: 17vw;
-        left: 6vw;
+        padding: 0.25vw 0.5vw;
+        background-color: colors.$color-white;
         img {
           height: 2.75vw;
         }
       }
       &.payscout {
-        top: 9vw;
-        left: 19vw;
         img {
           height: 3.5vw;
         }
       }
       &.western-timber-frame {
-        top: 9vw;
-        left: 5vw;
         img {
           height: 5.5vw;
         }
       }
       &.delegate {
-        top: 2vw;
-        left: 23vw;
         img {
           height: 4vw;
         }
       }
       &.whip-around {
-        top: 1.5vw;
-        left: 2vw;        
+        padding: 0.25vw 0.5vw;
+        background-color: colors.$color-white;
+        border-radius: 1vw;
         img {
           height: 2.75vw;
         }
       }
       &.centric {
-        top: 5.5vw;
-        left: 2vw;
+        padding: 0.25vw 0.5vw;
+        background-color: colors.$color-black;
+        border-radius: 3vw;
         img {
           height: 2vw;
         }
       }
       &.elan {
-        top: 14vw;
-        right: 3vw;
+        padding: 0.25vw 0.5vw;
+        background-color: colors.$color-black;
         img {
           height: 2vw;
         }
-      }  
+      }
     }
   }
 }

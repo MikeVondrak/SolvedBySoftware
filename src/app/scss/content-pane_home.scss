@@ -26,41 +26,61 @@
   .logo {
     z-index: -1;
     position: absolute;
-    top: -2vw;
-    right: 2vw;
-    width: 10w;
-    opacity: 0.25;
+    // top: 0.25vw;
+    // left: 0.25vw;
+    top: -1.75vw;
+    left: -2vw;
+    width: 17vw;
+    //opacity: 0.25;
+    border-radius: 50%;
+    //border-radius: 0% 0% 50% 0%;
+    background-color: colors.$color-gray-translucent;
+    background-image: radial-gradient(#000 68%, transparent 70%);
     @include utility.media-breakpoint-gte(xs) {
-      width: 10vw;
+      width: 12vw;
+      //top: 8vw;
     }
     @include utility.media-breakpoint-gte(lg) {
-      top: -1.75vw;
+      //top: -1.75vw;
       //left: 25vw;
-      width: 7vw;
+      width: 10vw; //top: 2vw;
     }
     @include utility.media-breakpoint-gte(hd) {
-      width: 8vw;
+      //width: 18vw;
     }
   }
   .bullets {
-    margin: 0 4vw 0 30vw;
-    padding: 1vw 1vw 1vw 3.5vw;
+    margin: 0vw 10vw 0vw 7vw;
+    padding: 1vw 1vw 2vw 4.5vw;
     font-size: 1.25em;
-    background-color: colors.$color_white_translucent;
+    //background-color: colors.$color_white_translucent;
+    border-radius: 20%;
     @include utility.media-breakpoint-gte(xs) {
-      margin: 0vw 2vw 0 22vw;
+      margin: 0vw 8vw 2vw 5vw;
       font-size: 1.05em;
     }
     @include utility.media-breakpoint-gte(sm) {
       font-size: 1.4em;
     }
     @include utility.media-breakpoint-gte(lg) {
-      margin: 0vw 2vw 0 16vw;
+      //margin: 0vw 2vw 0 16vw;
       font-size: 1.2em;
     }
     h2 {
-      margin: 0 0 1.5vw;
-      text-align: left;
+      margin: 4.5vw -6vw 4vw 0vw;
+      text-align: center;
+      font-size: 4.25vw;
+      @include utility.media-breakpoint-gte(xs) {
+        margin: 4.5vw -6vw 3vw 0vw;
+        font-size: 3.75vw;
+      }
+      @include utility.media-breakpoint-gte(sm) {
+        font-size: 3.4em;
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        //margin: 0vw 2vw 0 16vw;
+        font-size: 3.2em;
+      }
     }
     ul {
       li {

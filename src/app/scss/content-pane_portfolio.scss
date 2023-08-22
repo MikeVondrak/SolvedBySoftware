@@ -12,7 +12,7 @@
       colors.$color_black_translucent 0%,
       transparent 100%
     ),
-    url("../../assets/images/Portfolio.jpg");
+    url("../../assets/images/Portfolio_gray.jpg");
   // background-image: linear-gradient(
   //     90deg,
   //     colors.$color_orange_translucent 0%,
@@ -50,6 +50,7 @@
     li {
       z-index: 1;
       position: relative;
+      border: 2px solid colors.$color_orange;
       &::before {
         content: "";
         z-index: -1;
@@ -67,6 +68,14 @@
         //background-color: colors.$color_black;
       }
 
+      a {
+        display: block; 
+        img {
+          display: block;
+          //box-shadow: 0px 0px 1px 0px colors.$color_orange;
+        }
+      }
+
       &.stellar {
         padding: 0.25vw 0.5vw;
         background-color: colors.$color-white;
@@ -75,11 +84,13 @@
         }
       }
       &.payscout {
+        border-radius: 0.75rem;
         img {
           height: 3.5vw;
         }
       }
       &.western-timber-frame {
+        border-radius: 50%;
         img {
           height: 5.5vw;
         }

@@ -1,16 +1,34 @@
+@use './colors';
+@use './utility';
+
 #ContentPane_AboutUs.page-container {
-  padding: 1vw;
 
   .section {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
 
     p {
-      padding: 1vw;
+      margin: 0;
+      padding: 2vw;
     }
     img {
       width: 16vw;
+      align-self: flex-end;
+
+      @include utility.media-breakpoint-gte(xs) {
+        width: 14vw;
+      }
+      @include utility.media-breakpoint-gte(sm) {
+        width: 12vw;
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        width: 10w;
+      }
+      @include utility.media-breakpoint-gte(ws) {
+        width: 12vw;
+      }      
     }
   }
 

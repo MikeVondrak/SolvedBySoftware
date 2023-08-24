@@ -1,4 +1,5 @@
   @use "colors";
+  @use "utility";
 
 #ContentPane_Portfolio.page-container {
   display: flex;
@@ -84,7 +85,7 @@
         }
       }
       &.payscout {
-        border-radius: 0.75rem;
+        border-radius: 0.5rem;
         img {
           height: 3.5vw;
         }

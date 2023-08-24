@@ -53,7 +53,7 @@
         h1 {
           margin: 0 0 0.25vw 0;
           padding: 0 0 0 0;
-          font-size: clamp(1rem, 5vw, 3rem);
+          font-size: clamp(1.5rem, 5vw, 3rem);
         }
       }
       img {
@@ -64,7 +64,7 @@
         margin: 0 0 0.15vw 0;
         padding: 0;
         color: colors.$color_text_lt;
-        font-size: 1.2vw;
+        font-size: clamp(0.75rem, 2vw, 2.5rem);
         text-shadow: 1px 1px 1px colors.$color_black;
       }
     }
@@ -82,6 +82,7 @@
       a {
         h1 {
           margin: 0;
+          margin-left: clamp(2rem, 3vw, 6rem);
           padding: 0 0 0 0;
           font-size: clamp(1rem, 3.5vw, 3rem);
         }
@@ -103,18 +104,21 @@
       &.phone {
         a {
           h1 {            
-            font-size: clamp(1rem, 3vw, 6rem);
+            font-size: clamp(1rem, 3.25vw, 5rem);
           }
           img {
             width: clamp(2.5rem, 2.5vw, 8rem);
             //margin-left: clamp(1.75rem, 5vw, 10rem);
           }
         }
+        p {
+          font-size: clamp(0.75rem, 1.75vw, 2.5rem);
+        }
       }
       &.email {
         a {
           h1 {
-            font-size: clamp(1rem, 1.5vw, 5rem);
+            font-size: clamp(1.5rem, 2vw, 5rem);
             padding: 0 0 0 0;
           }
           img {

@@ -81,24 +81,24 @@
         padding: 0.25vw 0.5vw;
         background-color: colors.$color-white;
         img {
-          height: 2.75vw;
+          height: 5.75vw;
         }
       }
       &.payscout {
         border-radius: 0.5rem;
         img {
-          height: 3.5vw;
+          height: 8.5vw;
         }
       }
       &.western-timber-frame {
         border-radius: 50%;
         img {
-          height: 5.5vw;
+          height: 11.5vw;
         }
       }
       &.delegate {
         img {
-          height: 4vw;
+          height: 9vw;
         }
       }
       &.whip-around {
@@ -106,7 +106,7 @@
         background-color: colors.$color-white;
         border-radius: 1vw;
         img {
-          height: 2.75vw;
+          height: 5.75vw;
         }
       }
       &.centric {
@@ -114,14 +114,88 @@
         background-color: colors.$color-black;
         border-radius: 3vw;
         img {
-          height: 2vw;
+          height: 3.75vw;
         }
       }
       &.elan {
         padding: 0.25vw 0.5vw;
         background-color: colors.$color-black;
         img {
-          height: 2vw;
+          height: 3.75vw;
+        }
+      }
+      @include utility.media-breakpoint-gte(xs) {  
+        &.stellar {
+          img {
+            height: 4vw;
+          }
+        }
+        &.payscout {
+          img {
+            height: 6.5vw;
+          }
+        }
+        &.western-timber-frame {
+          img {
+            height: 8.5vw;
+          }
+        }
+        &.delegate {
+          img {
+            height: 7vw;
+          }
+        }
+        &.whip-around {
+          img {
+            height: 4.25vw;
+          }
+        }
+        &.centric {
+          img {
+            height: 3vw;
+          }
+        }
+        &.elan {
+          img {
+            height: 3vw;
+          }
+        }
+      }
+      @include utility.media-breakpoint-gte(lg) {
+        &.stellar {
+          img {
+            height: 2.75vw;
+          }
+        }
+        &.payscout {
+          img {
+            height: 3.5vw;
+          }
+        }
+        &.western-timber-frame {
+          img {
+            height: 5.5vw;
+          }
+        }
+        &.delegate {
+          img {
+            height: 4vw;
+          }
+        }
+        &.whip-around {
+          img {
+            height: 2.75vw;
+          }
+        }
+        &.centric {
+          img {
+            height: 2vw;
+          }
+        }
+        &.elan {
+          img {
+            height: 2vw;
+          }
         }
       }
     }

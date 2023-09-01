@@ -61,7 +61,6 @@ function addScrollHandler() {
 }
 
 function handeScroll(event: Event) {
-  console.log(window.scrollY);
   if (window.innerHeight > 868) {
   }
 }
@@ -121,9 +120,9 @@ export const loadPage = (pageId: string) => {
   debounce = false;
   document.addEventListener("DOMContentLoaded", ($event) => {
     addMainNavHandlers();
-    addScrollHandler();
+    // addScrollHandler(); 
     addResizeHandler();
-    addIntersectionObserver();
+    // addIntersectionObserver(); // 
     loadPage("Home");
   });
   window.addEventListener("resize", ($event) => {

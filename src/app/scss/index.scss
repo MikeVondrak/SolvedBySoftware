@@ -65,7 +65,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
 
-    background-color: #fff;
+    //background-color: colors.$color_gray_dk;
 
     header {
       display: flex;
@@ -77,9 +77,14 @@ body {
       .swoosh {
         z-index: 1; // swoosh above content
         position: absolute;
+        display: block;
         top: 0;
         left: 0;
         width: 100%;
+        min-height: 8.1vw;
+        background-image: url('/assets/images/Header_Swoosh.svg');
+        background-size: 102%;
+        background-repeat: no-repeat;
       }
 
       .hero-banner-container {
@@ -94,6 +99,31 @@ body {
 
         .hero-banner {
           width: 100%;
+        }
+
+        .logo {
+          position: absolute;
+          top: 0.5vw;
+          right: 0.5vw;
+          width: 14vw;
+          margin-bottom: clamp(1rem, 1vw, 4rem);
+          opacity: 0.25;
+          @include utility.media-breakpoint-gte(xs) {
+            right: 0.25vw;;
+          }
+          @include utility.media-breakpoint-gte(md) {
+            right: 0.25vw;;
+          }
+          @include utility.media-breakpoint-gte(lg) {
+            top: 5.5vw;
+            right: 15.5vw;;
+          }
+          @include utility.media-breakpoint-gte(ws) {
+            right: 16.35vw;
+          }
+          @include utility.media-breakpoint-gte(hd) {
+            right: 16.25vw;
+          }
         }
 
         .main-nav {
@@ -129,14 +159,12 @@ body {
             //text-shadow: $shadowOffset $shadowOffset clamp(1px, 0.4vw, 2px) colors.$color_gray;
             //text-shadow: 0.1vw 0.1vw 0.25vw rgba(0, 0, 0, 0.5);
             right: 1vw;
-            top: 10vw;
+            top: 16vw;
             width: 42vw;
             padding: 0;
             //font-size: 104%;
             @include utility.bg-radial-grad();
             transform: translateX(0%);
-          }
-          @include utility.media-breakpoint-gte(ws) {
           }
           @include utility.media-breakpoint-gte(ws) {
             right: 2vw;
@@ -210,10 +238,6 @@ body {
               display: flex;
             }
           }
-        }
-
-        .logo {
-          width: 10vw;
         }
 
         #NavMobile {
@@ -573,7 +597,7 @@ body {
             .phone {
               p {
                 white-space: nowrap;
-              }
+              } 
             }
             a {
               display: flex;
@@ -604,69 +628,85 @@ body {
 
     footer {
       position: relative;
-      min-height: clamp(10rem, 10vw, 18rem);
-      margin-top: 6vw;
+      //min-height: clamp(10rem, 10vw, 18rem);
+      //margin-top: 6vw;
       padding-bottom: clamp(0.5rem, 3vw, 3rem);
       background-color: colors.$color_gray_lt;
+      background-image: 
+        linear-gradient(0deg, transparent 20%, rgba(0,0,0,0.35) 100%),
+        linear-gradient(142deg, transparent 20%, rgba(0,0,0,0.35) 100%);
       text-align: right;
 
       .divider {
         width: 100%;
         height: 8vw;
         background: transparent url("../assets/images/Divider_Gray.svg")
-          no-repeat scroll 96% center;
+          no-repeat scroll 92% center;
         background-size: 200%;
         transform: translateY(-50%);
       }
 
       .content {
         position: relative;
+        top: -2vw;
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
         align-items: center;
-        margin-top: -2vw;
-        padding: 0 2vw;
-        gap: 6vw;
+        gap: 4vw;
+        //margin-bottom: 3vw;
         @include utility.media-breakpoint-gte(sm) {
           flex-direction: row;
           gap: 2vw;
         }
-        > div {
-          flex: 0 0 25%;
-          text-align: center;
-
-          &:first-of-type {
-            display: none;
-            @include utility.media-breakpoint-gte(sm) {
-              display: block;
-            }
-          }
-          &:last-of-type {
-            text-align: right;
-          }
-        }
-        
-        img {
-          width: clamp(6rem, 40vw, 18rem);
-          
-        }
+    
         a {
           display: block;
-          &.fishbone-logo {
-            display: inline-block;
-            $size: 12vw;
-            width: clamp(5rem, $size, 15rem);
-            height: clamp(5rem, $size, 15rem);
-            background-image: url("../assets/images/FishboneLogoFull_gray.svg");
-            background-size: contain;
-            background-repeat: no-repeat;
-            &:hover {
-              background-image: url("../assets/images/FishboneLogoFull.svg");
+
+          img {
+            display: block;
+            position: relative;
+            //top: -2vw;
+            width: auto; //clamp(8rem, 20vw, 18rem);
+            height: clamp(4rem, 7.5vw, 8.75rem);
+            
+          }
+
+          &.nmsdc {
+            padding: clamp(0.5rem, 0.5vw, 1rem);
+            border: 1px solid colors.$color_black;
+            border-radius: 1.5rem;
+            background-color: colors.$color_white;            
+            img {
+              height: clamp(3rem, 6.5vw, 7rem);
+            }
+            @include utility.media-breakpoint-gte(sm) {
+              border-width: 2px;
             }
           }
         }
       }
     }
   } // end site-container
+
+  .sub-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: auto;
+
+    a.fishbone-logo {
+      display: inline-block;
+      $size: 8vw;
+      width: clamp(5rem, $size, 8rem);
+      height: clamp(5rem, $size, 8rem);
+      margin: clamp(0.25rem, 1vw, 4rem) clamp(1rem, 5vw, 2rem);
+      background-image: url("../assets/images/FishboneLogoFull_gray.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      &:hover {
+        background-image: url("../assets/images/FishboneLogoFull.svg");
+      }
+    }
+  }
 }

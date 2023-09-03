@@ -51,9 +51,9 @@
     li {
       z-index: 1;
       position: relative;
-      border: 1px solid colors.$color_orange;
+      border-bottom: 2px solid colors.$color_orange;
       @include utility.media-breakpoint-gte(sm) {
-        border: 2px solid colors.$color_orange;
+        border-bottom: 4px solid colors.$color_orange;
       }
       &::before {
         content: "";

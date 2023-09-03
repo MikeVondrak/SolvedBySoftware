@@ -8,15 +8,16 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
 
     a {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
-      align-items: center;
-      gap: clamp(1rem, 4vw, 2rem);
-      width: 100%;
+      align-items: flex-end;
+      gap: clamp(2rem, 4vw, 3rem);
+      //width: 100%;
+      border-bottom: 1px solid colors.$color_orange;
 
       > div {
         //width: clamp(3.75rem, 13vw, 30rem);
@@ -28,18 +29,24 @@
     &.phone {
       flex-direction: column;
       justify-content: center;
-      align-items: flex-end;
-      padding-right: 4vw;
 
-      background-color: rgba(180,180,180,1);
-      background-image:
-      linear-gradient(40deg, colors.$color_black_translucent 0%, transparent 50%),
-      linear-gradient(80deg, transparent 30%, colors.$color_black_translucent 50%),
-        url('../../assets/images/Phone2.jpg');
+      background-color: rgba(180, 180, 180, 1);
+      background-image: linear-gradient(
+          40deg,
+          colors.$color_black_translucent 0%,
+          transparent 50%
+        ),
+        linear-gradient(
+          80deg,
+          transparent 30%,
+          colors.$color_black_translucent 50%
+        ),
+        url("../../assets/images/Phone2.jpg");
 
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: right 54%;
+      padding-right: 4vw;
 
       .details {
         display: flex;
@@ -48,17 +55,27 @@
       }
 
       a {
+        position: relative;
+        display: flex;
         justify-content: flex-end;
+        margin-bottom: 0.5vw;
+
+        > div {
+          display: flex;
+        }
 
         h1 {
           margin: 0 0 0.25vw 0;
-          padding: 0 0 0 0;
+          padding: 0 0 0 0.5vw;
           font-size: clamp(1.5rem, 5vw, 3rem);
         }
-      }
-      img {
-        width: clamp(2rem, 2.5vw, 8rem);
-        //margin-right: clamp(1.75rem, 5vw, 10rem);
+        img {
+          position: absolute;
+          left: -2.95vw;
+          top: 1vw;
+          width: clamp(2rem, 3vw, 8rem);
+          //margin-right: clamp(1.75rem, 5vw, 10rem);
+        }
       }
       p {
         margin: 0 0 0.15vw 0;
@@ -70,44 +87,92 @@
     }
     &.email {
       background-color: colors.$color_gray;
-      background-image:
-      
-      linear-gradient(80deg, colors.$color_black_translucent 50%, transparent 100%),
-        url('../../assets/images/Mailboxes2.jpg');
-        background-size: 100%;
+      background-image: linear-gradient(
+          80deg,
+          colors.$color_black_translucent 50%,
+          transparent 100%
+        ),
+        url("../../assets/images/Mailboxes2.jpg");
+      background-size: 100%;
       background-repeat: no-repeat;
       background-position: left 54%;
       justify-content: center;
+      align-items: flex-start;
+      padding-left: 6vw;
 
       a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         h1 {
           margin: 0;
-          margin-left: clamp(2rem, 3vw, 6rem);
           padding: 0 0 0 0;
           font-size: clamp(1rem, 3.5vw, 3rem);
         }
-        img {
-          width: clamp(2.25rem, 8vw, 10rem);
-          margin-left: clamp(1rem, 2vw, 6rem);
+        div {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          height: 100%;
+          img {
+            position: absolute;
+            bottom: -1px;
+            left: -2vw;
+            width: clamp(1.5rem, 4vw, 10rem);
+          }
         }
       }
     }
   }
 
+  @include utility.media-breakpoint-gte(sm) {
+    > div {
+      a {
+        gap: clamp(1rem, 5vw, 3rem);
+        border-bottom: 2px solid colors.$color_orange;
+        > div {
+        }
+      }
+      &.phone {
+        a {
+          h1 {
+          }
+          img {
+          }
+        }
+        p {
+        }
+      }
+      &.email {
+        a {
+          h1 {
+          }
+          div {
+            img {
+              bottom: -2px;
+            }
+          }
+        }
+      }
+    }
+  }
   @include utility.media-breakpoint-gte(lg) {
     > div {
       a {
+        gap: clamp(1rem, 2.5vw, 3rem);
+        border-bottom: 2px solid colors.$color_orange;
         > div {
           //width: clamp(3.75rem, 11vw, 30rem);
         }
       }
       &.phone {
         a {
-          h1 {            
+          h1 {
             font-size: clamp(1rem, 3.25vw, 5rem);
           }
           img {
-            width: clamp(2.5rem, 2.5vw, 8rem);
+            //width: clamp(2.5rem, 2.5vw, 8rem);
             //margin-left: clamp(1.75rem, 5vw, 10rem);
           }
         }
@@ -121,9 +186,62 @@
             font-size: clamp(1.5rem, 2vw, 5rem);
             padding: 0 0 0 0;
           }
-          img {
-            width: clamp(2.25rem, 4vw, 10rem);
-            //margin-left: clamp(1.75rem, 5vw, 10rem);
+          div {
+            img {
+              bottom: -2px;
+              left: -3vw;
+              width: clamp(2.25rem, 3vw, 5rem);
+            }
+          }
+        }
+      }
+    }
+    @include utility.media-breakpoint-gte(xl) {
+      > div {
+        a {
+          //gap: 2.5vw;
+          border-bottom: 3px solid colors.$color_orange;
+        }
+        &.email {
+          a {
+            div {
+              img {
+                bottom: -3px;
+              }
+            }
+          }
+        }
+      }
+    }
+    @include utility.media-breakpoint-gte(ws) {
+      > div {
+        a {
+          gap: 2vw;
+        }
+        &.email {
+          a {
+            div {
+              img {
+              
+              }
+            }
+          }
+        }
+      }
+    }
+    @include utility.media-breakpoint-gte(hd) {
+      > div {
+        a {
+          //text-decoration: underline;
+          border-bottom: 4px solid colors.$color_orange;
+        }
+        &.email {
+          a {
+            div {
+              img {
+                bottom: -4px;
+              }
+            }
           }
         }
       }

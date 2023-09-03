@@ -113,7 +113,7 @@ $col1: rgba(0, 0, 0, 0.8); // transparent; //#24822B;
     color: colors.$color_text_lt;
     font-size: 3.5vw;
     background-color: colors.$color_black_translucent;
-    //background-image: linear-gradient(90deg, transparent, colors.$color_black_translucent);
+    //background-image: radial-gradient(at center, rgba(0,0,0,0.6) 50%, transparent 100%);
     border-radius: 50%;
 
     &:first-of-type {

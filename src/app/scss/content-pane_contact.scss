@@ -71,9 +71,9 @@
         }
         img {
           position: absolute;
-          left: -2.95vw;
-          top: 1vw;
-          width: clamp(2rem, 3vw, 8rem);
+          left: clamp(-2.5rem, 3vw, -1.5rem);
+          top: clamp(0.25rem, 1.5vw, 1.5rem);
+          width: clamp(1.5rem, 2vw, 8rem);
           //margin-right: clamp(1.75rem, 5vw, 10rem);
         }
       }
@@ -98,7 +98,7 @@
       background-position: left 54%;
       justify-content: center;
       align-items: flex-start;
-      padding-left: 6vw;
+      padding-left: 10vw;
 
       a {
         display: flex;
@@ -129,7 +129,7 @@
   @include utility.media-breakpoint-gte(sm) {
     > div {
       a {
-        gap: clamp(1rem, 5vw, 3rem);
+        gap: clamp(1rem, 2vw, 3rem);
         border-bottom: 2px solid colors.$color_orange;
         > div {
         }
@@ -139,6 +139,8 @@
           h1 {
           }
           img {
+            width: 4.5vw;
+            left: -4.25vw;
           }
         }
         p {
@@ -151,6 +153,7 @@
           div {
             img {
               bottom: -2px;
+              left: -4vw;
             }
           }
         }
@@ -172,8 +175,9 @@
             font-size: clamp(1rem, 3.25vw, 5rem);
           }
           img {
-            //width: clamp(2.5rem, 2.5vw, 8rem);
-            //margin-left: clamp(1.75rem, 5vw, 10rem);
+            width: clamp(2rem, 3vw, 7rem);
+            top: 1vw;
+            left: -3vw;
           }
         }
         p {
@@ -181,6 +185,7 @@
         }
       }
       &.email {
+        padding-left: 7vw;
         a {
           h1 {
             font-size: clamp(1.5rem, 2vw, 5rem);
@@ -190,7 +195,7 @@
             img {
               bottom: -2px;
               left: -3vw;
-              width: clamp(2.25rem, 3vw, 5rem);
+              width: clamp(2.25rem, 3vw, 7rem);
             }
           }
         }
@@ -201,6 +206,14 @@
         a {
           //gap: 2.5vw;
           border-bottom: 3px solid colors.$color_orange;
+        }
+        &.phone {
+          a {
+            h1 {
+            }
+            img {
+            }
+          }
         }
         &.email {
           a {

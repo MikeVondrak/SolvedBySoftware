@@ -9,13 +9,13 @@
     align-items: center;
     gap: 2vw;
     height: 100%;
-    background-image: 
-      linear-gradient(
-        120deg,
+    padding: 0 1vw;
+    background-image: linear-gradient(
+        -90deg,
         transparent 40%,
         colors.$color_black_translucent
       ),
-      linear-gradient(0deg, transparent, colors.$color_black_translucent 70%),
+      linear-gradient(-45deg, transparent 70%, colors.$color_black_translucent 100%),
       url("/assets/images/Nuts_Bolts.jpg");
 
     background-size: 120%;
@@ -27,121 +27,158 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      gap: 1vw;
+      gap: 0.5vw;
       height: 100%;
-      width: 30%;
+      width: 38%;
+      @include utility.media-breakpoint-gte(xs) {
+        width: 38%;
+        gap: 0;
+      }
+      @include utility.media-breakpoint-gte(sm) {
+        width: 36%;
+      }
 
       p {
-        margin: 0 0 0 1vw;
+        margin: 0 0 0 0vw;
         padding: 0;
-        font-size: 110%;
+
+        font-size: 130%;
+        @include utility.media-breakpoint-gte(xs) {
+          font-size: 110%;
+        }
+        @include utility.media-breakpoint-gte(sm) {
+          font-size: 140%;
+        }
       }
       .avatar {
-        width: 13vw;
+        width: clamp(4rem, 20vw, 20rem);
         margin: 0vw 0 0 1vw;
         padding: 0.5vw 2vw 0;
-        background-image: radial-gradient(at center, colors.$color_white 0%, transparent 55%);
-        //background-position: 90% 10%;        
+        background-image: radial-gradient(
+          at center,
+          colors.$color_white 0%,
+          transparent 60%
+        );
+        //background-position: 90% 10%;
         overflow: visible;
+        @include utility.media-breakpoint-gte(xs) {
+          width: 15.75vw;
+        }
+        @include utility.media-breakpoint-gte(md) {
+          width: 17vw;
+        }
+        @include utility.media-breakpoint-gte(lg) {
+          width: 12vw;
+        }
+        @include utility.media-breakpoint-gte(ws) {
+          width: 12.5vw;
+        }
+        @include utility.media-breakpoint-gte(hd) {
+          width: 14vw;
+        }
       }
     }
 
     .tech-logos {
+      flex: 1;
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 2vw;
       //background-image: linear-gradient(90deg, transparent, colors.$color_white_translucent);
-
-      li {
-        width: 100%;
-        text-align: center;
-        a {
-          display: inline-block;
-          padding: clamp(0.5rem, 0.5vw, 1rem) clamp(0.75rem, 0.75vw, 1rem) clamp(0.25rem, 0.25vw, 0.5rem);
-          margin-bottom: 1vw;
-          background-color: colors.$color_white;
-          border-radius: 1rem;
-          border-bottom: 1px solid colors.$color_orange;
-        }
-        &:last-of-type {
-          a {
-            margin-bottom: 0;
-          }
-        }
-        p {
-          margin: 0;
-          padding: 2vw;
-        }
-        img {
-          display: inline-block;
+      ul {
+        flex: 1;
+        li {
           width: 100%;
-          max-width: 16vw;
-          max-height: 3vw;
-        }
-
-        &.sms360 {
+          text-align: center;
           a {
-            //padding: 0;
-            img {
-              
+            width: 100%;
+            display: inline-block;
+            padding: clamp(0.35rem, 0.5vw, 1rem) clamp(0.5rem, 0.75vw, 1rem)
+              clamp(0.15rem, 0.25vw, 0.5rem);
+            margin-bottom: 1vw;
+            background-color: colors.$color_white;
+            border-radius: 1rem;
+            border-bottom: 2px solid colors.$color_orange;
+          }
+          &:last-of-type {
+            a {
+              margin-bottom: 0;
             }
           }
-        }
-        &.slack {
-          a {
-            //padding: 0;
+          p {
+            margin: 0;
+            padding: 2vw;
           }
-        }
-      }
-      @include utility.media-breakpoint-gte(xs) {
-        li {
-          a {
-            img {
-              max-width: 14vw;
-            }
-          }
-        }
-      }
-      @include utility.media-breakpoint-gte(sm) {
-        li {
-          a {
-            border-width: 4px;
-            img {
-              max-width: 12vw;
-            }
-          }
-        }
-      }
-      @include utility.media-breakpoint-gte(lg) {
-        li {
           img {
-            max-width: 10vw;
+            display: inline-block;
+            width: 100%;
+            max-width: 22vw;
+            max-height: 6vw;
+          }
+
+          &.sms360 {
+            a {
+              //padding: 0;
+              img {
+              }
+            }
+          }
+          &.slack {
+            a {
+              //padding: 0;
+            }
           }
         }
-      }
-      @include utility.media-breakpoint-gte(ws) {
-        li {
-          a {
+        @include utility.media-breakpoint-gte(xs) {
+          li {
+            a {
+              img {
+                //max-width: 14vw;
+              }
+            }
+          }
+        }
+        @include utility.media-breakpoint-gte(sm) {
+          li {
+            a {
+              border-width: 4px;
+              img {
+                //max-width: 12vw;
+              }
+            }
+          }
+        }
+        @include utility.media-breakpoint-gte(lg) {
+          li {
             img {
               max-width: 10vw;
+              max-height: 3vw;
             }
-            &.sms360 {
-              a {
-                img {
-                  //max-width: 9vw;
-                  
+          }
+        }
+        @include utility.media-breakpoint-gte(ws) {
+          li {
+            a {
+              img {
+                max-width: 10vw;
+              }
+              &.sms360 {
+                a {
+                  img {
+                    //max-width: 9vw;
+                  }
+                }
+              }
+              &.five9,
+              &.stripe {
+                a {
+                  img {
+                    max-width: 8vw;
+                  }
                 }
               }
             }
-            &.five9, &.stripe {
-              a {
-                img {
-                  max-width: 8vw;
-                }
-              }
-            }
-
           }
         }
       }

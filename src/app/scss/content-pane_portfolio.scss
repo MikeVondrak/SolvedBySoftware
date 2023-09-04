@@ -53,6 +53,9 @@
       position: relative;
       border-bottom: 2px solid colors.$color_orange;
       @include utility.media-breakpoint-gte(sm) {
+        border-bottom: 3px solid colors.$color_orange;
+      }
+      @include utility.media-breakpoint-gte(hd) {
         border-bottom: 4px solid colors.$color_orange;
       }
       &::before {

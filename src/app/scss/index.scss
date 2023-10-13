@@ -633,7 +633,7 @@ body {
       position: relative;
       //min-height: clamp(10rem, 10vw, 18rem);
       //margin-top: 6vw;
-      padding-bottom: clamp(0.5rem, 3vw, 3rem);
+      //padding-bottom: clamp(0.5rem, 1vw, 2rem);
       background-color: colors.$color_gray_lt;
       background-image: 
         linear-gradient(0deg, transparent 20%, rgba(0,0,0,0.35) 100%),
@@ -641,6 +641,7 @@ body {
       text-align: right;
 
       .divider {
+        position: absolute;
         width: 100%;
         height: 8vw;
         background: transparent url("../assets/images/Divider_Gray.svg")
@@ -651,11 +652,11 @@ body {
 
       .content {
         position: relative;
-        top: -2vw;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        padding: clamp(1.5rem, 2vw, 3rem) 0 clamp(1rem, 1vw, 2rem);
         gap: 4vw;
         //margin-bottom: 3vw;
         @include utility.media-breakpoint-gte(sm) {
@@ -698,7 +699,7 @@ body {
     justify-content: flex-end;
     height: auto;
 
-    a.fishbone-logo {
+    a.creator-logo {
       display: inline-block;
       $size: 6vw;
       width: clamp(3rem, $size, 8rem);

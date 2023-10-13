@@ -704,12 +704,12 @@ body {
       width: clamp(3rem, $size, 8rem);
       height: clamp(3rem, $size, 8rem);
       margin: clamp(1rem, 1vw, 4rem) clamp(1rem, 3vw, 2rem);
-      background-image: url("../assets/images/FishboneLogoFull_gray.svg");
+      background-image: url("../assets/images/Logo_Compact.svg");
       background-size: contain;
       background-repeat: no-repeat;
-      &:hover {
-        background-image: url("../assets/images/FishboneLogoFull.svg");
-      }
+      // &:hover {
+      //   background-image: url("../assets/images/FishboneLogoFull.svg");
+      // }
     }
   }
 }

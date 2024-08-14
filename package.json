@@ -30,9 +30,10 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "sass-dev": "sass --watch --update --style=expanded src/app/scss/:src/css",
+    "sass-dev": "sass --watch --update --style=expanded src/app/scss/:dist/css",
     "sass-prod": "sass --no-source-map --style=compressed src/app/scss/:dist/css",
-    "start_2": "concurrently \"yarn sass-dev\" \"gulp serve\"",
-    "start": "gulp default"
+    "start": "concurrently \"yarn sass-dev\" \"gulp serve\"",
+    "start_deprecated": "gulp default",
+    "build": "gulp build"
   }
 }

@@ -1,7 +1,7 @@
 @use "./colors";
 @use "./utility";
 
-.nav-container {
+#MainNav.nav-container {
   position: relative;
   padding: 0.35rem 0.8rem;
   border: 2px solid colors.$color-white-alt;

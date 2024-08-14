@@ -1,12 +1,12 @@
 import { updateNav, setMarkerPosition } from "./main-nav";
 
 var currentPageId: string = "";
-var debounce: boolean = false;
+var resizeDebounce: boolean = false;
 
 /**
  * Update the virtual screen that displays content based on Main Nav selection
  */
-export function updateScreen() {
+function updateScreen() {
   const contentPanes = document.querySelectorAll<HTMLDivElement>(
     "#Screen [data-content-id]"
   );
@@ -34,7 +34,7 @@ export function updateScreen() {
 }
 
 /**
- *
+ * Attach click handlers for main navigation
  */
 function addMainNavHandlers() {
   const mainNavButtons = document.querySelectorAll("button[data-main-nav]");
@@ -50,60 +50,67 @@ function addMainNavHandlers() {
   });
 }
 
+/**
+ * Attach window resize logic
+ */
 function addResizeHandler() {
-  window.addEventListener("resize", (event: Event) => {
-    handeScroll(event);
+  // limit handling resize to every 250ms
+  resizeDebounce = false;
+
+  window.addEventListener("resize", ($event: Event) => {
+    if (resizeDebounce) {
+      return;
+    }
+    loadPage(currentPageId);
+    resizeDebounce = true;
+    // Load the page one final time after a short timeout to make sure we're in the correct UI state post-resizing
+    setTimeout(() => {
+      resizeDebounce = false;
+      loadPage(currentPageId);
+    }, 250);
   });
 }
 
-function addScrollHandler() {
-  window.addEventListener("scroll", handeScroll);
-}
+// function addIntersectionObserver() {
+//   const titleElement = document.getElementById("ContentTop");
+//   if (!titleElement) {
+//     throw new Error('No target for intersection');
+//   }
 
-function handeScroll(event: Event) {
-  if (window.innerHeight > 868) {
-  }
-}
+//   // Options for the Intersection Observer
+//   const options = {
+//     root: null, // Use the viewport as the root
+//     rootMargin: "0px",
+//     threshold: 0.0, // 100% of the target element must be visible to trigger the callback
+//   };
 
-function addIntersectionObserver() {
-  const titleElement = document.getElementById("ContentTop");
-  if (!titleElement) {
-    throw new Error('No target for intersection');
-  }
+//   // Callback function when the intersection occurs
+//   const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+//     entries.forEach((entry) => {
+//       if (entry.isIntersecting) {
+//         console.log("Title element is now visible in the viewport!");
+//         window.removeEventListener('scroll', handeScroll);
+//         const scrollBtn = document.getElementById('ScrollDown');
+//         if (!scrollBtn) {
+//           throw new Error('No scroll button');
+//         }
+//         scrollBtn.style.opacity = '0';
+//       }
+//     });
+//   };
 
-  // Options for the Intersection Observer
-  const options = {
-    root: null, // Use the viewport as the root
-    rootMargin: "0px",
-    threshold: 0.0, // 100% of the target element must be visible to trigger the callback
-  };
+//   // Create the Intersection Observer instance
+//   const observer = new IntersectionObserver(handleIntersection, options);
 
-  // Callback function when the intersection occurs
-  const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        console.log("Title element is now visible in the viewport!");
-        window.removeEventListener('scroll', handeScroll);
-        const scrollBtn = document.getElementById('ScrollDown');
-        if (!scrollBtn) {
-          throw new Error('No scroll button');
-        }
-        scrollBtn.style.opacity = '0';
-      }
-    });
-  };
+//   // Start observing the target element
+//   observer.observe(titleElement);
+// }
 
-  // Create the Intersection Observer instance
-  const observer = new IntersectionObserver(handleIntersection, options);
-
-  // Start observing the target element
-  observer.observe(titleElement);
-}
 /**
  *
  * @param pageId
  */
-export const loadPage = (pageId: string) => {
+const loadPage = (pageId: string) => {
   currentPageId = pageId;
   console.log("LOAD PAGE ", currentPageId);
   updateNav(currentPageId);
@@ -112,29 +119,22 @@ export const loadPage = (pageId: string) => {
 };
 
 /**
+ * Initialize app on first load
+ */
+function initializeApp($event: Event) {
+  addMainNavHandlers();
+  addResizeHandler();
+  loadPage("Home");
+}
+
+/**
  * Main App
  */
 (() => {
   console.log("-------- SBS APP INIT ---------");
   currentPageId = "";
-  debounce = false;
-  document.addEventListener("DOMContentLoaded", ($event) => {
-    addMainNavHandlers();
-    // addScrollHandler(); 
-    addResizeHandler();
-    // addIntersectionObserver(); // 
-    loadPage("Home");
-  });
-  window.addEventListener("resize", ($event) => {
-    if (debounce) {
-      return;
-    }
-    loadPage(currentPageId);
-    debounce = true;
-    // Load the page one final time after a short timeout to make sure we're in the correct UI state
-    setTimeout(() => {
-      debounce = false;
-      loadPage(currentPageId);
-    }, 250);
-  });
+  document.addEventListener("DOMContentLoaded", ($event) =>
+    initializeApp($event)
+  );
+  addResizeHandler();
 })();

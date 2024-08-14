@@ -150,6 +150,11 @@ gulp.task("serve", function () {
 });
 
 gulp.task(
-  "default",
+  "start_dev",
   gulp.series("copyAssets", "bundleCss", "typescript", "html", "serve")
+);
+
+gulp.task(
+  "build",
+  gulp.series("copyAssets", "bundleCss", "typescript", "html")
 );

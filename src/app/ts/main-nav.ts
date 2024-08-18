@@ -28,12 +28,9 @@ export function setMarkerPosition(pos: string) {
       : prefix;
   markerId += pos;
   
-  console.log('!!!', markerId, viewportX);
-  
   const markerEls = document.querySelectorAll<HTMLDivElement>(
     "[data-id='MainNavMarker']"
   );
-  console.log("+++", { pos }, { markerId });
   if (!markerEls.length) {
     console.error("Could not get marker element");
     return;
@@ -46,12 +43,10 @@ export function setMarkerPosition(pos: string) {
 }
 
 export function updateNav(currentPageId: string) {
-  console.log("--- Update nav: ", currentPageId);
   const buttonEls = document.querySelectorAll<HTMLButtonElement>(
     '[data-content-id="CarouselNavMain"] button'
   );
   buttonEls.forEach((button) => {
-    console.log("--- On page: ", currentPageId);
     button.disabled = false;
     if (button.getAttribute("data-main-nav") === currentPageId) {
       button.disabled = true;

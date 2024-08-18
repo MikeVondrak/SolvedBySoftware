@@ -1,4 +1,5 @@
 import { updateNav, setMarkerPosition } from "./main-nav";
+import * as contactForm from "./contact-form";
 
 var currentPageId: string = "";
 var resizeDebounce: boolean = false;
@@ -71,48 +72,48 @@ function addResizeHandler() {
   });
 }
 
-// function addIntersectionObserver() {
-//   const titleElement = document.getElementById("ContentTop");
-//   if (!titleElement) {
-//     throw new Error('No target for intersection');
-//   }
+/**
+ * 
+ */
+function addScrollButtonIntersectionObserver() {
+  const titleElement = document.getElementById("ContentTop");
+  if (!titleElement) {
+    throw new Error('No target for intersection');
+  }
 
-//   // Options for the Intersection Observer
-//   const options = {
-//     root: null, // Use the viewport as the root
-//     rootMargin: "0px",
-//     threshold: 0.0, // 100% of the target element must be visible to trigger the callback
-//   };
+  // Options for the Intersection Observer
+  const options = {
+    root: null, // Use the viewport as the root
+    rootMargin: "0px",
+    threshold: 0.1, // % of the target element that must be visible to trigger the callback
+  };
 
-//   // Callback function when the intersection occurs
-//   const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-//     entries.forEach((entry) => {
-//       if (entry.isIntersecting) {
-//         console.log("Title element is now visible in the viewport!");
-//         window.removeEventListener('scroll', handeScroll);
-//         const scrollBtn = document.getElementById('ScrollDown');
-//         if (!scrollBtn) {
-//           throw new Error('No scroll button');
-//         }
-//         scrollBtn.style.opacity = '0';
-//       }
-//     });
-//   };
+  // Callback function when the intersection occurs
+  const handleIntersection = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const scrollBtn = document.getElementById('ScrollDown');
+        if (!scrollBtn) {
+          throw new Error('No scroll button');
+        }
+        scrollBtn.style.opacity = '0';
+      }
+    });
+  };
 
-//   // Create the Intersection Observer instance
-//   const observer = new IntersectionObserver(handleIntersection, options);
+  // Create the Intersection Observer instance
+  const observer = new IntersectionObserver(handleIntersection, options);
 
-//   // Start observing the target element
-//   observer.observe(titleElement);
-// }
+  // Start observing the target element
+  observer.observe(titleElement);
+}
 
 /**
  *
  * @param pageId
  */
-const loadPage = (pageId: string) => {
+function loadPage(pageId: string) {
   currentPageId = pageId;
-  console.log("LOAD PAGE ", currentPageId);
   updateNav(currentPageId);
   updateScreen();
   setMarkerPosition(currentPageId);
@@ -125,6 +126,8 @@ function initializeApp($event: Event) {
   addMainNavHandlers();
   addResizeHandler();
   loadPage("Home");
+  addScrollButtonIntersectionObserver();
+  contactForm.initialize();
 }
 
 /**

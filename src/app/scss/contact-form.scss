@@ -1,7 +1,66 @@
-
 @use "./colors";
 @use "./utility";
 
-.title {
-  color: red !important;
+#ContactUs.contact-us-container {
+  h2 {
+    margin: 0.75vw 0 2.5vw;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    justify-content: flex-start;
+    gap: 2vw;
+    padding: 0 2vw;
+    margin: 0 15vw 2vw;
+    .col {
+      flex: 1;
+      ul {
+        list-style-type: none;
+        text-align: right;
+
+        label { 
+          border-bottom: 1px solid colors.$color_white;
+          transition: all 0.4s;
+          &.selected {
+            border-bottom: 1px solid colors.$color_orange;
+          }
+        }
+        flex: 1;
+        .hint {
+          margin: 0;
+          padding: 0vw 0 0 0;
+          color: rgba(colors.$color_text, 0.25);
+          text-align: right;
+        }
+      }
+
+      &.left {
+        padding-right: 2vw;
+      }
+
+      &.right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2vw;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+
+          label {
+            cursor: pointer;
+            
+            margin-right: 1vw;
+            text-align: right;
+          }
+          input[type="textbox"] {
+            width: clamp(300px, 20vw, 600px);
+            margin: 0 0 1vw;
+            font-size: 1.2vw;
+          }
+        }
+      }
+    }
+  }
 }

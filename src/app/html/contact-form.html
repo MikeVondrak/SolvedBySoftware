@@ -1,5 +1,72 @@
 <template data-template-id="ContactForm">
-  <h2>Contact Us</h2>
-  
+  <div id="ContactUs" class="contact-us-container">
+    <h2>How can we help you?</h2>
+    <form>
+      <div class="col left">
+        <!-- <p class="hint">Click to select</p> -->
+        <ul>
+          <li>
+            <label for="CustomApp">Application Development</label>
+            <input id="CustomApp" type="checkbox" />
+          </li>
+          <li>
+            <label for="DataMigrate">Data Migration</label>
+            <input id="DataMigrate" type="checkbox" />
+          </li>
+          <li>
+            <label for="LightningMigrate">Lightning Migration</label>
+            <input id="LightningMigrate" type="checkbox" />
+          </li>
+          <li>
+            <label for="Automation">Salesforce Automation</label>
+            <input id="Automation" type="checkbox" />
+          </li>
+          <li>
+            <label for="Reporting">Reporting and Dashboards</label>
+            <input id="Reporting" type="checkbox" />
+          </li>
+          <li>
+            <label for="ThirdParty">Third-Party App Integration</label>
+            <input id="ThirdParty" type="checkbox" />
+          </li>
+          <li>
+            <div>
+              <label for="Other">Other</label>
+              <input id="ThirdParty" type="checkbox" />
+            </div>
+            <textarea placeholder="Other..."></textarea>
+          </li>
+        </ul>
+      </div>
+      <div class="col right">
+        <div>
+          <div>
+            <label for="Name">Name</label>
+            <input id="Name" type="text" />
+          </div>
+          <div>
+            <label for="Name">Email</label>
+            <input id="Email" type="text" />
+          </div>
+        </div>
+        <button>Send</button>
+      </div>
+    </form>
+  </div>
 
+  <!-- 
+</template>
+How can we help you? (Then a series of checkboxes)
+Custom Application Development - Building custom applications on the Salesforce platform to meet specific business needs.
+
+Data Migration - Transferring data from legacy systems to Salesforce, ensuring data integrity and security.
+
+Salesforce Automation - Implementing workflows, process automation, and approval processes to streamline business operations.
+
+Salesforce Lightning Migration - Upgrading from Salesforce Classic to the Lightning Experience for improved functionality and user interface.
+
+Custom Reporting and Dashboards - Creating tailored reports and dashboards to provide insights and analytics specific to business goals.
+
+Third-Party App Integration - Connecting Salesforce with third-party applications (like Mailchimp, Slack, etc.) to enhance functionality.
+-->
 </template>

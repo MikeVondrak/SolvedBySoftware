@@ -34,6 +34,7 @@
       flex-direction: row;
       align-items: center;
       cursor: pointer;
+      box-shadow: none;
       
       width: 12vw;
       @include utility.media-breakpoint-gte(xs) {

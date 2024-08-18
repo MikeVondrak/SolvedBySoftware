@@ -273,7 +273,7 @@ body {
       width: 100%;
       // margin-bottom: -2vw;
       padding: 0;
-      background-image: linear-gradient(180deg, colors.$color_white_alt2 0%, colors.$color_white 100%);
+      background-color: colors.$color_white_alt2;
 
       img {
         width: 100%; // iOS fix
@@ -285,30 +285,32 @@ body {
     }
 
     @keyframes hover-up-down {
-      $bounceAmount: 5%;
+      $bounceAmount: 15%;
       $scaleAmount: 0.05;
       from {
-        transform: translateY(-$bounceAmount) scale(1 + $scaleAmount);
+        transform: translate(0, -$bounceAmount) scale(1 + $scaleAmount);
       }
       to {
-        transform: translateY($bounceAmount) scale(1 - $scaleAmount);
+        transform: translate(0, $bounceAmount) scale(1 - $scaleAmount);
       }
     }
     @keyframes hover-up-down-shadow {
-      $bounceAmount: 1%;
+      $bounceAmount: 5%;
       $scaleAmount: 0.025;
       from {
-        transform: translateY(-$bounceAmount) scale(1 + $scaleAmount);
+        transform: translate(0, -$bounceAmount) scale(1 + $scaleAmount);
       }
       to {
-        transform: translateY($bounceAmount) scale(1 - $scaleAmount);
+        transform: translate(0, $bounceAmount) scale(1 - $scaleAmount);
       }
     }
     #ScrollDown.scroll-down-container {
       --scrollButtonOpacity: 1;
+      $hoverAnimationTime: 2s;
       z-index: 1;
       display: none;
       @include utility.media-breakpoint-gte(lg) {
+        // For Desktop / large sizes show the "scroll-down" button
         display: block;
       }
       position: fixed;
@@ -325,7 +327,7 @@ body {
         height: 2vw;
         clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
         background-color: colors.$color-orange;
-        animation: hover-up-down 1s 0.1s ease-in-out infinite alternate;
+        animation: hover-up-down $hoverAnimationTime 0.1s ease-in infinite alternate;
       }
       .scroll-down-shadow {
         position: absolute;
@@ -337,7 +339,7 @@ body {
         clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
         background-color: rgba(0,0,0,0.1);
         background-image: radial-gradient(circle, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0) 100%);
-        animation: hover-up-down-shadow 1s ease-in-out infinite alternate;
+        animation: hover-up-down-shadow $hoverAnimationTime ease-in infinite alternate;
       }
     }
 
@@ -345,7 +347,7 @@ body {
       flex: 1; // flexbox sticky footer
       position: relative;
       top: 0;
-      background-color: colors.$color_white;
+      background-color: colors.$color_white_alt2;
 
       .content {
         margin: 0;
@@ -602,10 +604,10 @@ body {
               display: flex;
               justify-content: flex-start;
               align-items: center;
-              gap: clamp(0.5rem, 1vw, 1rem);
-              
+              gap: clamp(0.5rem, 1vw, 1rem); 
               flex-wrap: nowrap;
-              text-align: left;
+              // text-align: left;
+
               img {
                 //width: 8vw;
                 height: 16vw;

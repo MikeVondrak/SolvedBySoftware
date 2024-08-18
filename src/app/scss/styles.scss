@@ -1,10 +1,10 @@
+@use 'sass:math';
 @use "colors";
 @use "utility";
 @use "typography";
 
 /* Define the font family */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
-
 
 * {
   box-sizing: border-box;
@@ -18,9 +18,12 @@ body {
   scroll-behavior: smooth;
   color: colors.$color_text;
   background-color: colors.$color_background;
-  background-image: 
-    linear-gradient(180deg, transparent 96%, rgba(0,0,0,0.35) 100%),
-    linear-gradient(142deg, transparent, rgba(0,0,0,0.4));
+  background-image: linear-gradient(
+      180deg,
+      transparent 96%,
+      rgba(0, 0, 0, 0.35) 100%
+    ),
+    linear-gradient(142deg, transparent, rgba(0, 0, 0, 0.4));
 }
 body {
   line-height: 1.25;
@@ -36,6 +39,77 @@ footer {
 a {
   color: colors.$color_primary;
   text-decoration: none;
+}
+
+button {
+  padding: 0.5vw 1vw;
+  background-color: colors.$color-primary;
+  color: colors.$color_text_lt;
+  text-shadow: 2px 2px 2px colors.$color_black_translucent;
+  border-width: 2px;
+  border-color: colors.$color_orange;
+  border-radius: 0.5vw;
+  box-shadow: 2px 2px 4px 0px colors.$color_black;
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+input {
+  position: relative;
+  padding: 1vw 0.75vw;
+  border-radius: 2vw;
+
+  cursor: pointer;
+
+  &[type="text"] {
+    border: 0.2vw solid colors.$color_gray_translucent;
+    background: colors.$color_white_alt;
+  }
+
+  &[type="checkbox"] {
+    $checkWidth: 1.2vw;
+    $checkX: math.div($checkWidth, 3);
+    
+    transform: translate(0.3vw, 0.65vw);
+
+    // Hide native checkbox
+    height: 0;
+    width: 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      width: $checkWidth*0.95;
+      height: $checkWidth*0.95;
+      border-radius: 50%;
+      background-color: transparent;
+      transition: all 0.2s 0.2s ease-in-out;
+      animation-fill-mode: backwards;
+    }
+
+    &::after {
+      content: url("../../assets/images/Marker_Orange.svg");
+      display: block;
+      width: $checkWidth;
+      transform-origin: 50% 33%;
+      transform: rotate(90deg);
+      transition: all 0.2s 0.0s linear;
+    }
+
+    &:checked {
+      &::before {
+        background-color: colors.$color_orange;
+      }
+      &::after {
+        transform: rotate(215deg);
+      }
+    }
+  }
 }
 
 .nowrap {

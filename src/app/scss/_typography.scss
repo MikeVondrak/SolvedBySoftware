@@ -82,8 +82,11 @@ p {
   margin: ($hMargin + ($hMarginInc * 2.5)) 0 ($hMargin + ($hMarginInc * 1));
   font-size: 1em;
 }
-li, a, button {
+li, a, button, input[type="submit"] {
   font-size: 1em;
+}
+a, button, input[type="submit"] {
+  font-family: "Raleway", sans-serif;
 }
 .tagline {
   margin-top: 0;

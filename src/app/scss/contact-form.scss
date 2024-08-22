@@ -32,12 +32,12 @@
           border-radius: clamp(1rem, 2vw, 3rem);
           background-color: colors.$color_white_alt;
           legend {
-            padding: 0.5vw;
+            padding: 0 clamp(0.5rem, 0.5vw, 1rem) 0.25vw clamp(0.25rem, 0.25vw, 1rem);
             margin-left: clamp(0.25rem, 0.1vw, 4rem);
             //border: clamp(3px,0.2vw,10px) solid colors.$color_gray_translucent; // Match textbox styles.scss
             // fancy way of doing gradient borders
             background: linear-gradient(colors.$color_white_alt, colors.$color_white_alt) padding-box,
-              linear-gradient(to bottom, colors.$color_gray_translucent 53.5%, transparent 54%) border-box;
+              linear-gradient(to bottom, colors.$color_gray_translucent 55.95%, transparent 56%) border-box;
             border-radius: 3rem;
             border: clamp(3px, 0.2vw, 10px) solid transparent;
             border-bottom: none;
@@ -97,17 +97,14 @@
                   padding: 0;
                 }
               }
-
-              &.other-offset-marker {
-                //margin-right: clamp(1rem, 1.5vw, 4rem);
-                input {
-                  // "Other" option is a text field, push the marker down to line up with the middle
-                  &::before,
-                  &::after {
-                    //margin-top: clamp(1.5rem, 2.25vw, 4rem);
-                    //pointer-events: none;
-                  }
-                }
+            }
+            &.other-topic {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-end;
+              margin-top: clamp(1rem, 1vw, 3rem);
+              .checkmark-container {
+                margin-right: clamp(0.5rem,1.5vw,5rem);
               }
             }
           }
@@ -119,12 +116,10 @@
           justify-content: flex-end;
 
           textarea {
-            position: absolute;
             width: clamp(100px, 50vw, 800px);
-            top: clamp(0.25em, 1vw, 2rem);
-            right: clamp(0.5rem, 1.5vw, 4rem);
+            background-color: colors.$color_white;
             @include utility.media-breakpoint-gte(sm) {
-              width: 20vw;
+              width: 100%;
             }
           }
           .text-other-spacer {
@@ -141,7 +136,7 @@
           gap: 1vw;
           @include utility.media-breakpoint-gte(sm) {
             justify-content: flex-start;
-            align-items: flex-start;
+            align-items: center;
             height: 100%;
           }
           .control-stack {
@@ -168,8 +163,8 @@
 
           .captcha-container {
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
             margin-top: clamp(1rem, 1vw, 2rem);
             .g-recaptcha {
               padding: clamp(1rem, 1.5vw, 3rem);
@@ -184,9 +179,6 @@
     .submit-container {
       margin: clamp(2rem, 4vw, 6rem) 0 clamp(4rem, 6vw, 8rem);
       text-align: center;
-      button {
-        margin: 0 0 clamp(3rem, 6vw, 10rem);
-      }
     }
   }
 }

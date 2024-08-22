@@ -50,7 +50,7 @@ a {
 }
 
 button, input[type="submit"] {
-  padding: clamp(0.5rem, 0.75vw, 3rem) clamp(1rem, 1.5vw, 5rem);
+  padding: clamp(0.75rem, 1vw, 3rem) clamp(1.5rem, 2vw, 5rem);
   background-color: colors.$color-primary;
   color: colors.$color_text_lt;
   text-shadow: 2px 2px 2px colors.$color_black_translucent;
@@ -58,7 +58,7 @@ button, input[type="submit"] {
   border-color: colors.$color_orange;
   border-radius: clamp(1.5rem, 3vw, 5rem);
   box-shadow: 2px 2px 4px 0px colors.$color_black;
-  font-size: clamp(1.5rem, 2vw, 3rem);
+  font-size: clamp(1.5rem, 2.5vw, 5rem);
 
   &:active {
     box-shadow: none;

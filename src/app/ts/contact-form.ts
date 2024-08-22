@@ -11,6 +11,8 @@ let topicsSelected: TopicIds[] = [];
 const formSelector = '#ContactUs';
 const labelSelector = 'label';
 const checkboxSelector = 'input';
+const topicOtherTextareaSelector = 'OtherTopic';
+const topicOtherCheckmarkSelector = 'OtherTopicCheckmark';
 const topicSelection = [];
 let el: HTMLElement | null;
 let labels: NodeListOf<HTMLElement>;
@@ -41,17 +43,35 @@ export function initialize() {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', ($event) => topicClick($event));
   });
+
+  const otherText = document.getElementById(topicOtherTextareaSelector);
+  if(!otherText) {
+    console.error('Contact form other text not found');
+    return;
+  }
+  console.log('11111111');
+  otherText?.addEventListener('input', handleTextInput); //handleTextKeypress($event));
+  console.log('22222222');
 }
 
-export function topicClick($event: Event) {
+function handleTextInput($event: Event) {
+  const otherText = $event.target as HTMLTextAreaElement;
+  const otherCheckmark = document.getElementById(topicOtherCheckmarkSelector) as HTMLInputElement;
+  if (!otherText || !otherCheckmark) {
+    throw new Error('Cannot find textarea and/or checkbox');
+    return;
+  }
+  otherCheckmark.checked = otherText.textLength > 0;
+}
+
+function topicClick($event: Event) {
   $event.stopPropagation();
-  console.log('-----------------', $event, $event.target);
+  //console.log('-----------------', $event, $event.target);
   const clickedEl = $event.target as HTMLElement;
   const labelEl = clickedEl?.parentElement?.parentElement; 
   if (!labelEl) {
     console.error('Cannot find parent label element of click');
   }
-  console.log(labelEl?.nodeName);
   labelEl?.classList.toggle('selected');
 
 

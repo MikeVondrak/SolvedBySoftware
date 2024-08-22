@@ -6,8 +6,16 @@
 /* Define the font family */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
 
+@mixin focusOutline() {
+  outline: clamp(0.25rem, 0.5vw, 0.5rem) solid rgba(colors.$color_yellow,0.5);
+}
+
 * {
   box-sizing: border-box;
+
+  &:focus-visible {
+    @include focusOutline();
+  }
 }
 
 html,
@@ -41,15 +49,16 @@ a {
   text-decoration: none;
 }
 
-button {
-  padding: 0.5vw 1vw;
+button, input[type="submit"] {
+  padding: clamp(0.5rem, 0.75vw, 3rem) clamp(1rem, 1.5vw, 5rem);
   background-color: colors.$color-primary;
   color: colors.$color_text_lt;
   text-shadow: 2px 2px 2px colors.$color_black_translucent;
   border-width: 2px;
   border-color: colors.$color_orange;
-  border-radius: 0.5vw;
+  border-radius: clamp(1.5rem, 3vw, 5rem);
   box-shadow: 2px 2px 4px 0px colors.$color_black;
+  font-size: clamp(1.5rem, 2vw, 3rem);
 
   &:active {
     box-shadow: none;
@@ -59,20 +68,13 @@ button {
 input {
   position: relative;
   padding: 1vw 0.75vw;
-  border-radius: 2vw;
-
+  border-radius: clamp(1rem, 2vw, 5rem);
   cursor: pointer;
 
-  &[type="text"] {
-    border: 0.2vw solid colors.$color_gray_translucent;
-    background: colors.$color_white_alt;
-  }
-
   &[type="checkbox"] {
+    position: relative;
     $checkWidth: 1.2vw;
-    $checkX: math.div($checkWidth, 3);
-    
-    transform: translate(0.3vw, 0.65vw);
+    padding: 0;
 
     // Hide native checkbox
     height: 0;
@@ -84,20 +86,22 @@ input {
       display: block;
       top: 0;
       left: 0;
-      width: $checkWidth*0.95;
-      height: $checkWidth*0.95;
+      width: clamp(0.5rem, $checkWidth, 8rem);
+      height: clamp(0.5rem, $checkWidth, 8rem);
       border-radius: 50%;
       background-color: transparent;
+      transform: translate(33%, 0);
       transition: all 0.2s 0.2s ease-in-out;
       animation-fill-mode: backwards;
     }
 
     &::after {
+      position: absolute;
       content: url("../../assets/images/Marker_Orange.svg");
       display: block;
-      width: $checkWidth;
+      width: clamp(0.5rem, $checkWidth, 8rem);
       transform-origin: 50% 33%;
-      transform: rotate(90deg);
+      transform: translate(33%, 0) rotate(90deg);
       transition: all 0.2s 0.0s linear;
     }
 
@@ -106,9 +110,36 @@ input {
         background-color: colors.$color_orange;
       }
       &::after {
-        transform: rotate(215deg);
+        transform: translate(33%, 0) rotate(215deg);
       }
     }
+  }
+
+  // Textbox
+  &[type="text"] {
+    padding: clamp(0.5rem, 0.2vw, 5rem) clamp(0.75rem, 0.5vw, 4rem);
+    font-size: clamp(10pt, 1.2vw, 64pt);
+    border: clamp(3px,0.2vw,10px) solid colors.$color_gray_translucent;
+    background: colors.$color_white_alt;
+  }
+}
+
+textarea {
+  background-color: colors.$color_white_alt;
+  border: 0.2vw solid colors.$color_gray_translucent;
+  border-radius: clamp(1rem, 5vw, 10rem);
+  font-size: clamp(10pt, 1vw, 10rem);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input[type='text'], textarea {
+  padding: clamp(0.75rem, 0.5vw, 4rem) clamp(1.25rem, 0.8vw, 6rem);
+  border-radius: clamp(1rem, 30vw, 5rem);
+}
+
+label {
+  &:focus-within { 
+    @include focusOutline();
   }
 }
 
@@ -121,4 +152,7 @@ input {
 .emphasis2 {
   font-style: italic;
   font-weight: bold;
+}
+.required {
+  color: colors.$color_red;
 }

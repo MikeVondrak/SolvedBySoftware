@@ -1,60 +1,4 @@
-<template data-template-id="ContactForm">
-  <div id="ContactUs" class="contact-us-container">
-    <h2>How can we help you?</h2>
-    <form>
-      <div class="col left">
-        <!-- <p class="hint">Click to select</p> -->
-        <ul>
-          <li>
-            <label for="CustomApp">Application Development</label>
-            <input id="CustomApp" type="checkbox" />
-          </li>
-          <li>
-            <label for="DataMigrate">Data Migration</label>
-            <input id="DataMigrate" type="checkbox" />
-          </li>
-          <li>
-            <label for="LightningMigrate">Lightning Migration</label>
-            <input id="LightningMigrate" type="checkbox" />
-          </li>
-          <li>
-            <label for="Automation">Salesforce Automation</label>
-            <input id="Automation" type="checkbox" />
-          </li>
-          <li>
-            <label for="Reporting">Reporting and Dashboards</label>
-            <input id="Reporting" type="checkbox" />
-          </li>
-          <li>
-            <label for="ThirdParty">Third-Party App Integration</label>
-            <input id="ThirdParty" type="checkbox" />
-          </li>
-          <li>
-            <div>
-              <label for="Other">Other</label>
-              <input id="ThirdParty" type="checkbox" />
-            </div>
-            <textarea placeholder="Other..."></textarea>
-          </li>
-        </ul>
-      </div>
-      <div class="col right">
-        <div>
-          <div>
-            <label for="Name">Name</label>
-            <input id="Name" type="text" />
-          </div>
-          <div>
-            <label for="Name">Email</label>
-            <input id="Email" type="text" />
-          </div>
-        </div>
-        <button>Send</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- 
+<!-- 
 </template>
 How can we help you? (Then a series of checkboxes)
 Custom Application Development - Building custom applications on the Salesforce platform to meet specific business needs.
@@ -69,4 +13,99 @@ Custom Reporting and Dashboards - Creating tailored reports and dashboards to pr
 
 Third-Party App Integration - Connecting Salesforce with third-party applications (like Mailchimp, Slack, etc.) to enhance functionality.
 -->
+
+<template data-template-id="ContactForm">
+  <div id="ContactUs" class="contact-us-container">
+    <h2>How can we help you?</h2>
+    <form>
+      <div class="column-container">
+        <div class="col left">
+          <fieldset>
+            <legend><span class="required">*</span>Select topics</legend>
+            <ul>
+              <li>
+                <label for="CustomApp">
+                  <span>Application Development</span>
+                  <div class="checkmark-container">
+                    <input id="CustomApp" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="DataMigrate">
+                  <span>Data Migration</span>
+                  <div class="checkmark-container">
+                    <input id="DataMigrate" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="LightningMigrate">
+                  <span>Lightning Migration</span>
+                  <div class="checkmark-container">
+                    <input id="LightningMigrate" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="Automation">
+                  <span>Salesforce Automation</span>
+                  <div class="checkmark-container">
+                    <input id="Automation" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="Reporting">
+                  <span>Reporting and Dashboards</span>
+                  <div class="checkmark-container">
+                    <input id="Reporting" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li>
+                <label for="ThirdParty">
+                  <span>Third-Party App Integration</span>
+                  <div class="checkmark-container">
+                    <input id="ThirdParty" type="checkbox" />
+                  </div>
+                </label>
+              </li>
+              <li class="other-offset-marker">
+                <textarea id="OtherTopic" placeholder="Other topic..."></textarea>
+                <div class="checkmark-container">
+                  <input id="Other" type="checkbox" disabled />
+                </div>
+                <!-- <div class="text-other-spacer"></div> -->
+              </li>
+            </ul>
+          </fieldset>
+        </div>
+        <div class="col right">
+          <div class="control-stack">
+            <label for="Name"><span class="required">*</span>Name</label>
+            <input id="Name" type="text" />
+          </div>
+          <div class="control-stack">
+            <label for="Email"><span class="required">*</span>Email</label>
+            <input id="Email" type="text" />
+          </div>
+          <!-- data-sitekey connects to reCAPTCHA to inject widget here -->
+          <div class="captcha-container">
+            <div
+              class="g-recaptcha"
+              data-size="compact"
+              data-sitekey="6LemICsqAAAAAChnyBrAyJTIcfeFeA8Dw43Xo5j0"
+            >
+              reCAPTCHA loads here
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="submit-container">
+        <!-- <button id="SubmitInquiry">Send</button> -->
+        <input type="submit" value="Send"/>
+      </div>
+    </form>
+  </div>
 </template>

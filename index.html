@@ -9,15 +9,31 @@
       content="width=device-width, initial-scale=1.0"
       viewport-fit="cover"
     />
+    <!-- Resource hints for browser to pre-load -->
+    <link rel="preconnect" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <!-- Resources -->
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="css/bundle.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap"
       rel="stylesheet"
     />
     <script src="js/bundle.js"></script>
+    <script onload="onloadCallback()" async src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+      const onloadCallback = function() {
+        console.log("reCAPTCHA has loaded!");
+        if (!grecaptcha) {
+          console.error("grecaptcha undefined");
+          return;
+        }
+        console.log(grecaptcha);
+        const A = grecaptcha.reset;
+        console.log(A);
+      };
+    </script>
+    
   </head>
   <body>
     <div class="site-container">

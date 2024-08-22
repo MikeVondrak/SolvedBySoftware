@@ -3,63 +3,189 @@
 
 #ContactUs.contact-us-container {
   h2 {
-    margin: 0.75vw 0 2.5vw;
+    margin: 3vw 0 3vw;
     text-align: center;
   }
   form {
     display: flex;
-    justify-content: flex-start;
-    gap: 2vw;
-    padding: 0 2vw;
-    margin: 0 15vw 2vw;
-    .col {
-      flex: 1;
-      ul {
-        list-style-type: none;
-        text-align: right;
+    flex-direction: column;
 
-        label { 
-          border-bottom: 1px solid colors.$color_white;
-          transition: all 0.4s;
-          &.selected {
-            border-bottom: 1px solid colors.$color_orange;
+    .column-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 10rem);
+      @include utility.media-breakpoint-gte(sm) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 clamp(1.5rem, 2vw, 3rem);
+      }
+      .col {
+        fieldset {
+          border: clamp(3px, 0.2vw, 10px) solid colors.$color_gray_translucent; // Match textbox styles.scss
+          //width: clamp(260px, 40vw, 800px);
+          min-width: 200px;
+          padding: clamp(0.5rem, 0.5vw, 5rem) clamp(1rem, 1.5vw, 5rem)
+            clamp(1rem, 1.5vw, 2rem);
+          border-radius: clamp(1rem, 2vw, 3rem);
+          background-color: colors.$color_white_alt;
+          legend {
+            padding: 0.5vw;
+            margin-left: clamp(0.25rem, 0.1vw, 4rem);
+            //border: clamp(3px,0.2vw,10px) solid colors.$color_gray_translucent; // Match textbox styles.scss
+            // fancy way of doing gradient borders
+            background: linear-gradient(colors.$color_white_alt, colors.$color_white_alt) padding-box,
+              linear-gradient(to bottom, colors.$color_gray_translucent 53.5%, transparent 54%) border-box;
+            border-radius: 3rem;
+            border: clamp(3px, 0.2vw, 10px) solid transparent;
+            border-bottom: none;
+            color: colors.$color_gray_lt;
+            background-color: colors.$color_white_alt;
+            border-radius: clamp(1rem, 2vw, 3rem);
+            font-size: clamp(0.8rem, 1.2vw, 4rem);
+            text-shadow: 2px 2px 3px colors.$color_gray_translucent;
           }
         }
-        flex: 1;
-        .hint {
-          margin: 0;
-          padding: 0vw 0 0 0;
-          color: rgba(colors.$color_text, 0.25);
+        ul {
+          flex: 1;
+          max-width: 80vw;
+          list-style-type: none;
           text-align: right;
-        }
-      }
 
-      &.left {
-        padding-right: 2vw;
-      }
-
-      &.right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2vw;
-
-        > div {
-          display: flex;
-          flex-direction: column;
-
-          label {
-            cursor: pointer;
-            
-            margin-right: 1vw;
+          @include utility.media-breakpoint-gte(xs) {
             text-align: right;
           }
-          input[type="textbox"] {
-            width: clamp(300px, 20vw, 600px);
-            margin: 0 0 1vw;
-            font-size: 1.2vw;
+
+          li {
+            margin-bottom: clamp(0.35rem, 0.4vw, 4rem);
+            label {
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-end;
+              align-items: center;
+              border-radius: clamp(2rem, 5vw, 10rem);
+
+              span {
+                border-bottom: 1px solid colors.$color_gray_translucent;
+                @include utility.media-breakpoint-gte(sm) {
+                  border-bottom-width: 2px;
+                }
+                transition: border-color 0.4s ease;
+              }
+              &.selected span {
+                border-color: colors.$color_orange;
+              }
+
+              .checkmark-container {
+                $checkmarkWidth: clamp(
+                  0.5rem * 1.33,
+                  1.2vw * 1.33,
+                  8rem * 1.33
+                );
+                $checkmarkHeight: clamp(0.5rem, 1.2vw, 8rem);
+                position: relative;
+                width: $checkmarkWidth;
+                height: $checkmarkHeight;
+                margin-left: clamp(0.25rem, 0.25vw, 1rem);
+                input {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  margin: 0;
+                  padding: 0;
+                }
+              }
+
+              &.other-offset-marker {
+                //margin-right: clamp(1rem, 1.5vw, 4rem);
+                input {
+                  // "Other" option is a text field, push the marker down to line up with the middle
+                  &::before,
+                  &::after {
+                    //margin-top: clamp(1.5rem, 2.25vw, 4rem);
+                    //pointer-events: none;
+                  }
+                }
+              }
+            }
           }
         }
+
+        &.left {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+
+          textarea {
+            position: absolute;
+            width: clamp(100px, 50vw, 800px);
+            top: clamp(0.25em, 1vw, 2rem);
+            right: clamp(0.5rem, 1.5vw, 4rem);
+            @include utility.media-breakpoint-gte(sm) {
+              width: 20vw;
+            }
+          }
+          .text-other-spacer {
+            position: relative;
+            height: clamp(1.5rem, 4vw, 10rem);
+          }
+        }
+
+        &.right {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 1vw;
+          @include utility.media-breakpoint-gte(sm) {
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100%;
+          }
+          .control-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4vw;
+            label {
+              color: colors.$color_text_label;
+            }
+
+            input[type="text"] {
+              width: clamp(240px, 60vw, 400px);
+              @include utility.media-breakpoint-gte(sm) {
+                width: clamp(240px, 30vw, 500px);
+              }
+              @include utility.media-breakpoint-gte(lg) {
+                width: clamp(240px, 28vw, 800px);
+              }
+              @include utility.media-breakpoint-gte(hd) {
+                width: clamp(240px, 22vw, 800px);
+              }
+            }
+          }
+
+          .captcha-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: clamp(1rem, 1vw, 2rem);
+            .g-recaptcha {
+              padding: clamp(1rem, 1.5vw, 3rem);
+              border-radius: 2rem;
+              border: clamp(3px, 0.2vw, 10px) solid colors.$color_gray_translucent;
+              background-color: colors.$color_white_alt;
+            }
+          }
+        }
+      }
+    }
+    .submit-container {
+      margin: clamp(2rem, 4vw, 6rem) 0 clamp(4rem, 6vw, 8rem);
+      text-align: center;
+      button {
+        margin: 0 0 clamp(3rem, 6vw, 10rem);
       }
     }
   }

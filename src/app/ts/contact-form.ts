@@ -60,6 +60,7 @@ export function initialize() {
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', ($event) => {
       $event.preventDefault();
+      topicClick($event);
     });
   });
 
@@ -141,16 +142,30 @@ function topicClick($event: PointerEvent | MouseEvent) {
     return;
   }
   // TODO - generalized solution for traversing the DOM to the parent label
-  // click could be on the 1st or 2nd level child
+  // click could be on the 1st or 3nd level child
   let labelEl = clickedEl?.parentElement;
   if (!!labelEl && !(labelEl instanceof HTMLLabelElement)) {
+    console.log('*** Get label from parent el', {labelEl});
     labelEl = labelEl?.parentElement;
   }
-  if (!labelEl) {
+  if (!labelEl || !(labelEl instanceof HTMLLabelElement)) {
     console.error('Cannot find parent label element of click');
     return;
   }
   labelEl.classList.toggle('selected');
+  // Get all the checkbox input elements
+  const checkboxes = labelEl.getElementsByTagName('input');
+  if (!checkboxes || checkboxes.length <= 0) {
+    console.error('Cannot get checkbox child of label');
+    return;
+  }
+  const checkboxInput = (checkboxes.item(0) as HTMLInputElement);
+  // Wait a cycle to set the checked value in case the event is coming from the checkbox input
+  // - avoids bug where clicking on the checkmark image does not select the checkmark
+  setTimeout(() => {
+    checkboxInput.checked = !checkboxInput.checked;
+  });
+  
   const topicId = labelEl.getAttribute('data-topic-id') as TopicId;
   if (!topicId) {
     console.error('Cannot find ID for topic', {labelEl});

@@ -59,6 +59,7 @@
       padding: 0;
       background-color: transparent;
       border: none;
+      border-radius: clamp(0.5rem, 1vw, 2rem);
       transition: opacity 0.3s ease-in-out;
 
       // &::before {

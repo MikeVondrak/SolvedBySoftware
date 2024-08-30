@@ -1,3 +1,5 @@
+@use 'colors';
+
 $breakpoints: (
   "min": 320,
   "xs": 400,
@@ -20,4 +22,8 @@ $breakpoints: (
     rgba(255, 255, 255, 0.35) 35%,
     transparent 70%
   );
+}
+
+@mixin focusOutline() {
+  outline: clamp(0.25rem, 0.5vw, 0.5rem) dotted rgba(colors.$color_yellow,0.85);
 }

@@ -1,12 +1,12 @@
 @use "./colors";
 @use "./utility";
 
-#ContactUs.contact-us-container {
+.contact-us-container {
   h2 {
     margin: 3vw 0 3vw;
     text-align: center;
   }
-  form {
+  form#ContactUs {
     display: flex;
     flex-direction: column;
 
@@ -31,6 +31,11 @@
             clamp(1rem, 1.5vw, 2rem);
           border-radius: clamp(1rem, 2vw, 3rem);
           background-color: colors.$color_white_alt;
+
+          &:invalid {
+            border-color: rgba(colors.$color_red, 0.5);
+          }
+
           legend {
             padding: 0 clamp(0.5rem, 0.5vw, 1rem) 0.25vw clamp(0.25rem, 0.25vw, 1rem);
             margin-left: clamp(0.25rem, 0.1vw, 4rem);
@@ -61,10 +66,11 @@
           li {
             margin-bottom: clamp(0.35rem, 0.4vw, 4rem);
             label {
-              display: flex;
+              display: inline-flex;
               flex-direction: row;
               justify-content: flex-end;
               align-items: center;
+              padding: 0 0 0 clamp(0.5rem, 1vw, 2rem);
               border-radius: clamp(2rem, 5vw, 10rem);
 
               span {
@@ -91,10 +97,18 @@
                 margin-left: clamp(0.25rem, 0.25vw, 1rem);
                 input {
                   position: absolute;
+                  width: 0;
+                  height: 0;
                   top: 0;
                   left: 0;
                   margin: 0;
                   padding: 0;
+                  border: none;
+                  outline: none;
+                  &::before, &::after {
+                    border: none;
+                    outline: none;
+                  }
                 }
               }
             }
@@ -147,7 +161,7 @@
               color: colors.$color_text_label;
             }
 
-            input[type="text"] {
+            input[type="text"], input[type="email"] {
               width: clamp(240px, 60vw, 400px);
               @include utility.media-breakpoint-gte(sm) {
                 width: clamp(240px, 30vw, 500px);
@@ -158,14 +172,25 @@
               @include utility.media-breakpoint-gte(hd) {
                 width: clamp(240px, 22vw, 800px);
               }
+
+              &:valid {
+                border-color: rgba(colors.$color_green, 0.5);
+              }
+              &:invalid {
+                border-color: rgba(colors.$color_red, 0.5);
+              }
             }
           }
 
           .captcha-container {
+            align-self: flex-start;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-top: clamp(1rem, 1vw, 2rem);
+            &:focus-within {
+              border: 4px solid red;
+            }
             .g-recaptcha {
               padding: clamp(1rem, 1.5vw, 3rem);
               border-radius: 2rem;

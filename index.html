@@ -23,7 +23,6 @@
     <script onload="onloadCallback()" async src="https://www.google.com/recaptcha/api.js"></script>
     <script>
       const onloadCallback = function() {
-        console.log("reCAPTCHA has loaded!");
         if (!grecaptcha) {
           console.error("grecaptcha undefined");
           return;

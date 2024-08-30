@@ -11,8 +11,6 @@ function updateScreen() {
   const contentPanes = document.querySelectorAll<HTMLDivElement>(
     "#Screen [data-content-id]"
   );
-  console.log("Update Screen:", currentPageId, contentPanes.length);
-
   contentPanes.forEach((pane) => {
     const id = pane.getAttribute("data-content-id");
     if (id !== currentPageId) {
@@ -24,7 +22,6 @@ function updateScreen() {
     }
 
     if (id === currentPageId) {
-      console.log(`ID: ${id}, ${currentPageId}`);
       pane.style.display = "block";
       setTimeout(() => {
         // set timeout so opacity change doesn't happen the same cycle as display block (interrupts animation)

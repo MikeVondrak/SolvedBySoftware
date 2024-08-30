@@ -6,15 +6,11 @@
 /* Define the font family */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
 
-@mixin focusOutline() {
-  outline: clamp(0.25rem, 0.5vw, 0.5rem) solid rgba(colors.$color_yellow,0.5);
-}
-
 * {
   box-sizing: border-box;
 
   &:focus-visible {
-    @include focusOutline();
+    @include utility.focusOutline();
   }
 }
 
@@ -100,7 +96,13 @@ input {
       content: url("../../assets/images/Marker_Orange.svg");
       display: block;
       width: clamp(0.5rem, $checkWidth, 8rem);
-      transform-origin: 50% 33%;
+      transform-origin: 50% 25%;
+      @include utility.media-breakpoint-gte(md) {
+        transform-origin: 50% 30%;
+      }
+      @include utility.media-breakpoint-gte(hd) {
+        transform-origin: 50% 33%;
+      }
       transform: translate(33%, 0) rotate(90deg);
       transition: all 0.2s 0.0s linear;
     }
@@ -116,7 +118,7 @@ input {
   }
 
   // Textbox
-  &[type="text"] {
+  &[type="text"], &[type="email"] {
     padding: clamp(0.5rem, 0.2vw, 5rem) clamp(0.75rem, 0.5vw, 4rem);
     font-size: clamp(10pt, 1.2vw, 64pt);
     border: clamp(3px,0.2vw,10px) solid colors.$color_gray_translucent;
@@ -132,14 +134,14 @@ textarea {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-input[type='text'], textarea {
+input[type="text"], input[type="email"], textarea {
   padding: clamp(0.75rem, 0.5vw, 4rem) clamp(1.25rem, 0.8vw, 6rem);
   border-radius: clamp(1rem, 30vw, 5rem);
 }
 
 label {
   &:focus-within { 
-    @include focusOutline();
+    @include utility.focusOutline();
   }
 }
 

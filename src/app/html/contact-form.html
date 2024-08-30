@@ -15,66 +15,66 @@ Third-Party App Integration - Connecting Salesforce with third-party application
 -->
 
 <template data-template-id="ContactForm">
-  <div id="ContactUs" class="contact-us-container">
+  <div class="contact-us-container">
     <h2>How can we help you?</h2>
-    <form>
+    <form id="ContactUs">
       <div class="column-container">
         <div class="col left">
           <fieldset>
             <legend><span class="required">*</span>Select topics</legend>
             <ul>
               <li>
-                <label for="CustomApp">
+                <label for="CustomApp" data-topic-id="APP_DEV">
                   <span>Application Development</span>
                   <div class="checkmark-container">
-                    <input id="CustomApp" type="checkbox" />
+                    <input id="CustomApp" type="checkbox" name="TopicsCheckGroup" value="Application Development"/>
                   </div>
                 </label>
               </li>
               <li>
-                <label for="DataMigrate">
+                <label for="DataMigrate" data-topic-id="DATA_MIG">
                   <span>Data Migration</span>
                   <div class="checkmark-container">
-                    <input id="DataMigrate" type="checkbox" />
+                    <input id="DataMigrate" type="checkbox" name="TopicsCheckGroup" value="Data Migration" />
                   </div>
                 </label>
               </li>
               <li>
-                <label for="LightningMigrate">
+                <label for="LightningMigrate" data-topic-id="LIGHTNING_MIG">
                   <span>Lightning Migration</span>
                   <div class="checkmark-container">
-                    <input id="LightningMigrate" type="checkbox" />
+                    <input id="LightningMigrate" type="checkbox" name="TopicsCheckGroup" value="Lightning Migration" />
                   </div>
                 </label>
               </li>
               <li>
-                <label for="Automation">
+                <label for="Automation" data-topic-id="SF_AUTO">
                   <span>Salesforce Automation</span>
                   <div class="checkmark-container">
-                    <input id="Automation" type="checkbox" />
+                    <input id="Automation" type="checkbox" name="TopicsCheckGroup"  value="Salesforce Automation" />
                   </div>
                 </label>
               </li>
               <li>
-                <label for="Reporting">
-                  <span>Reporting and Dashboards</span>
+                <label for="Reporting" data-topic-id="REPORTING">
+                  <span>Reporting & Dashboards</span>
                   <div class="checkmark-container">
-                    <input id="Reporting" type="checkbox" />
+                    <input id="Reporting" type="checkbox" name="TopicsCheckGroup" value="Reporting and Dashboards" />
                   </div>
                 </label>
               </li>
               <li>
-                <label for="ThirdParty">
+                <label for="ThirdParty" data-topic-id="THIRD_PARTY">
                   <span>Third-Party App Integration</span>
                   <div class="checkmark-container">
-                    <input id="ThirdParty" type="checkbox" />
+                    <input id="ThirdParty" type="checkbox" name="TopicsCheckGroup" value="Third-Party App Integration"/>
                   </div>
                 </label>
               </li>
               <li class="other-topic">
-                <textarea id="OtherTopic" placeholder="Other topic..."></textarea>
+                <textarea id="OtherTopic" data-topic-id="OTHER" placeholder="Other topic..."></textarea>
                 <div class="checkmark-container">
-                  <input id="OtherTopicCheckmark" type="checkbox" disabled />
+                  <input id="OtherTopicCheckmark" type="checkbox" name="TopicsCheckGroup" value="" disabled />
                 </div>
                 <!-- <div class="text-other-spacer"></div> -->
               </li>
@@ -84,11 +84,11 @@ Third-Party App Integration - Connecting Salesforce with third-party application
         <div class="col right">
           <div class="control-stack">
             <label for="Name"><span class="required">*</span>Name</label>
-            <input id="Name" type="text" />
+            <input id="Name" type="text" required autocomplete="name"/>
           </div>
           <div class="control-stack">
             <label for="Email"><span class="required">*</span>Email</label>
-            <input id="Email" type="text" />
+            <input id="Email" type="email" required autocomplete="email"/>
           </div>
           <!-- data-sitekey connects to reCAPTCHA to inject widget here -->
           <div class="captcha-container">
@@ -103,8 +103,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
         </div>
       </div>
       <div class="submit-container">
-        <!-- <button id="SubmitInquiry">Send</button> -->
-        <input type="submit" value="Send"/>
+        <input id="SubmitInquiry" type="submit" value="Send"/>
       </div>
     </form>
   </div>

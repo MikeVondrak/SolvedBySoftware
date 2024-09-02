@@ -1,4 +1,4 @@
-@use 'colors';
+@use "colors";
 
 $breakpoints: (
   "min": 320,
@@ -25,5 +25,12 @@ $breakpoints: (
 }
 
 @mixin focusOutline() {
-  outline: clamp(0.25rem, 0.5vw, 0.5rem) dotted rgba(colors.$color_yellow,0.85);
+  outline: clamp(0.25rem, 0.5vw, 0.5rem) dotted rgba(colors.$color_yellow, 0.85);
+}
+
+@mixin tblr($val) {
+  top: $val;
+  bottom: $val;
+  left: $val;
+  right: $val;
 }

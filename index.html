@@ -20,15 +20,18 @@
       rel="stylesheet"
     />
     <script src="js/bundle.js"></script>
-    <script onload="onloadCallback()" async src="https://www.google.com/recaptcha/api.js"></script>
     <script>
-      const onloadCallback = function() {
+      function grecaptchaScriptLoadedCallback() {
         if (!grecaptcha) {
           console.error("grecaptcha undefined");
           return;
         }
+        // dispatch event so it can be handled in Contact Form
+        // TODO: better element to use than body?
+        document.querySelector('body').dispatchEvent(new Event('grecaptchaLoadedCallback'));
       };
-    </script>
+      </script>
+      <script async defer src="https://www.google.com/recaptcha/api.js?onload=grecaptchaScriptLoadedCallback&render=explicit"></script>
     
   </head>
   <body>

@@ -17,7 +17,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
 <template data-template-id="ContactForm">
   <div class="contact-us-container">
     <h2>How can we help you?</h2>
-    <form id="ContactUs">
+    <form id="ContactUs" novalidate>
       <div class="column-container">
         <div class="col left">
           <fieldset id="TopicFieldset">
@@ -130,11 +130,10 @@ Third-Party App Integration - Connecting Salesforce with third-party application
             <input id="Email" type="email" required autocomplete="email" />
           </div>
           <div class="captcha-container">
-            <!-- data-sitekey connects to reCAPTCHA to inject widget here -->
+            <!-- g-recaptcha class REQUIRED! data-sitekey connects to reCAPTCHA to inject widget here -->
             <div
+              id="Grecaptcha"
               class="g-recaptcha"
-              data-size="compact"
-              data-sitekey="6LemICsqAAAAAChnyBrAyJTIcfeFeA8Dw43Xo5j0"
             >
               reCAPTCHA loads here
             </div>

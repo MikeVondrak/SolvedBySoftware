@@ -31,13 +31,16 @@ const inputEmailSelector = 'input[type="email"]';
 const topicFiedsetSelector = 'TopicFieldset';
 const topicOtherTextareaSelector = 'OtherTopic';
 const topicOtherCheckmarkSelector = 'OtherTopicCheckmark';
+const recaptchaSelector = 'Grecaptcha';
 const formSubmitSelector = 'SubmitInquiry';
+
 let formEl: HTMLElement;
 let topicFieldset: HTMLFieldSetElement;
 let labels: NodeListOf<HTMLElement>;
 let checkInputs: NodeListOf<HTMLElement>;
 let textInputs: NodeListOf<HTMLElement>;
 let emailInputs: NodeListOf<HTMLElement>;
+let recaptcha: HTMLElement;
 let submitInput: HTMLElement;
 /**
  * Attach event handlers etc for form
@@ -53,6 +56,10 @@ export function initialize() {
   if (!addEventListeners()) {
     console.error('Failed attaching listeners');
     return;
+  }
+
+  if (!initializeGrecaptcha()) {
+    console.error('Failed initializing reCAPTCHA');
   }
 }
 /**
@@ -94,10 +101,16 @@ function initializeElements(): boolean {
   }
   inputTouched.set(textInputs.item(0).id as InputId, false);
   inputTouched.set(emailInputs.item(0).id as InputId, false);
+  // Get recaptcha container div
+  recaptcha = document.getElementById(recaptchaSelector) as HTMLElement;
+  if (!recaptcha) {
+    console.error('reCAPTCHA not found');
+    return false;
+  }
   // Get submit input
   submitInput = document.getElementById(formSubmitSelector) as HTMLInputElement;
   if (!submitInput) {
-    console.error('Contact form submit not found');
+    console.error('Submit input not found');
     return false;
   }
   return true;
@@ -153,9 +166,48 @@ function addEventListeners(): boolean {
   emailInput.addEventListener('input', ($event) => inputTextInput($event));
 
   // Override the form submit so we can do custom validation 
+  
+  recaptcha.addEventListener('data-callback', () => console.log('callback!!!!'));
+  
   formEl.addEventListener('submit', handleSubmit);
   // Report success
   return true;
+}
+/**
+ * Initialize reCAPTCHA programatically
+ */
+function initializeGrecaptcha(): boolean {
+  document.querySelector('body')?.addEventListener('grecaptchaLoadedCallback', () => grecaptchaLoaded());
+  return true;
+}
+function grecaptchaLoaded() {
+  console.log('GRECAPTCHA LOADED');
+  const params: ReCaptchaV2.Parameters = {
+    size: 'compact',
+    sitekey: "6LemICsqAAAAAChnyBrAyJTIcfeFeA8Dw43Xo5j0",
+    callback: grecaptchaSuccess,
+    'error-callback': grecaptchaFail,
+    'expired-callback': grecaptchaExpired,
+  };
+  grecaptcha.render(recaptcha, params);
+}
+function grecaptchaSuccess() {
+  recaptcha.classList.remove('invalid');
+  recaptcha.classList.add('valid');
+  updateSubmit(formValidate());
+  console.log('CAPTCHA SUCCESS');
+}
+function grecaptchaFail() {
+  recaptcha.classList.add('invalid');
+  recaptcha.classList.remove('valid');
+  updateSubmit(formValidate());
+  console.log('CAPTCHA FAILED???');
+}
+function grecaptchaExpired() {
+  recaptcha.classList.add('invalid');
+  recaptcha.classList.remove('valid');
+  updateSubmit(formValidate());
+  console.log('CAPTCHA EXPIRED');
 }
 /**
  * Indicate the user interacted with a UI input
@@ -213,8 +265,9 @@ function inputTextBlur($event: Event) {
  * @param $event 
  */
 function inputTextInvalid($event: Event) {
-  console.log('INVALID');
-  handleSubmit($event);
+  const el = $event.target as HTMLInputElement;
+  console.log('INVALID', el.id, el.classList);
+  el.classList.add('invalid');
 }
 /**
  * When value for a textbox changes
@@ -222,17 +275,29 @@ function inputTextInvalid($event: Event) {
  */
 function inputTextInput($event: Event) {
   const el = $event.target as HTMLInputElement;
+  el.classList.toggle('invalid', !el.checkValidity());
+  el.classList.toggle('valid', el.checkValidity());
+  el.parentElement?.classList.toggle('invalid', !el.checkValidity());
+  el.parentElement?.classList.toggle('valid', el.checkValidity());
   console.log('INPUT INPUT', {el});
+
 }
 /**
- * Update the style of the fieldset to reflect validity
- * @param $event 
+ * Check all non-Topic input fields for values
+ * @returns All inputs valid
  */
-function topicFieldsetUpdate() {
-  // Set whether the set of checkboxes is in/valid 
-  const topicSelected = getTopicSelectedAny();
-  topicFieldset.classList.toggle('valid', topicSelected);
-  topicFieldset.classList.toggle('invalid', !topicSelected);
+function inputTextsValidate(): boolean {
+  console.log('INPUT TEXT VALIDATE');
+  const texts = Array.from(textInputs) as HTMLInputElement[];
+  const emails = Array.from(emailInputs) as HTMLInputElement[];
+  const inputs = [...texts, ...emails];
+
+  inputs.forEach(input => {
+    input.classList.toggle('invalid', !input.checkValidity());
+    input.classList.toggle('valid', input.checkValidity());
+  });
+
+  return !inputs.some((input) => !input.checkValidity());
 }
 /**
  * Apply styles when topic is deselected
@@ -244,7 +309,7 @@ function topicBlur($event: FocusEvent) {
     return;
   }
   // A topic has been touched, so update fieldset validation styles
-  topicFieldsetUpdate();
+  fieldsetTopicsValidate();
 }
 /**
  * Handle input changes for the Other topic option textarea
@@ -277,7 +342,7 @@ function textareaInput($event: Event) {
  */
 function getTopicTouchedAny(): boolean {
   const anyTouched = Array.from(topicTouched.values()).includes(true); 
-  console.log('ANY TOUCHED:', anyTouched, topicTouched.values());
+  console.log('ANY TOPIC TOUCHED:', anyTouched, topicTouched.values());
   return anyTouched;
 }
 /**
@@ -298,13 +363,12 @@ function setTopicTouched(topicId: TopicId, uiEl: HTMLElement) {
     console.error('Cannot get ID of topic');
     return;
   }
-  console.log('TOPIC TOUCHED');
   uiEl.classList.add('touched');
   if (!topicTouched.get(topicId)) {
     console.log('SET TOPIC TOUCHED');
     topicTouched.set(topicId, true);
   }
-  topicFieldsetUpdate();
+  fieldsetTopicsValidate();
 }
 /**
  * Process click of radio button group
@@ -363,27 +427,62 @@ function topicClick($event: PointerEvent | MouseEvent) {
   labelEl.focus();
 }
 /**
+ * Update the style of the fieldset to reflect validity
+ * @param $event 
+ */
+function fieldsetTopicsValidate() {
+  // Set whether the set of checkboxes is in/valid 
+  const topicSelected = getTopicSelectedAny();
+  topicFieldset.classList.toggle('valid', topicSelected);
+  topicFieldset.classList.toggle('invalid', !topicSelected);
+}
+/**
+ * Validate all form controls
+ */
+function formValidate(): boolean {
+  let formValid = true;
+  // If no Topic has been touched/selected
+  if (!getTopicTouchedAny() || !getTopicSelectedAny()) {
+    fieldsetTopicsValidate();
+    formValid = false;
+  }
+
+  // NOTE: Other Inputs should have invalid class set by invalid() event
+
+  formValid = inputTextsValidate() && formValid;
+
+  const captchaValid = !!grecaptcha.getResponse();
+  console.log({captchaValid}, {formValid});
+  formValid = formValid && !!captchaValid;
+
+  return formValid;
+}
+/**
+ * 
+ * @param formValid 
+ */
+function updateSubmit(formValid: boolean) {
+  submitInput.classList.add('touched');
+  submitInput.classList.toggle('invalid', !formValid);
+  submitInput.classList.toggle('valid', formValid);
+  // TODO - make this less brittle, relies on markup structure to match
+  // Add touched class to parent to show red box-shadow (can't be applied to pseudo-element)
+  submitInput.parentElement?.classList.add('touched');
+  submitInput.parentElement?.classList.toggle('invalid', !formValid);
+  submitInput.parentElement?.classList.toggle('valid', formValid);
+}
+
+/**
  * Handle form submission asynchronously
  * @param $event Submit event from form
  */
 function handleSubmit($event: SubmitEvent | Event) {
-  console.log('AAAAA');
+  console.log('SUBMIT');
   // Prevent native control response
   $event.preventDefault();
   $event.stopPropagation();
-  
-  // If nothing has been touched/selected
-  if (!getTopicTouchedAny() || !getTopicSelectedAny()) {
-    topicFieldsetUpdate();
-  }
 
-  submitInput.classList.add('touched');
-  // TODO - make this less brittle, relies on markup structure to match
-  submitInput.parentElement?.classList.add('touched');
-
-  
-
-  // TODO - logic
+  updateSubmit(formValidate());
 }
 /**
  * Helper function for existence

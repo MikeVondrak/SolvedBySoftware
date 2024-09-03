@@ -1,24 +1,15 @@
 @use "./colors";
 @use "./utility";
 
+$validationAnimationTime: 0.4s;
+
 // Fancy way of doing gradient borders
 // - Padding-box filled with white on top of border-box filled gradient bg
 @mixin gradient-border-legend($color: colors.$color_gray_translucent) {
-  background: linear-gradient(
-                  colors.$color_white_alt,
-                  colors.$color_white_alt
-                )
-                padding-box,
-              linear-gradient(
-                  to bottom,
-                  $color 55.95%,
-                  transparent 56%
-                )
-                border-box;
+  background: linear-gradient(colors.$color_white_alt, colors.$color_white_alt)
+      padding-box,
+    linear-gradient(to bottom, $color 55.95%, transparent 56%) border-box;
 }
-$borderColorInvalid: rgba(colors.$color_red, 0.5);
-$borderColorValid: rgba(colors.$color_green, 0.5);
-
 .contact-us-container {
   h2 {
     margin: 3vw 0 3vw;
@@ -70,14 +61,14 @@ $borderColorValid: rgba(colors.$color_green, 0.5);
           border: clamp(3px, 0.2vw, 10px) solid colors.$color_gray_translucent; // Match textbox styles.scss
           border-radius: clamp(1rem, 2vw, 3rem);
           background-color: colors.$color_white_alt;
-          transition: border-color 0.5s;
-          
+          transition: border-color $validationAnimationTime;
+
           legend {
             padding: clamp(0.25rem, 0.25vw, 1rem) clamp(1rem, 0.75vw, 2rem)
               0.25rem clamp(0.5rem, 0.5vw, 2rem);
             margin-left: clamp(0.25rem, 0.1vw, 4rem);
             @include gradient-border-legend();
-            
+
             border-radius: 3rem;
             border: clamp(3px, 0.2vw, 10px) solid transparent;
             border-bottom: none;
@@ -89,15 +80,15 @@ $borderColorValid: rgba(colors.$color_green, 0.5);
           }
 
           &.invalid {
-            border-color: $borderColorInvalid;
+            border-color: colors.$color_border_invalid;
             legend {
-              @include gradient-border-legend($borderColorInvalid);
+              @include gradient-border-legend(colors.$color_border_invalid);
             }
           }
           &.valid {
-            border-color: rgba($borderColorValid, 0.5);
+            border-color: rgba(colors.$color_border_valid, 0.5);
             legend {
-              @include gradient-border-legend($borderColorValid);
+              @include gradient-border-legend(colors.$color_border_valid);
             }
           }
         }
@@ -127,7 +118,7 @@ $borderColorValid: rgba(colors.$color_green, 0.5);
                 @include utility.media-breakpoint-gte(sm) {
                   border-bottom-width: 2px;
                 }
-                transition: border-color 0.4s ease;
+                transition: border-color $validationAnimationTime ease;
               }
               &.selected span {
                 border-color: colors.$color_orange;
@@ -234,19 +225,19 @@ $borderColorValid: rgba(colors.$color_green, 0.5);
 
           .captcha-container {
             align-self: flex-start;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             margin-top: clamp(1rem, 1vw, 2rem);
-            &:focus-within {
-              border: 4px solid red;
-            }
-            .g-recaptcha {
-              padding: clamp(1rem, 1.5vw, 3rem);
+            #Grecaptcha {
+              padding: clamp(0.5rem, 1vw, 2rem);
               border-radius: 2rem;
               border: clamp(3px, 0.2vw, 10px) solid
                 colors.$color_gray_translucent;
               background-color: colors.$color_white_alt;
+              &.invalid {
+                border-color: colors.$color_border_invalid;
+              }
+              &.valid {
+                border-color: colors.$color_border_valid;
+              }
             }
           }
         }
@@ -265,26 +256,38 @@ $borderColorValid: rgba(colors.$color_green, 0.5);
         display: block;
         @include utility.tblr(0);
         background-color: transparent;
-        
+
         &::after {
           content: "";
-          @include utility.tblr(0); 
+          @include utility.tblr(0);
           position: absolute;
           display: block;
-          border-radius: clamp(1.5rem, 3vw, 5rem); // NOTE: needs to match styles.scss value for button/submit border radius
+          border-radius: clamp(
+            1.5rem,
+            3vw,
+            5rem
+          ); // NOTE: needs to match styles.scss value for button/submit border radius
           box-shadow: 0px 0px 20px 4px rgba(colors.$color_red, 0.75);
-          transition: opacity 0.5s ease;
+          transition: opacity $validationAnimationTime ease;
           opacity: 0;
           pointer-events: none;
         }
-        &.touched {
-          &::after {
-            opacity: 1;
-          }
+        &.touched.invalid::after {
+          border-color: colors.$color_border_invalid;
+          box-shadow: 0px 0px 20px 4px rgba(colors.$color_red, 0.75);
+          opacity: 1;
+        }
+        &.touched.valid::after {
+          border-color: colors.$color_border_valid;
+          box-shadow: 0px 0px 20px 4px rgba(colors.$color_green, 0.75);
+          opacity: 1;
         }
         input[type="submit"] {
-          &.touched {
-            border-color: rgba(colors.$color_red, 0.75);
+          &.touched.invalid {
+            border-color: colors.$color_border_invalid;
+          }
+          &.touched.valid {
+            border-color: colors.$color_border_valid;
           }
         }
       }

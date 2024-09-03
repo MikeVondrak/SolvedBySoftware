@@ -277,6 +277,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/grecaptcha@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@types/grecaptcha/-/grecaptcha-3.0.9.tgz#9f3b07ec06c8fff221aa6fc124fe5b8a0e2c3349"
+  integrity sha512-fFxMtjAvXXMYTzDFK5NpcVB7WHnrHVLl00QzEGpuFxSAC789io6M+vjcn+g5FTEamIJtJr/IHkCDsqvJxeWDyw==
+
 "@types/node@*", "@types/node@>=10.0.0":
   version "20.0.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.0.0.tgz#081d9afd28421be956c1a47ced1c9a0034b467e2"

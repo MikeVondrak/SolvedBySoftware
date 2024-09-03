@@ -53,17 +53,7 @@ button, input[type="submit"] {
   border-radius: clamp(1.5rem, 3vw, 5rem);
   box-shadow: 2px 2px 4px 0px colors.$color_black;
   font-size: clamp(1.5rem, 2.5vw, 5rem);
-
   border: clamp(3px, 0.25vw, 10px) solid rgba(colors.$color_gray_translucent, 0.25);
-  &[type="submit"] {
-
-    &:invalid.touched {
-      border-color: rgba(colors.$color_red, 0.5);
-    }
-    &:valid.touched {
-      border-color: rgba(colors.$color_green, 0.5);
-    }
-  }
   
   &:active {
     box-shadow: none;
@@ -132,7 +122,7 @@ input {
     font-size: clamp(10pt, 1.2vw, 64pt);
     border: clamp(3px,0.2vw,10px) solid colors.$color_gray_translucent;
     background: colors.$color_white_alt;
-    transition: background-color 0.25s ease;
+    transition: border-color 0.25s ease;
   }
 }
 
@@ -164,6 +154,12 @@ label {
 .emphasis2 {
   font-style: italic;
   font-weight: bold;
+}
+input.invalid {
+  border-color: colors.$color_border_invalid;
+}
+input.valid {
+  border-color: colors.$color_border_valid;
 }
 .required {
   color: colors.$color_red;

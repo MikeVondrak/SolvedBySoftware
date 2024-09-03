@@ -368,7 +368,7 @@ function setTopicTouched(topicId: TopicId, uiEl: HTMLElement) {
     console.log('SET TOPIC TOUCHED');
     topicTouched.set(topicId, true);
   }
-  fieldsetTopicsValidate();
+  updateSubmit(formValidate());
 }
 /**
  * Process click of radio button group
@@ -452,6 +452,9 @@ function formValidate(): boolean {
   formValid = inputTextsValidate() && formValid;
 
   const captchaValid = !!grecaptcha.getResponse();
+  recaptcha.classList.toggle('invalid', !captchaValid);
+  recaptcha.classList.toggle('valid', captchaValid);
+  
   console.log({captchaValid}, {formValid});
   formValid = formValid && !!captchaValid;
 
@@ -471,7 +474,6 @@ function updateSubmit(formValid: boolean) {
   submitInput.parentElement?.classList.toggle('invalid', !formValid);
   submitInput.parentElement?.classList.toggle('valid', formValid);
 }
-
 /**
  * Handle form submission asynchronously
  * @param $event Submit event from form

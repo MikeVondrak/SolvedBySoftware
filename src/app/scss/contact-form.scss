@@ -232,6 +232,7 @@ $validationAnimationTime: 0.4s;
               border: clamp(3px, 0.2vw, 10px) solid
                 colors.$color_gray_translucent;
               background-color: colors.$color_white_alt;
+              transition: border-color $validationAnimationTime;
               &.invalid {
                 border-color: colors.$color_border_invalid;
               }
@@ -267,19 +268,19 @@ $validationAnimationTime: 0.4s;
             3vw,
             5rem
           ); // NOTE: needs to match styles.scss value for button/submit border radius
-          box-shadow: 0px 0px 20px 4px rgba(colors.$color_red, 0.75);
+          box-shadow: 0px 0px 10px 4px rgba(colors.$color_red, 0.75);
           transition: opacity $validationAnimationTime ease;
           opacity: 0;
           pointer-events: none;
         }
         &.touched.invalid::after {
           border-color: colors.$color_border_invalid;
-          box-shadow: 0px 0px 20px 4px rgba(colors.$color_red, 0.75);
+          box-shadow: 0px 0px 10px 4px rgba(colors.$color_red, 0.75);
           opacity: 1;
         }
         &.touched.valid::after {
           border-color: colors.$color_border_valid;
-          box-shadow: 0px 0px 20px 4px rgba(colors.$color_green, 0.75);
+          box-shadow: 0px 0px 10px 4px rgba(colors.$color_green, 0.75);
           opacity: 1;
         }
         input[type="submit"] {

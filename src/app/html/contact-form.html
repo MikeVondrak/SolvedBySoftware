@@ -30,7 +30,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="CustomApp"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Application Development"
                     />
                   </div>
@@ -43,7 +43,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="DataMigrate"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Data Migration"
                     />
                   </div>
@@ -56,7 +56,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="LightningMigrate"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Lightning Migration"
                     />
                   </div>
@@ -69,7 +69,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="Automation"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Salesforce Automation"
                     />
                   </div>
@@ -82,7 +82,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="Reporting"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Reporting and Dashboards"
                     />
                   </div>
@@ -95,7 +95,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                     <input
                       id="ThirdParty"
                       type="checkbox"
-                      name="TopicsCheckGroup"
+                      name="Topics"
                       value="Third-Party App Integration"
                     />
                   </div>
@@ -104,6 +104,7 @@ Third-Party App Integration - Connecting Salesforce with third-party application
               <li class="other-topic">
                 <textarea
                   id="OtherTopic"
+                  name="Topics"
                   data-input-id="OTHER"
                   placeholder="Other topic..."
                 ></textarea>
@@ -111,8 +112,8 @@ Third-Party App Integration - Connecting Salesforce with third-party application
                   <input
                     id="OtherTopicCheckmark"
                     type="checkbox"
-                    name="TopicsCheckGroup"
-                    value=""
+                    name="Topics"
+                    value="Other"
                     disabled
                   />
                 </div>
@@ -123,18 +124,18 @@ Third-Party App Integration - Connecting Salesforce with third-party application
         <div class="col right">
           <div class="control-stack" data-input-id="NAME">
             <label for="Name"><span class="required">*</span>Name</label>
-            <input id="Name" type="text" required autocomplete="name" />
+            <input id="Name" type="text" name="Name" required autocomplete="name" />
           </div>
           <div class="control-stack" data-input-id="EMAIL">
             <label for="Email"><span class="required">*</span>Email</label>
-            <input id="Email" type="email" required autocomplete="email" />
+            <input id="Email" type="email" name="Email" required autocomplete="email" />
           </div>
           <div class="captcha-container">
             <div
-              id="Grecaptcha"
-              class="g-recaptcha"
+            id="Grecaptcha"
+            class="g-recaptcha"
             >
-              <!-- g-recaptcha class REQUIRED! Connects to reCAPTCHA to inject widget here -->
+            <!-- g-recaptcha class REQUIRED! Connects to reCAPTCHA to inject widget here -->
             </div>
           </div>
         </div>

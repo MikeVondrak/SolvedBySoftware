@@ -12,6 +12,8 @@ enum InputIds {
   EMAIL = 'Email'
 }
 
+const sbsAPI = "https://solvedbysoftwareco2-dev-ed.develop.my.salesforce-sites.com/services/apexrest/ContactFormEntryREST"
+
 type TopicId = keyof typeof TopicIds;
 type InputId = keyof typeof InputIds;
 
@@ -166,9 +168,6 @@ function addEventListeners(): boolean {
   emailInput.addEventListener('input', ($event) => inputTextInput($event));
 
   // Override the form submit so we can do custom validation 
-  
-  recaptcha.addEventListener('data-callback', () => console.log('callback!!!!'));
-  
   formEl.addEventListener('submit', handleSubmit);
   // Report success
   return true;
@@ -180,8 +179,10 @@ function initializeGrecaptcha(): boolean {
   document.querySelector('body')?.addEventListener('grecaptchaLoadedCallback', () => grecaptchaLoaded());
   return true;
 }
+/**
+ * 
+ */
 function grecaptchaLoaded() {
-  console.log('GRECAPTCHA LOADED');
   const params: ReCaptchaV2.Parameters = {
     size: 'compact',
     sitekey: "6LemICsqAAAAAChnyBrAyJTIcfeFeA8Dw43Xo5j0",
@@ -191,23 +192,38 @@ function grecaptchaLoaded() {
   };
   grecaptcha.render(recaptcha, params);
 }
+/**
+ * 
+ */
 function grecaptchaSuccess() {
   recaptcha.classList.remove('invalid');
   recaptcha.classList.add('valid');
   updateSubmit(formValidate());
-  console.log('CAPTCHA SUCCESS');
 }
+/**
+ * 
+ */
 function grecaptchaFail() {
   recaptcha.classList.add('invalid');
   recaptcha.classList.remove('valid');
   updateSubmit(formValidate());
-  console.log('CAPTCHA FAILED???');
 }
+/**
+ * 
+ */
 function grecaptchaExpired() {
   recaptcha.classList.add('invalid');
   recaptcha.classList.remove('valid');
   updateSubmit(formValidate());
-  console.log('CAPTCHA EXPIRED');
+}
+/**
+ * 
+ */
+function grecaptchaValidate(): boolean {
+  const captchaValid = !!grecaptcha.getResponse();
+  recaptcha.classList.toggle('invalid', !captchaValid);
+  recaptcha.classList.toggle('valid', captchaValid);
+  return captchaValid;
 }
 /**
  * Indicate the user interacted with a UI input
@@ -220,10 +236,8 @@ function setInputTouched(inputId: InputId, uiEl: HTMLElement) {
     console.error('Cannot get ID of topic');
     return;
   }
-  console.log('INPUT TOUCHED');
   uiEl.classList.add('touched');
   if (!inputTouched.get(inputId)) {
-    console.log('SET INPUT TOUCHED', {inputId});
     inputTouched.set(inputId, true);
   }
 }
@@ -239,7 +253,6 @@ function inputTextChange($event: Event) {
     console.error('Could not get input or id', {text}, {id});
     return;
   }
-  console.log('----- Input CHANGE', {id});
   setInputTouched(id, text);
 }
 /**
@@ -255,7 +268,6 @@ function inputTextBlur($event: Event) {
   }
   const textId = text.id as InputId;
   if (inputTouched.get(textId) && !text.classList.contains('touched')) {
-    console.log('---- TEXTBLUR', {textId});
     inputTouched.set(textId, true);
     text.classList.add('touched');
   }
@@ -266,7 +278,6 @@ function inputTextBlur($event: Event) {
  */
 function inputTextInvalid($event: Event) {
   const el = $event.target as HTMLInputElement;
-  console.log('INVALID', el.id, el.classList);
   el.classList.add('invalid');
 }
 /**
@@ -279,7 +290,6 @@ function inputTextInput($event: Event) {
   el.classList.toggle('valid', el.checkValidity());
   el.parentElement?.classList.toggle('invalid', !el.checkValidity());
   el.parentElement?.classList.toggle('valid', el.checkValidity());
-  console.log('INPUT INPUT', {el});
 
 }
 /**
@@ -287,7 +297,6 @@ function inputTextInput($event: Event) {
  * @returns All inputs valid
  */
 function inputTextsValidate(): boolean {
-  console.log('INPUT TEXT VALIDATE');
   const texts = Array.from(textInputs) as HTMLInputElement[];
   const emails = Array.from(emailInputs) as HTMLInputElement[];
   const inputs = [...texts, ...emails];
@@ -309,7 +318,8 @@ function topicBlur($event: FocusEvent) {
     return;
   }
   // A topic has been touched, so update fieldset validation styles
-  fieldsetTopicsValidate();
+  //fieldsetTopicsValidate();
+  formValidate();
 }
 /**
  * Handle input changes for the Other topic option textarea
@@ -342,7 +352,6 @@ function textareaInput($event: Event) {
  */
 function getTopicTouchedAny(): boolean {
   const anyTouched = Array.from(topicTouched.values()).includes(true); 
-  console.log('ANY TOPIC TOUCHED:', anyTouched, topicTouched.values());
   return anyTouched;
 }
 /**
@@ -350,7 +359,14 @@ function getTopicTouchedAny(): boolean {
  * @returns If any topic checkboxes are currently selected
  */
 function getTopicSelectedAny(): boolean {
-  return Array.from(checkInputs).some(check => (check as HTMLInputElement).checked);
+  const inputs = Array.from(checkInputs);
+  if (!inputs) {
+    console.error('Could not get topics array');
+  }
+  const anyChecked = inputs.some(input => (input as HTMLInputElement)?.checked);
+  const checked = inputs.find(input => (input as HTMLInputElement)?.checked);
+  console.log('@@@', {anyChecked}, {checked});
+  return anyChecked;
 }
 /**
  * Indicate the user interacted with a UI element
@@ -365,7 +381,6 @@ function setTopicTouched(topicId: TopicId, uiEl: HTMLElement) {
   }
   uiEl.classList.add('touched');
   if (!topicTouched.get(topicId)) {
-    console.log('SET TOPIC TOUCHED');
     topicTouched.set(topicId, true);
   }
   updateSubmit(formValidate());
@@ -433,6 +448,7 @@ function topicClick($event: PointerEvent | MouseEvent) {
 function fieldsetTopicsValidate() {
   // Set whether the set of checkboxes is in/valid 
   const topicSelected = getTopicSelectedAny();
+  console.log('### fieldsetTopics', topicSelected);
   topicFieldset.classList.toggle('valid', topicSelected);
   topicFieldset.classList.toggle('invalid', !topicSelected);
 }
@@ -441,27 +457,23 @@ function fieldsetTopicsValidate() {
  */
 function formValidate(): boolean {
   let formValid = true;
+  console.log('!!!', getTopicTouchedAny(), getTopicSelectedAny());
   // If no Topic has been touched/selected
-  if (!getTopicTouchedAny() || !getTopicSelectedAny()) {
-    fieldsetTopicsValidate();
+  if (getTopicTouchedAny() || !getTopicSelectedAny()) {
     formValid = false;
+    updateSubmit(formValid);
   }
+  fieldsetTopicsValidate();
 
   // NOTE: Other Inputs should have invalid class set by invalid() event
 
   formValid = inputTextsValidate() && formValid;
-
-  const captchaValid = !!grecaptcha.getResponse();
-  recaptcha.classList.toggle('invalid', !captchaValid);
-  recaptcha.classList.toggle('valid', captchaValid);
-  
-  console.log({captchaValid}, {formValid});
-  formValid = formValid && !!captchaValid;
+  formValid = formValid && grecaptchaValidate();
 
   return formValid;
 }
 /**
- * 
+ * Change the style of the "Send" button based on form validity
  * @param formValid 
  */
 function updateSubmit(formValid: boolean) {
@@ -479,12 +491,58 @@ function updateSubmit(formValid: boolean) {
  * @param $event Submit event from form
  */
 function handleSubmit($event: SubmitEvent | Event) {
-  console.log('SUBMIT');
   // Prevent native control response
   $event.preventDefault();
   $event.stopPropagation();
 
-  updateSubmit(formValidate());
+  let valid = formValidate();
+  updateSubmit(valid);
+  if (!valid) {
+    // For invalid form do nothing, validation styles set by updateSubmit()
+    return;
+  }
+  // Submit form via AJAX
+  submitHttpRequest();
+}
+/**
+ * Send the Contact form data to the API
+ */
+function submitHttpRequest() {
+  const xhttp = new XMLHttpRequest();
+  const data = getRequestBody();
+  xhttp.onload = handleHttpResonse;
+  xhttp.onerror = handleHttpError;
+  xhttp.open("POST", sbsAPI, true);
+  xhttp.setRequestHeader('Content-Type', 'json');
+  xhttp.setRequestHeader('Access-Control-Allow-Origin', '*'); // TODO - SET CORRECT VALUE AFTER TESTING
+  xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
+  xhttp.send(JSON.stringify(data));  
+}
+/**
+ * 
+ */
+function handleHttpError(progressEvent: ProgressEvent) {
+ console.log('ERROR', {progressEvent})
+}
+/**
+ * 
+ */
+function handleHttpResonse(progressEvent: ProgressEvent) {
+  console.log('RESPONSE', {progressEvent});
+}
+/**
+ * 
+ */
+function getRequestBody() {
+  const form = formEl as HTMLFormElement;
+  const data = new FormData(form);
+  const json = {    
+    name: data.get('Name'),
+    email: data.get('Email'),
+    topics: data.getAll('Topics'),
+  }
+  return json;
 }
 /**
  * Helper function for existence

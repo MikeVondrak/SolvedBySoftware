@@ -24,8 +24,8 @@ $breakpoints: (
   );
 }
 
-@mixin focusOutline() {
-  outline: clamp(0.25rem, 0.5vw, 0.5rem) dotted rgba(colors.$color_yellow, 0.85);
+@mixin focusOutline($color: colors.$color_yellow) {
+  outline: clamp(0.25rem, 0.35vw, 0.5rem) dotted rgba($color, 0.85);
 }
 
 @mixin tblr($val) {

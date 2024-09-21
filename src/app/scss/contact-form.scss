@@ -224,10 +224,12 @@ $validationAnimationTime: 0.4s;
           }
 
           .captcha-container {
-            align-self: flex-start;
+            @include utility.media-breakpoint-gte(sm) {
+              align-self: flex-start;
+            }
             margin-top: clamp(1rem, 1vw, 2rem);
             #Grecaptcha {
-              padding: clamp(0.5rem, 1vw, 2rem);
+              padding: 1.25rem 1rem 1rem 1.25rem;
               border-radius: 2rem;
               border: clamp(3px, 0.2vw, 10px) solid
                 colors.$color_gray_translucent;

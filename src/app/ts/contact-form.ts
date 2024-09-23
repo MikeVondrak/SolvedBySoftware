@@ -25,6 +25,9 @@ const inputArray: InputId[] = Object.keys(InputIds).map(input => input as InputI
 let topicTouched: Map<TopicId, boolean> = new Map(topicArray.map(topic => [topic as TopicId, false]));
 let inputTouched: Map<InputId, boolean> = new Map(inputArray.map(input => [input as InputId, false]));
 
+let formSubmitted: boolean = false;
+
+const contactUsHeaderSelector = "ContactUsHeader";
 const formSelector = 'ContactUs';
 const labelSelector = 'label';
 const checkboxSelector = 'input[type="checkbox"]';
@@ -35,8 +38,11 @@ const topicOtherTextareaSelector = 'OtherTopic';
 const topicOtherCheckmarkSelector = 'OtherTopicCheckmark';
 const recaptchaSelector = 'Grecaptcha';
 const formSubmitSelector = 'SubmitInquiry';
+const schedulingSectionSelector = "Scheduling";
+const schedulingSectionHeaderText = "Thank you for your interest!"
 
 let formEl: HTMLElement;
+let contactUsHeader: HTMLElement;
 let topicFieldset: HTMLFieldSetElement;
 let labels: NodeListOf<HTMLElement>;
 let checkInputs: NodeListOf<HTMLElement>;
@@ -44,6 +50,7 @@ let textInputs: NodeListOf<HTMLElement>;
 let emailInputs: NodeListOf<HTMLElement>;
 let recaptcha: HTMLElement;
 let submitInput: HTMLElement;
+let schedulingSection: HTMLElement;
 /**
  * Attach event handlers etc for form
  * @returns early on invalid condition
@@ -69,6 +76,12 @@ export function initialize() {
  * @returns true if successful
  */
 function initializeElements(): boolean {
+  // Contact section header
+  contactUsHeader = document.getElementById(contactUsHeaderSelector) as HTMLElement;
+  if (!contactUsHeader) {
+    console.error('Contact section header not found');
+    return false;
+  }
   // Get form element  
   const fEl = document.getElementById(formSelector);
   if (!fEl) {
@@ -115,6 +128,14 @@ function initializeElements(): boolean {
     console.error('Submit input not found');
     return false;
   }
+  // Get Calendly link section
+  schedulingSection = document.getElementById(schedulingSectionSelector) as HTMLInputElement;
+  if (!schedulingSection) {
+    console.error('Scheduling section not found');
+    return false;
+  }
+  // Scheduling section is only shown after submitting form
+  schedulingSection.style.display = "none";
   return true;
 }
 /**
@@ -145,8 +166,8 @@ function addEventListeners(): boolean {
     console.error('Contact form other text not found');
     return false;
   }
-  otherText.addEventListener('blur', ($event) => topicBlur($event));
   otherText.addEventListener('input', ($event) => textareaInput($event));
+  otherText.addEventListener('blur', ($event) => topicBlur($event));
   //
   // Name and Email Text boxes
   //
@@ -157,18 +178,19 @@ function addEventListeners(): boolean {
   if (!nameInput || !emailInput) {
     console.error('Could not find input: ', {nameInput}, {emailInput});
   }
+  nameInput.addEventListener('input', ($event) => inputTextInput($event));
   nameInput.addEventListener('change', ($event) => inputTextChange($event));
   nameInput.addEventListener('blur', ($event) => inputTextBlur($event));
   nameInput.addEventListener('invalid', ($event) => inputTextInvalid($event));
-  nameInput.addEventListener('input', ($event) => inputTextInput($event));
   
+  emailInput.addEventListener('input', ($event) => inputTextInput($event));
   emailInput.addEventListener('change', ($event) => inputTextChange($event));
   emailInput.addEventListener('blur', ($event) => inputTextBlur($event));
   emailInput.addEventListener('invalid', ($event) => inputTextInvalid($event));
-  emailInput.addEventListener('input', ($event) => inputTextInput($event));
 
   // Override the form submit so we can do custom validation 
   formEl.addEventListener('submit', handleSubmit);
+
   // Report success
   return true;
 }
@@ -198,7 +220,7 @@ function grecaptchaLoaded() {
 function grecaptchaSuccess() {
   recaptcha.classList.remove('invalid');
   recaptcha.classList.add('valid');
-  updateSubmit(formValidate());
+  formValidate();
 }
 /**
  * 
@@ -206,7 +228,7 @@ function grecaptchaSuccess() {
 function grecaptchaFail() {
   recaptcha.classList.add('invalid');
   recaptcha.classList.remove('valid');
-  updateSubmit(formValidate());
+  formValidate();
 }
 /**
  * 
@@ -214,7 +236,7 @@ function grecaptchaFail() {
 function grecaptchaExpired() {
   recaptcha.classList.add('invalid');
   recaptcha.classList.remove('valid');
-  updateSubmit(formValidate());
+  formValidate();
 }
 /**
  * 
@@ -236,10 +258,14 @@ function setInputTouched(inputId: InputId, uiEl: HTMLElement) {
     console.error('Cannot get ID of topic');
     return;
   }
-  uiEl.classList.add('touched');
-  if (!inputTouched.get(inputId)) {
-    inputTouched.set(inputId, true);
+
+  if (inputTouched.get(inputId) && !uiEl.classList.contains('touched')) { 
+    uiEl.classList.add('touched');
+    if (!inputTouched.get(inputId)) {
+      inputTouched.set(inputId, true);
+    }
   }
+  formValidate();
 }
 /**
  * Handle UI changes for input into "Other" textarea
@@ -267,18 +293,16 @@ function inputTextBlur($event: Event) {
     return;
   }
   const textId = text.id as InputId;
-  if (inputTouched.get(textId) && !text.classList.contains('touched')) {
-    inputTouched.set(textId, true);
-    text.classList.add('touched');
-  }
+  setInputTouched(textId, text);
 }
 /**
  * Update state on attempt to submit form with invalid input
+ * 
  * @param $event 
  */
 function inputTextInvalid($event: Event) {
-  const el = $event.target as HTMLInputElement;
-  el.classList.add('invalid');
+  //debugger;
+  //inputTextsValidate();
 }
 /**
  * When value for a textbox changes
@@ -290,7 +314,6 @@ function inputTextInput($event: Event) {
   el.classList.toggle('valid', el.checkValidity());
   el.parentElement?.classList.toggle('invalid', !el.checkValidity());
   el.parentElement?.classList.toggle('valid', el.checkValidity());
-
 }
 /**
  * Check all non-Topic input fields for values
@@ -364,8 +387,6 @@ function getTopicSelectedAny(): boolean {
     console.error('Could not get topics array');
   }
   const anyChecked = inputs.some(input => (input as HTMLInputElement)?.checked);
-  const checked = inputs.find(input => (input as HTMLInputElement)?.checked);
-  console.log('@@@', {anyChecked}, {checked});
   return anyChecked;
 }
 /**
@@ -379,11 +400,11 @@ function setTopicTouched(topicId: TopicId, uiEl: HTMLElement) {
     console.error('Cannot get ID of topic');
     return;
   }
-  uiEl.classList.add('touched');
   if (!topicTouched.get(topicId)) {
+    uiEl.classList.add('touched');
     topicTouched.set(topicId, true);
   }
-  updateSubmit(formValidate());
+  formValidate();
 }
 /**
  * Process click of radio button group
@@ -424,13 +445,8 @@ function topicClick($event: PointerEvent | MouseEvent) {
   // - avoids bug where clicking on the checkmark image does not select the checkmark
   setTimeout(() => {
     checkboxInput.checked = !checkboxInput.checked;
-    if (getTopicSelectedAny()) {
-      topicFieldset.classList.add('valid');
-      topicFieldset.classList.remove('invalid');
-    } else if(getTopicTouchedAny()) {
-      topicFieldset.classList.remove('valid');
-      topicFieldset.classList.add('invalid');
-    }
+    fieldsetTopicsValidate(); // TODO: reorganize formValidate to not need this call
+    formValidate();
   });
   
   const topicId = labelEl.getAttribute('data-input-id') as TopicId;
@@ -445,31 +461,27 @@ function topicClick($event: PointerEvent | MouseEvent) {
  * Update the style of the fieldset to reflect validity
  * @param $event 
  */
-function fieldsetTopicsValidate() {
+function fieldsetTopicsValidate(): boolean {
   // Set whether the set of checkboxes is in/valid 
   const topicSelected = getTopicSelectedAny();
-  console.log('### fieldsetTopics', topicSelected);
   topicFieldset.classList.toggle('valid', topicSelected);
   topicFieldset.classList.toggle('invalid', !topicSelected);
+  return topicSelected;
 }
 /**
  * Validate all form controls
  */
 function formValidate(): boolean {
   let formValid = true;
-  console.log('!!!', getTopicTouchedAny(), getTopicSelectedAny());
-  // If no Topic has been touched/selected
-  if (getTopicTouchedAny() || !getTopicSelectedAny()) {
-    formValid = false;
-    updateSubmit(formValid);
+  if (!formSubmitted) {
+    // Don't show validation until first form submit
+    return formValid;
   }
-  fieldsetTopicsValidate();
-
-  // NOTE: Other Inputs should have invalid class set by invalid() event
-
+  formValid = fieldsetTopicsValidate();
   formValid = inputTextsValidate() && formValid;
-  formValid = formValid && grecaptchaValidate();
+  formValid = grecaptchaValidate() && formValid;
 
+  updateSubmit(formValid);
   return formValid;
 }
 /**
@@ -491,14 +503,14 @@ function updateSubmit(formValid: boolean) {
  * @param $event Submit event from form
  */
 function handleSubmit($event: SubmitEvent | Event) {
+  formSubmitted = true;
   // Prevent native control response
   $event.preventDefault();
   $event.stopPropagation();
 
   let valid = formValidate();
-  updateSubmit(valid);
   if (!valid) {
-    // For invalid form do nothing, validation styles set by updateSubmit()
+    // For invalid form do nothing, validation styles set by formValidate()
     return;
   }
   // Submit form via AJAX
@@ -530,6 +542,9 @@ function handleHttpError(progressEvent: ProgressEvent) {
  */
 function handleHttpResonse(progressEvent: ProgressEvent) {
   console.log('RESPONSE', {progressEvent});
+  contactUsHeader.innerText = schedulingSectionHeaderText;
+  schedulingSection.style.display = "block";
+  formEl.style.display = "none";
 }
 /**
  * 

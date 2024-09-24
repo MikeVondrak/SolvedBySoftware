@@ -55,6 +55,9 @@ const recaptchaSelector = 'Grecaptcha';
 const formSubmitSelector = 'SubmitInquiry';
 const schedulingSectionSelector = "Scheduling";
 const schedulingSectionHeaderText = "Thank you for your interest!"
+const loadingSpinnerSelector = "FormLoadingSpinner";
+const errorSectionSelector = "FormError";
+const errorSectionHeaderText = "Error sending request";
 
 let formEl: HTMLElement;
 let contactUsHeader: HTMLElement;
@@ -66,6 +69,8 @@ let emailInputs: NodeListOf<HTMLElement>;
 let recaptcha: HTMLElement;
 let submitInput: HTMLElement;
 let schedulingSection: HTMLElement;
+let loadingSpinner: HTMLElement;
+let errorSection: HTMLElement;
 /**
  * Attach event handlers etc for form
  * @returns early on invalid condition
@@ -149,6 +154,20 @@ function initializeElements(): boolean {
     console.error('Scheduling section not found');
     return false;
   }
+  // Get loading spinner
+  loadingSpinner = document.getElementById(loadingSpinnerSelector) as HTMLElement;
+  if (!loadingSpinner) {
+    console.error('Loading spinner not found');
+    return false;
+  }
+  // Get Form Error section
+  errorSection = document.getElementById(errorSectionSelector) as HTMLElement;
+  if (!errorSection) {
+    console.error('Could not find form error section');
+    return false;
+  }
+  errorSection.style.display = 'none';
+  errorSection.style.opacity = '0';
   // Scheduling section is only shown after submitting form
   setFormState(FormState.Entry);
   return true;
@@ -561,9 +580,12 @@ function submitHttpRequest() {
   xhttp.onerror = handleHttpError;
   xhttp.open("POST", sbsAPI, true);
   xhttp.setRequestHeader('Content-Type', 'json');
-  xhttp.setRequestHeader('Access-Control-Allow-Origin', '*'); // TODO - SET CORRECT VALUE AFTER TESTING
-  xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  //xhttp.setRequestHeader('Access-Control-Allow-Origin', '*'); // TODO - SET CORRECT VALUE AFTER TESTING
+  xhttp.setRequestHeader('Access-Control-Allow-Origin', 'solvedbysoftwareco.com');
+  //xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+  xhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  //xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   xhttp.send(JSON.stringify(data));
 }
 /**
@@ -602,6 +624,7 @@ function setFormState(state: FormState) {
       formEl.style.display = "block";
       schedulingSection.style.display = "none";
       schedulingSection.style.opacity = "0";
+      
       break;
     case FormState.Submitting:
       // Disable form during submission
@@ -610,13 +633,18 @@ function setFormState(state: FormState) {
       submitInput.setAttribute('disabled', 'true');
       // TODO: get colors from SCSS?
       submitInput.style.backgroundColor = '#888';
+      loadingSpinner.style.opacity = '1';
       break;
     case FormState.Error:
-      formEl.setAttribute('disabled', 'false');
+      contactUsHeader.innerText = errorSectionHeaderText;
+      formEl.removeAttribute('disabled');
       formEl.style.opacity = '1';
-      submitInput.setAttribute('disabled', 'false');
+      submitInput.removeAttribute('disabled');
       // TODO: get colors from SCSS?
       submitInput.style.backgroundColor = '#F47E3F';
+      errorSection.style.display = 'block';
+      errorSection.style.opacity = '1';
+      loadingSpinner.style.opacity = '0';
       break;
     case FormState.Success:
       contactUsHeader.innerText = schedulingSectionHeaderText;
@@ -625,6 +653,7 @@ function setFormState(state: FormState) {
         formEl.style.display = "none";
         schedulingSection.style.display = "block";
         schedulingSection.style.opacity = "1";
+        loadingSpinner.style.opacity = '0';
       }, 500);
       break;
   }

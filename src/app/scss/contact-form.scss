@@ -6,15 +6,16 @@ $validationAnimationTime: 0.4s;
 // Fancy way of doing gradient borders
 // - Padding-box filled with white on top of border-box filled gradient bg
 @mixin gradient-border-legend($color: colors.$color_gray_translucent) {
-  background: linear-gradient(colors.$color_white_alt, colors.$color_white_alt)
-      padding-box,
+  background: linear-gradient(colors.$color_white_alt, colors.$color_white_alt) padding-box,
     linear-gradient(to bottom, $color 55.95%, transparent 56%) border-box;
 }
+
 .contact-us-container {
   h2 {
     margin: 3vw 0 3vw;
     text-align: center;
   }
+
   form#ContactUs {
     display: flex;
     flex-direction: column;
@@ -25,9 +26,11 @@ $validationAnimationTime: 0.4s;
         20% {
           opacity: 0;
         }
+
         50% {
           opacity: 1;
         }
+
         80% {
           opacity: 0;
         }
@@ -48,29 +51,31 @@ $validationAnimationTime: 0.4s;
       justify-content: flex-start;
       align-items: center;
       gap: clamp(1rem, 3vw, 10rem);
+
       @include utility.media-breakpoint-gte(sm) {
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
         padding: 0 clamp(1.5rem, 2vw, 3rem);
       }
+
       .col {
         fieldset {
           min-width: 200px;
           margin-top: 2.5vw;
+
           @include utility.media-breakpoint-gte(md) {
             margin-top: 1.75vw;
           }
-          padding: clamp(0.5rem, 0.5vw, 5rem) clamp(1rem, 1.5vw, 5rem)
-            clamp(1rem, 1.5vw, 2rem);
+
+          padding: clamp(0.5rem, 0.5vw, 5rem) clamp(1rem, 1.5vw, 5rem) clamp(1rem, 1.5vw, 2rem);
           border: clamp(3px, 0.2vw, 10px) solid colors.$color_gray_translucent; // Match textbox styles.scss
           border-radius: clamp(1rem, 2vw, 3rem);
           background-color: colors.$color_white_alt;
           transition: border-color $validationAnimationTime;
 
           legend {
-            padding: clamp(0.25rem, 0.25vw, 1rem) clamp(1rem, 0.75vw, 2rem)
-              0.25rem clamp(0.5rem, 0.5vw, 2rem);
+            padding: clamp(0.25rem, 0.25vw, 1rem) clamp(1rem, 0.75vw, 2rem) 0.25rem clamp(0.5rem, 0.5vw, 2rem);
             margin-left: clamp(0.25rem, 0.1vw, 4rem);
             @include gradient-border-legend();
 
@@ -86,17 +91,21 @@ $validationAnimationTime: 0.4s;
 
           &.invalid {
             border-color: colors.$color_border_invalid;
+
             legend {
               @include gradient-border-legend(colors.$color_border_invalid);
             }
           }
+
           &.valid {
             border-color: rgba(colors.$color_border_valid, 0.5);
+
             legend {
               @include gradient-border-legend(colors.$color_border_valid);
             }
           }
         }
+
         ul {
           flex: 1;
           max-width: 80vw;
@@ -109,37 +118,39 @@ $validationAnimationTime: 0.4s;
 
           li {
             margin-bottom: clamp(0.35rem, 0.4vw, 4rem);
+
             label {
               display: inline-flex;
               flex-direction: row;
               justify-content: flex-end;
               align-items: center;
-              padding: 0 clamp(0.125rem, 0.125vw, 0.5rem) 0
-                clamp(0.5rem, 1vw, 2rem);
+              padding: 0 clamp(0.125rem, 0.125vw, 0.5rem) 0 clamp(0.5rem, 1vw, 2rem);
               border-radius: clamp(2rem, 5vw, 10rem);
 
               span {
                 border-bottom: 1px solid colors.$color_gray_translucent;
+
                 @include utility.media-breakpoint-gte(sm) {
                   border-bottom-width: 2px;
                 }
+
                 transition: border-color $validationAnimationTime ease;
               }
+
               &.selected span {
                 border-color: colors.$color_orange;
               }
 
               .checkmark-container {
-                $checkmarkWidth: clamp(
-                  0.5rem * 1.33,
-                  1.2vw * 1.33,
-                  8rem * 1.33
-                );
+                $checkmarkWidth: clamp(0.5rem * 1.33,
+                    1.2vw * 1.33,
+                    8rem * 1.33);
                 $checkmarkHeight: clamp(0.5rem, 1.2vw, 8rem);
                 position: relative;
                 width: $checkmarkWidth;
                 height: $checkmarkHeight;
                 margin-left: clamp(0.25rem, 0.25vw, 1rem);
+
                 input {
                   position: absolute;
                   width: 0;
@@ -150,6 +161,7 @@ $validationAnimationTime: 0.4s;
                   padding: 0;
                   border: none;
                   outline: none;
+
                   &::before,
                   &::after {
                     border: none;
@@ -158,17 +170,20 @@ $validationAnimationTime: 0.4s;
                 }
               }
             }
+
             &.other-topic {
               display: flex;
               flex-direction: row;
               justify-content: flex-end;
               margin-top: clamp(1rem, 1vw, 3rem);
+
               textarea {
                 &::placeholder {
                   font-style: italic;
                   color: rgba(0, 0, 0, 0.35);
                 }
               }
+
               .checkmark-container {
                 margin-right: clamp(0.5rem, 1.5vw, 5rem);
               }
@@ -184,10 +199,12 @@ $validationAnimationTime: 0.4s;
           textarea {
             width: clamp(100px, 50vw, 800px);
             background-color: colors.$color_white;
+
             @include utility.media-breakpoint-gte(sm) {
               width: 100%;
             }
           }
+
           .text-other-spacer {
             position: relative;
             height: clamp(1.5rem, 4vw, 10rem);
@@ -200,15 +217,18 @@ $validationAnimationTime: 0.4s;
           justify-content: flex-start;
           align-items: center;
           gap: 1vw;
+
           @include utility.media-breakpoint-gte(sm) {
             justify-content: flex-start;
             align-items: center;
             height: 100%;
           }
+
           .control-stack {
             display: flex;
             flex-direction: column;
             gap: 0.4vw;
+
             label {
               color: colors.$color_text_label;
             }
@@ -216,12 +236,15 @@ $validationAnimationTime: 0.4s;
             input[type="text"],
             input[type="email"] {
               width: clamp(240px, 60vw, 400px);
+
               @include utility.media-breakpoint-gte(sm) {
                 width: clamp(240px, 30vw, 500px);
               }
+
               @include utility.media-breakpoint-gte(lg) {
                 width: clamp(240px, 28vw, 800px);
               }
+
               @include utility.media-breakpoint-gte(hd) {
                 width: clamp(240px, 22vw, 800px);
               }
@@ -232,17 +255,20 @@ $validationAnimationTime: 0.4s;
             @include utility.media-breakpoint-gte(sm) {
               align-self: flex-start;
             }
+
             margin-top: clamp(1rem, 1vw, 2rem);
+
             #Grecaptcha {
               padding: 0.75rem 0.5rem 0.5rem 0.75rem;
               border-radius: 2rem;
-              border: clamp(3px, 0.2vw, 10px) solid
-                colors.$color_gray_translucent;
+              border: clamp(3px, 0.2vw, 10px) solid colors.$color_gray_translucent;
               background-color: colors.$color_white_alt;
               transition: border-color $validationAnimationTime;
+
               &.invalid {
                 border-color: colors.$color_border_invalid;
               }
+
               &.valid {
                 border-color: colors.$color_border_valid;
               }
@@ -251,6 +277,7 @@ $validationAnimationTime: 0.4s;
         }
       }
     }
+
     .submit-container {
       position: relative;
       display: flex;
@@ -259,6 +286,7 @@ $validationAnimationTime: 0.4s;
       justify-content: center;
       margin: clamp(2rem, 4vw, 6rem) 0 clamp(4rem, 6vw, 8rem);
       text-align: center;
+
       .submit-input-wrapper {
         position: relative;
         display: block;
@@ -270,30 +298,32 @@ $validationAnimationTime: 0.4s;
           @include utility.tblr(0);
           position: absolute;
           display: block;
-          border-radius: clamp(
-            1.5rem,
-            3vw,
-            5rem
-          ); // NOTE: needs to match styles.scss value for button/submit border radius
+          border-radius: clamp(1.5rem,
+              3vw,
+              5rem); // NOTE: needs to match styles.scss value for button/submit border radius
           box-shadow: 0px 0px 10px 4px rgba(colors.$color_red, 0.75);
           transition: opacity $validationAnimationTime ease;
           opacity: 0;
           pointer-events: none;
         }
+
         &.touched.invalid::after {
           border-color: colors.$color_border_invalid;
           box-shadow: 0px 0px 6px 0px rgba(colors.$color_red, 0.75);
           opacity: 1;
         }
+
         &.touched.valid::after {
           border-color: colors.$color_border_valid;
           box-shadow: 0px 0px 6px 0px rgba(colors.$color_green, 0.75);
           opacity: 1;
         }
+
         input[type="submit"] {
           &.touched.invalid {
             border-color: colors.$color_border_invalid;
           }
+
           &.touched.valid {
             border-color: colors.$color_border_valid;
           }
@@ -301,14 +331,47 @@ $validationAnimationTime: 0.4s;
       }
     }
   }
+
+  .loading-spinner {
+    position: absolute;
+    width: 20vw;
+    top: calc(50% - 10vw);
+    left: calc(50% - 10vw);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(359deg);
+      }
+    }
+
+    animation: rotate 1s ease-in-out infinite;
+  }
 }
 
 .scheduling-container {
   margin-bottom: 10vw;
-  padding: 0 3vw;
+  padding: 0 10vw;
   text-align: center;
   transition: opacity 0.5s ease;
+
   @include utility.media-breakpoint-gte(md) {
     padding: 0 5vw;
   }
+}
+
+.error-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(2rem, 4vw, 6rem) 10vw clamp(4rem, 6vw, 8rem);
+  text-align: center;
+  transition: opacity 0.5s ease;
 }

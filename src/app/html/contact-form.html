@@ -17,6 +17,9 @@ Third-Party App Integration - Connecting Salesforce with third-party application
 <template data-template-id="ContactForm">
   <div class="contact-us-container">
     <h2 id="ContactUsHeader">How can we help you?</h2>
+    <div id="FormError" class="error-container">
+      <p>Sorry, we couldn't complete<br>your request right now.<br><br>Please try again, or email<br><a href="mailto:info@solvedbysoftwareco.com">info@solvedbysoftwareco.com</a><br>to schedule a consultation.</p>
+    </div>
     <form id="ContactUs" novalidate>
       <div class="column-container">
         <div class="col left">
@@ -146,9 +149,10 @@ Third-Party App Integration - Connecting Salesforce with third-party application
         </div>
       </div>
     </form>
+    <img id="FormLoadingSpinner" class="loading-spinner" src="assets/images/LoadingSpinner.svg" />
   </div>
   <div id="Scheduling" class="scheduling-container">
     <p>We will email you shortly, or please use this link to<br/>
     <a href="https://calendly.com/chanida" target="_blank">schedule a time</a> for us to chat!</p>
-  </div>
+  </div>  
 </template>

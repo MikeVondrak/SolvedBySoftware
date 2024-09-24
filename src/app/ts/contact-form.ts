@@ -8,8 +8,20 @@ enum TopicIds {
   OTHER = 'Other Topic',
 }
 enum InputIds {
-  NAME = 'Name',
-  EMAIL = 'Email'
+  Name = 'Name',
+  Email = 'Email'
+}
+enum FormState {
+  Entry,
+  Submitting,
+  Success,
+  Error,
+}
+enum FormControls {
+  Topics,
+  Name,
+  Email,
+  Captcha,
 }
 
 const sbsAPI = "https://solvedbysoftwareco2-dev-ed.develop.my.salesforce-sites.com/services/apexrest/ContactFormEntryREST"
@@ -24,6 +36,9 @@ const inputArray: InputId[] = Object.keys(InputIds).map(input => input as InputI
 // Initialize all inputs in the checkbox group to clean
 let topicTouched: Map<TopicId, boolean> = new Map(topicArray.map(topic => [topic as TopicId, false]));
 let inputTouched: Map<InputId, boolean> = new Map(inputArray.map(input => [input as InputId, false]));
+
+let controlsValid: Map<FormControls, boolean> = new Map([[FormControls.Topics, false], [FormControls.Name, false], [FormControls.Email, false], [FormControls.Captcha, false]]);
+let controlsTouched: Map<FormControls, boolean> = new Map([[FormControls.Topics, false], [FormControls.Name, false], [FormControls.Email, false], [FormControls.Captcha, false]]);
 
 let formSubmitted: boolean = false;
 
@@ -58,7 +73,7 @@ let schedulingSection: HTMLElement;
 export function initialize() {
   // Get all elements from DOM
   if (!initializeElements() || !formEl) {
-    console.error('Failed getting elements', {formEl});
+    console.error('Failed getting elements', { formEl });
     return;
   }
   // Attach event listeners that drive UI states
@@ -111,7 +126,7 @@ function initializeElements(): boolean {
   textInputs = formEl.querySelectorAll(inputTextSelector);
   emailInputs = formEl.querySelectorAll(inputEmailSelector);
   if (!textInputs || textInputs.length <= 0 || !emailInputs || emailInputs.length <= 0) {
-    console.error('Text/email inputs not found', {textInputs}, {emailInputs});
+    console.error('Text/email inputs not found', { textInputs }, { emailInputs });
     return false;
   }
   inputTouched.set(textInputs.item(0).id as InputId, false);
@@ -135,7 +150,7 @@ function initializeElements(): boolean {
     return false;
   }
   // Scheduling section is only shown after submitting form
-  schedulingSection.style.display = "none";
+  setFormState(FormState.Entry);
   return true;
 }
 /**
@@ -176,13 +191,13 @@ function addEventListeners(): boolean {
   const nameInput = textInputs.item(0) as HTMLInputElement;
   const emailInput = emailInputs.item(0) as HTMLInputElement;
   if (!nameInput || !emailInput) {
-    console.error('Could not find input: ', {nameInput}, {emailInput});
+    console.error('Could not find input: ', { nameInput }, { emailInput });
   }
   nameInput.addEventListener('input', ($event) => inputTextInput($event));
   nameInput.addEventListener('change', ($event) => inputTextChange($event));
   nameInput.addEventListener('blur', ($event) => inputTextBlur($event));
   nameInput.addEventListener('invalid', ($event) => inputTextInvalid($event));
-  
+
   emailInput.addEventListener('input', ($event) => inputTextInput($event));
   emailInput.addEventListener('change', ($event) => inputTextChange($event));
   emailInput.addEventListener('blur', ($event) => inputTextBlur($event));
@@ -220,6 +235,8 @@ function grecaptchaLoaded() {
 function grecaptchaSuccess() {
   recaptcha.classList.remove('invalid');
   recaptcha.classList.add('valid');
+  controlsValid.set(FormControls.Captcha, true);
+  controlsTouched.set(FormControls.Captcha, true);
   formValidate();
 }
 /**
@@ -228,6 +245,8 @@ function grecaptchaSuccess() {
 function grecaptchaFail() {
   recaptcha.classList.add('invalid');
   recaptcha.classList.remove('valid');
+  controlsValid.set(FormControls.Captcha, false);
+  controlsTouched.set(FormControls.Captcha, true);
   formValidate();
 }
 /**
@@ -253,18 +272,22 @@ function grecaptchaValidate(): boolean {
  * @param uiEl Elemnent to add 'touched' class to
  * @returns On invalid conditions
  */
-function setInputTouched(inputId: InputId, uiEl: HTMLElement) {
+function setInputTouched(inputId: InputId, uiEl: HTMLInputElement) {
   if (!inputId) {
     console.error('Cannot get ID of topic');
     return;
   }
 
-  if (inputTouched.get(inputId) && !uiEl.classList.contains('touched')) { 
+  if (inputTouched.get(inputId) && !uiEl.classList.contains('touched')) {
     uiEl.classList.add('touched');
     if (!inputTouched.get(inputId)) {
       inputTouched.set(inputId, true);
     }
   }
+  // TODO - generalize for more controls
+  const controlId = getControlId(inputId);
+  controlsTouched.set(controlId, true);
+  controlsValid.set(controlId, uiEl.checkValidity());
   formValidate();
 }
 /**
@@ -276,7 +299,7 @@ function inputTextChange($event: Event) {
   const text = $event.target as HTMLInputElement;
   const id = text?.id as InputId;
   if (!text || nullOrUndefined(id)) {
-    console.error('Could not get input or id', {text}, {id});
+    console.error('Could not get input or id', { text }, { id });
     return;
   }
   setInputTouched(id, text);
@@ -301,8 +324,9 @@ function inputTextBlur($event: Event) {
  * @param $event 
  */
 function inputTextInvalid($event: Event) {
-  //debugger;
-  //inputTextsValidate();
+  if (formSubmitted) {
+    updateSubmit(false);
+  }
 }
 /**
  * When value for a textbox changes
@@ -314,6 +338,11 @@ function inputTextInput($event: Event) {
   el.classList.toggle('valid', el.checkValidity());
   el.parentElement?.classList.toggle('invalid', !el.checkValidity());
   el.parentElement?.classList.toggle('valid', el.checkValidity());
+  const controlId = el.id as InputId;
+  if (!controlId) {
+    console.error('Could not find text input for:', el.id);
+  }
+  setInputTouched(controlId, el);
 }
 /**
  * Check all non-Topic input fields for values
@@ -363,10 +392,10 @@ function textareaInput($event: Event) {
   const topicId: TopicId = otherText.getAttribute('data-input-id') as TopicId;
   const event: InputEvent = $event as InputEvent;
   if (!topicId || !event) {
-    console.error('Cannot get topic ID / event of textbox', {topicId}, {event});
+    console.error('Cannot get topic ID / event of textbox', { topicId }, { event });
     return;
   }
-  
+
   setTopicTouched(topicId, otherText);
 }
 /**
@@ -374,7 +403,7 @@ function textareaInput($event: Event) {
  * @returns True if any UI input from user in form
  */
 function getTopicTouchedAny(): boolean {
-  const anyTouched = Array.from(topicTouched.values()).includes(true); 
+  const anyTouched = Array.from(topicTouched.values()).includes(true);
   return anyTouched;
 }
 /**
@@ -404,6 +433,7 @@ function setTopicTouched(topicId: TopicId, uiEl: HTMLElement) {
     uiEl.classList.add('touched');
     topicTouched.set(topicId, true);
   }
+  controlsTouched.set(FormControls.Topics, true);
   formValidate();
 }
 /**
@@ -445,16 +475,15 @@ function topicClick($event: PointerEvent | MouseEvent) {
   // - avoids bug where clicking on the checkmark image does not select the checkmark
   setTimeout(() => {
     checkboxInput.checked = !checkboxInput.checked;
-    fieldsetTopicsValidate(); // TODO: reorganize formValidate to not need this call
-    formValidate();
+    setTopicTouched(topicId, labelEl);
+    fieldsetTopicsValidate(); // TODO: reorganize formValidate to not need this call?
   });
-  
+
   const topicId = labelEl.getAttribute('data-input-id') as TopicId;
   if (!topicId) {
-    console.error('Cannot find ID for topic', {labelEl});
+    console.error('Cannot find ID for topic', { labelEl });
     return;
   }
-  setTopicTouched(topicId, labelEl);
   labelEl.focus();
 }
 /**
@@ -466,6 +495,7 @@ function fieldsetTopicsValidate(): boolean {
   const topicSelected = getTopicSelectedAny();
   topicFieldset.classList.toggle('valid', topicSelected);
   topicFieldset.classList.toggle('invalid', !topicSelected);
+  controlsValid.set(FormControls.Topics, topicSelected);
   return topicSelected;
 }
 /**
@@ -473,14 +503,17 @@ function fieldsetTopicsValidate(): boolean {
  */
 function formValidate(): boolean {
   let formValid = true;
-  if (!formSubmitted) {
+  let allControlsValid = !(Array.from(controlsValid.values()).some((val) => !val));
+  let allControlsTouched = !(Array.from(controlsTouched.values()).some((val) => !val));
+  console.log('all valid', { allControlsValid }, { allControlsTouched }, { controlsValid });
+  if (!formSubmitted && !allControlsTouched) {
     // Don't show validation until first form submit
     return formValid;
   }
   formValid = fieldsetTopicsValidate();
   formValid = inputTextsValidate() && formValid;
   formValid = grecaptchaValidate() && formValid;
-
+  console.log('valid', formValid);
   updateSubmit(formValid);
   return formValid;
 }
@@ -513,6 +546,8 @@ function handleSubmit($event: SubmitEvent | Event) {
     // For invalid form do nothing, validation styles set by formValidate()
     return;
   }
+  // Set form style for waiting for response
+  setFormState(FormState.Submitting);
   // Submit form via AJAX
   submitHttpRequest();
 }
@@ -528,23 +563,20 @@ function submitHttpRequest() {
   xhttp.setRequestHeader('Content-Type', 'json');
   xhttp.setRequestHeader('Access-Control-Allow-Origin', '*'); // TODO - SET CORRECT VALUE AFTER TESTING
   xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-  xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization'); 
-  xhttp.send(JSON.stringify(data));  
+  xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  xhttp.send(JSON.stringify(data));
 }
 /**
  * 
  */
 function handleHttpError(progressEvent: ProgressEvent) {
- console.log('ERROR', {progressEvent})
+  setFormState(FormState.Error);
 }
 /**
  * 
  */
 function handleHttpResonse(progressEvent: ProgressEvent) {
-  console.log('RESPONSE', {progressEvent});
-  contactUsHeader.innerText = schedulingSectionHeaderText;
-  schedulingSection.style.display = "block";
-  formEl.style.display = "none";
+  setFormState(FormState.Success);
 }
 /**
  * 
@@ -552,12 +584,54 @@ function handleHttpResonse(progressEvent: ProgressEvent) {
 function getRequestBody() {
   const form = formEl as HTMLFormElement;
   const data = new FormData(form);
-  const json = {    
+  const json = {
     name: data.get('Name'),
     email: data.get('Email'),
     topics: data.getAll('Topics'),
   }
   return json;
+}
+/**
+ * 
+ * @param state 
+ */
+function setFormState(state: FormState) {
+  switch (state) {
+    case FormState.Entry:
+      formEl.style.opacity = "1";
+      formEl.style.display = "block";
+      schedulingSection.style.display = "none";
+      schedulingSection.style.opacity = "0";
+      break;
+    case FormState.Submitting:
+      // Disable form during submission
+      formEl.setAttribute('disabled', 'true');
+      formEl.style.opacity = '0.5';
+      submitInput.setAttribute('disabled', 'true');
+      // TODO: get colors from SCSS?
+      submitInput.style.backgroundColor = '#888';
+      break;
+    case FormState.Error:
+      formEl.setAttribute('disabled', 'false');
+      formEl.style.opacity = '1';
+      submitInput.setAttribute('disabled', 'false');
+      // TODO: get colors from SCSS?
+      submitInput.style.backgroundColor = '#F47E3F';
+      break;
+    case FormState.Success:
+      contactUsHeader.innerText = schedulingSectionHeaderText;
+      formEl.style.opacity = "0";
+      setTimeout(() => {
+        formEl.style.display = "none";
+        schedulingSection.style.display = "block";
+        schedulingSection.style.opacity = "1";
+      }, 500);
+      break;
+  }
+}
+function getControlId(inputId: InputId): FormControls {
+  const controlId = (inputId as InputIds) === InputIds.Name ? FormControls.Name : FormControls.Email;
+  return controlId;
 }
 /**
  * Helper function for existence
